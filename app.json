@@ -1,0 +1,16 @@
+{
+  "name": "Trendgetter",
+  "displayName": "Trendgetter",
+  "expo": {
+    "name": "trendgetter",
+    "slug": "trendgetter",
+    "description": "",
+    "privacy": "unlisted",
+    "sdkVersion": "36.0.0",
+    "version": "1.0.0",
+    "entryPoint": "node_modules/expo/AppEntry.js",
+    "platforms": ["ios", "android", "web"],
+    "icon": "src/assets/logo-full-1024x1024.png",
+    "primaryColor": "#4285f4"
+  }
+}

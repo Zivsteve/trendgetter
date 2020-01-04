@@ -1,0 +1,227 @@
+import React, { Component } from 'react';
+import RNBootSplash from 'react-native-bootsplash';
+import { StatusBar, View, RefreshControl, Dimensions, ScrollView, TouchableOpacity, FlatList } from 'react-native';
+import { Button, withTheme, Theme } from 'react-native-paper';
+import Carousel from 'react-native-snap-carousel';
+import ContentService from '../services/ContentService';
+import YoutubeVideoDetail from '../components/YoutubeVideoDetail';
+import GoogleSearchDetail from '../components/GoogleSearchDetail';
+import TrendingTitle from '../components/TrendingTitle';
+import { getReadableDate } from '../utils/NumberUtils';
+import { Svg, Circle } from 'react-native-svg';
+import { navigate, toggleDrawer } from '../services/NavigationService';
+import Navbar from '../components/Navbar';
+import SnapchatStoryView from '../components/SnapchatStoryView';
+import TwitterTagDetail from '../components/TwitterTagDetail';
+import NavigationBar from '../components/NavigationBar';
+import { MAX_CONTENT_WIDTH, savedHomeLayout, savedColors } from '../Config';
+
+const windowDims = Dimensions.get('window');
+
+interface Props {
+  theme: Theme;
+}
+
+class HomeScreen extends Component<Props> {
+  state = {
+    layout: savedHomeLayout,
+    youtubeVideos: [] as any[],
+    googleSearches: [] as any[],
+    twitterTags: [] as any[],
+    snapchatStories: [] as any[],
+    refreshing: false,
+  };
+
+  componentDidMount() {
+    // Fix unloaded content flashing by adding a timeout of 1 ms.
+    setTimeout(() => RNBootSplash.hide({ duration: 200 }), 1);
+    this._refresh();
+  }
+
+  async _refresh() {
+    this.setState({ refreshing: true });
+    const videos = await ContentService.getYoutubeVideos();
+    const searches = await ContentService.getGoogleSearches();
+    const tags = await ContentService.getTwitterTags();
+    const stories = await ContentService.getSnapchatStories();
+
+    this.setState({
+      layout: savedHomeLayout,
+      youtubeVideos: videos.slice(0, 5),
+      googleSearches: searches.slice(0, 5),
+      twitterTags: tags.slice(0, 5),
+      snapchatStories: stories.slice(0, 5),
+      refreshing: false,
+    });
+  }
+
+  render() {
+    const { layout, refreshing } = this.state;
+    const { theme } = this.props;
+    const { colors } = theme;
+    const date = getReadableDate();
+    const circleColor = theme.dark ? '#fff' : '#000';
+
+    return (
+      <View
+        style={{
+          height: '100%',
+          alignItems: 'center',
+          backgroundColor: colors.background,
+          borderTopStartRadius: 20,
+          borderTopEndRadius: 20,
+        }}>
+        <StatusBar
+          translucent
+          barStyle={theme.dark ? 'light-content' : 'dark-content'}
+          backgroundColor='rgba(0,0,0,0.05)'
+        />
+        <NavigationBar dark={theme.dark} />
+
+        <ScrollView
+          style={{ width: '100%', backgroundColor: colors.background }}
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={() => this._refresh()}
+              colors={['#007afd', 'blue', 'yellow']}
+              tintColor='#007afd'
+            />
+          }>
+          <Navbar icon='sort-variant' title={date} action={() => toggleDrawer()} underStatusBar dark={theme.dark} />
+
+          <View style={{ width: MAX_CONTENT_WIDTH, marginBottom: 200, alignSelf: 'center' }}>
+            {layout.map((name, index) => (
+              <View key={index}>
+                {name === 'youtube' && this._renderYoutube()}
+                {name === 'google' && this._renderGoogle()}
+                {name === 'twitter' && this._renderTwitter()}
+                {name === 'snapchat' && this._renderSnapchat()}
+              </View>
+            ))}
+          </View>
+
+          <View
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: '-40%',
+              zIndex: -1,
+            }}
+            pointerEvents='none'>
+            <Svg width={windowDims.width * 1.8} height={windowDims.height} viewBox='0 0 800 800'>
+              <Circle fill={circleColor} opacity='0.010' cx='400' cy='400' r='400' />
+              <Circle fill={circleColor} opacity='0.015' cx='400' cy='400' r='300' />
+              <Circle fill={circleColor} opacity='0.020' cx='400' cy='400' r='200' />
+              <Circle fill={circleColor} opacity='0.030' cx='400' cy='400' r='100' />
+            </Svg>
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
+
+  _renderYoutube() {
+    const videoWidth = Math.max(MAX_CONTENT_WIDTH - 100, 300);
+    const { youtubeVideos } = this.state;
+
+    return (
+      <View style={{ minHeight: 300, marginTop: 50 }}>
+        <TrendingTitle
+          icon='youtube'
+          name='YouTube'
+          iconColor={savedColors.youtube}
+          onPress={() => navigate('youtube')}
+        />
+        <Carousel
+          sliderWidth={MAX_CONTENT_WIDTH}
+          itemWidth={videoWidth}
+          inactiveSlideScale={0.8}
+          inactiveSlideOpacity={1}
+          data={youtubeVideos}
+          renderItem={({ item, index }) => (
+            <View key={index}>
+              <YoutubeVideoDetail options={item} />
+            </View>
+          )}
+        />
+      </View>
+    );
+  }
+
+  _renderGoogle() {
+    const { googleSearches } = this.state;
+
+    return (
+      <View style={{ minHeight: 300, marginTop: 50 }}>
+        <TrendingTitle icon='google' name='Google' iconColor={savedColors.google} onPress={() => navigate('google')} />
+        <FlatList
+          scrollEnabled={false}
+          data={googleSearches}
+          keyExtractor={(item, index) => `${index}`}
+          renderItem={({ item, index }) => <GoogleSearchDetail index={index} options={item} />}
+        />
+        <Button style={{ width: 200, alignSelf: 'center' }} onPress={() => navigate('google')}>
+          More
+        </Button>
+      </View>
+    );
+  }
+
+  _renderTwitter() {
+    const { twitterTags } = this.state;
+
+    return (
+      <View style={{ minHeight: 300, marginTop: 50 }}>
+        <TrendingTitle
+          icon='twitter'
+          name='Twitter'
+          iconColor={savedColors.twitter}
+          onPress={() => navigate('twitter')}
+        />
+        <FlatList
+          scrollEnabled={false}
+          data={twitterTags}
+          keyExtractor={(item, index) => `${index}`}
+          renderItem={({ item, index }) => <TwitterTagDetail index={index} options={item} />}
+        />
+        <Button style={{ width: 200, alignSelf: 'center' }} onPress={() => navigate('twitter')}>
+          More
+        </Button>
+      </View>
+    );
+  }
+
+  _renderSnapchat() {
+    const storyWidth = MAX_CONTENT_WIDTH / 2;
+    const { snapchatStories } = this.state;
+
+    return (
+      <View style={{ minHeight: 300, marginTop: 50 }}>
+        <TrendingTitle
+          icon='snapchat'
+          name='Snapchat'
+          iconColor={savedColors.snapchat}
+          onPress={() => navigate('snapchat')}
+        />
+        <Carousel
+          sliderWidth={MAX_CONTENT_WIDTH}
+          itemWidth={storyWidth}
+          data={snapchatStories}
+          renderItem={({ item, index }) => (
+            <TouchableOpacity
+              key={index}
+              style={{ width: storyWidth, borderRadius: 20, overflow: 'hidden' }}
+              onPress={() => navigate('story', { options: item })}
+              activeOpacity={0.6}>
+              <SnapchatStoryView options={item} width={storyWidth} height={storyWidth * 2} />
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+    );
+  }
+}
+
+export default withTheme(HomeScreen);

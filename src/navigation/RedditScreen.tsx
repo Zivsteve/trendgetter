@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StatusBar, Dimensions, RefreshControl, ScrollView, FlatList } from 'react-native';
+import { View, StatusBar, Dimensions, ScrollView, FlatList } from 'react-native';
 import ContentService from '../services/ContentService';
 import { Theme, withTheme } from 'react-native-paper';
 import RedditPostDetail from '../components/RedditPostDetail';
@@ -7,6 +7,7 @@ import TrendingTitle from '../components/TrendingTitle';
 import Navbar from '../components/Navbar';
 import NavigationBar from '../components/NavigationBar';
 import { savedColors } from '../Config';
+import { RefreshControl } from '../components/refresh-control';
 
 const window = Dimensions.get('window');
 
@@ -51,7 +52,7 @@ class RedditScreen extends Component<Props> {
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={() => this._refresh()}
-                colors={['#007afd', 'blue', 'yellow']}
+                colors={[this._themeColor]}
                 tintColor='#007afd'
               />
             }>
@@ -67,12 +68,11 @@ class RedditScreen extends Component<Props> {
               <View>
                 <TrendingTitle icon='reddit' name='Reddit' />
 
-                <FlatList
-                  style={{ marginTop: 20 }}
-                  data={posts}
-                  keyExtractor={(item, index) => `${index}`}
-                  renderItem={({ item, index }) => <RedditPostDetail options={item} width={window.width - 10} />}
-                />
+                <View style={{ marginTop: 20 }}>
+                  {posts.map((item, index) => (
+                    <RedditPostDetail key={index} options={item} width={window.width - 10} />
+                  ))}
+                </View>
               </View>
             </View>
           </ScrollView>

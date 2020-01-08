@@ -26,10 +26,10 @@ class SettingsScreen extends Component<Props> {
           <FlatList
             style={{ backgroundColor: colors.background }}
             data={[
-              { key: 'Home Layout', icon: 'shape', action: () => navigate('settings_home') },
-              { key: 'Theme', icon: 'format-color-fill', action: () => navigate('settings_theme') },
-              { key: 'Colors', icon: 'brush', action: () => navigate('settings_color') },
-              { key: 'About', icon: 'cellphone-screenshot', action: () => navigate('about') },
+              { key: 'Home Layout', icon: 'shape', action: () => navigate('/settings/home') },
+              { key: 'Theme', icon: 'format-color-fill', action: () => navigate('/settings/theme') },
+              { key: 'Colors', icon: 'brush', action: () => navigate('/settings/color') },
+              { key: 'About', icon: 'cellphone-screenshot', action: () => navigate('/about') },
             ]}
             keyExtractor={(item, index) => `${index}`}
             renderItem={({ item }) => (

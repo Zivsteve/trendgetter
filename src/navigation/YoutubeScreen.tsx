@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StatusBar, Dimensions, RefreshControl, ScrollView, FlatList } from 'react-native';
+import { View, StatusBar, Dimensions, ScrollView, FlatList } from 'react-native';
 import ContentService from '../services/ContentService';
 import { Theme, withTheme } from 'react-native-paper';
 import TrendingTitle from '../components/TrendingTitle';
@@ -7,6 +7,7 @@ import YoutubeVideoDetail from '../components/YoutubeVideoDetail';
 import Navbar from '../components/Navbar';
 import NavigationBar from '../components/NavigationBar';
 import { savedColors } from '../Config';
+import { RefreshControl } from '../components/refresh-control';
 
 const window = Dimensions.get('window');
 
@@ -52,7 +53,7 @@ class YoutubeScreen extends Component<Props> {
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={() => this._refresh()}
-                colors={['#007afd', 'blue', 'yellow']}
+                colors={[this._themeColor]}
                 tintColor='#007afd'
               />
             }>
@@ -68,16 +69,13 @@ class YoutubeScreen extends Component<Props> {
               <View style={{ alignItems: 'center' }}>
                 <TrendingTitle icon='youtube' name='YouTube' />
 
-                <FlatList
-                  style={{ marginTop: 20 }}
-                  data={videos}
-                  keyExtractor={(item, index) => `${index}`}
-                  renderItem={({ item, index }) => (
-                    <View style={{ width: videoWidth, marginTop: 20 }}>
+                <View style={{ marginTop: 20 }}>
+                  {videos.map((item, index) => (
+                    <View key={index} style={{ width: videoWidth, marginTop: 20 }}>
                       <YoutubeVideoDetail options={item} />
                     </View>
-                  )}
-                />
+                  ))}
+                </View>
               </View>
             </View>
           </ScrollView>

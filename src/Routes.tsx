@@ -1,8 +1,7 @@
 import React from 'react';
-import { createStackNavigator } from 'react-navigation-stack';
-import { createDrawerNavigator, DrawerContentComponentProps } from 'react-navigation-drawer';
-import { createAppContainer, NavigationContainerComponent } from 'react-navigation';
-import { fromRight } from 'react-navigation-transitions';
+import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainerRef, NavigationContainer, RouteProp } from '@react-navigation/native';
 import { setTopLevelNavigator, onNavigationStateChange } from './services/NavigationService';
 
 import DrawerContent from './navigation/DrawerContent';
@@ -16,77 +15,44 @@ import SnapchatScreen from './navigation/SnapchatScreen';
 import RedditScreen from './navigation/RedditScreen';
 import SnapchatStoryScreen from './navigation/SnapchatStoryScreen';
 import AboutScreen from './navigation/AboutScreen';
-import { SettingsNavigator } from './navigation/settings/Routes';
+import SettingsRoutes from './navigation/settings/Routes';
 
-type DrawerContentType =
-  | React.ComponentClass<DrawerContentComponentProps, any>
-  | React.FunctionComponent<DrawerContentComponentProps>;
+const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
 
-const StackNavigator = createStackNavigator(
-  {
-    home: {
-      screen: HomeScreen,
-      params: { path: 'home' },
-    },
-    youtube: {
-      screen: YoutubeScreen,
-      params: { path: 'youtube' },
-    },
-    google: {
-      screen: GoogleScreen,
-      params: { path: 'google' },
-    },
-    twitter: {
-      screen: TwitterScreen,
-      params: { path: 'twitter' },
-    },
-    reddit: {
-      screen: RedditScreen,
-      params: { path: 'reddit' },
-    },
-    github: {
-      screen: GithubScreen,
-      params: { path: 'github' },
-    },
-    snapchat: {
-      screen: SnapchatScreen,
-      params: { path: 'snapchat' },
-    },
-    story: {
-      screen: SnapchatStoryScreen,
-      params: { path: 'snapchat/story' },
-    },
-    settings: SettingsNavigator,
-    about: {
-      screen: AboutScreen,
-      params: { path: 'about' },
-    },
-  },
-  {
-    initialRouteName: 'home',
-    headerMode: 'none',
-    transitionConfig: () => fromRight(500),
-  },
-);
-
-const DrawerNavigator = createDrawerNavigator(
-  {
-    default: StackNavigator,
-  },
-  {
-    initialRouteName: 'default',
-    contentComponent: DrawerContent as DrawerContentType,
-    drawerBackgroundColor: 'transparent',
-  },
-);
-
-const Container = createAppContainer(DrawerNavigator);
-
-export default function Routes() {
+function Routes() {
   return (
-    <Container
-      ref={(navigatorRef: NavigationContainerComponent) => setTopLevelNavigator(navigatorRef)}
-      onNavigationStateChange={(p) => onNavigationStateChange(p)}
-    />
+    <NavigationContainer
+      ref={(navigatorRef: NavigationContainerRef) => setTopLevelNavigator(navigatorRef)}
+      onStateChange={(p) => onNavigationStateChange(p)}>
+      <Drawer.Navigator initialRouteName='/' drawerContent={(props) => <DrawerContent {...props} />}>
+        <Drawer.Screen
+          name='/'
+          component={() => (
+            <Stack.Navigator
+              initialRouteName='home'
+              headerMode='none'
+              screenOptions={{ gestureEnabled: false, ...TransitionPresets.SlideFromRightIOS }}>
+              <Stack.Screen name='/' component={HomeScreen} />
+              <Stack.Screen name='/youtube' component={YoutubeScreen} />
+              <Stack.Screen name='/google' component={GoogleScreen} />
+              <Stack.Screen name='/twitter' component={TwitterScreen} />
+              <Stack.Screen name='/reddit' component={RedditScreen} />
+              <Stack.Screen name='/github' component={GithubScreen} />
+              <Stack.Screen name='/snapchat' component={SnapchatScreen} />
+              <Stack.Screen
+                name='/snapchat/story'
+                component={SnapchatStoryScreen}
+                options={SnapchatStoryScreen.navigationOptions}
+              />
+              <Stack.Screen name='/settings' component={SettingsRoutes} />
+              <Stack.Screen name='/about' component={AboutScreen} options={AboutScreen.navigationOptions} />
+            </Stack.Navigator>
+          )}
+        />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }
+
+export default Routes;

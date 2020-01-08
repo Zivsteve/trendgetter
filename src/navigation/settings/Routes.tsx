@@ -1,33 +1,24 @@
-import { createStackNavigator } from 'react-navigation-stack';
-import { fromBottom } from 'react-navigation-transitions';
-
+import React from 'react';
+import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import SettingsScreen from './SettingsScreen';
 import HomeSettingsScreen from './HomeSettingsScreen';
 import ThemeSettingsScreen from './ThemeSettingsScreen';
 import ColorSettingsScreen from './ColorSettingsScreen';
 
-export const SettingsNavigator = createStackNavigator(
-  {
-    default: {
-      screen: SettingsScreen,
-      params: { path: 'settings' },
-    },
-    settings_home: {
-      screen: HomeSettingsScreen,
-      params: { path: 'settings/home' },
-    },
-    settings_theme: {
-      screen: ThemeSettingsScreen,
-      params: { path: 'settings/theme' },
-    },
-    settings_color: {
-      screen: ColorSettingsScreen,
-      params: { path: 'settings/color' },
-    },
-  },
-  {
-    initialRouteName: 'default',
-    headerMode: 'none',
-    transitionConfig: () => fromBottom(500),
-  },
-);
+const Stack = createStackNavigator();
+
+function SettingsRoutes() {
+  return (
+    <Stack.Navigator
+      initialRouteName='/settings'
+      headerMode='none'
+      screenOptions={{ gestureEnabled: false, ...TransitionPresets.RevealFromBottomAndroid }}>
+      <Stack.Screen name='/settings' component={SettingsScreen} />
+      <Stack.Screen name='/settings/home' component={HomeSettingsScreen} />
+      <Stack.Screen name='/settings/theme' component={ThemeSettingsScreen} />
+      <Stack.Screen name='/settings/color' component={ColorSettingsScreen} />
+    </Stack.Navigator>
+  );
+}
+
+export default SettingsRoutes;

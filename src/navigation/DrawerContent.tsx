@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, ScrollView } from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { Drawer, Text, Theme, withTheme, TouchableRipple } from 'react-native-paper';
 import { navigate } from '../services/NavigationService';
@@ -44,24 +44,24 @@ function DrawerContent(props: Props) {
       <DrawerHeader />
 
       <View style={{ paddingBottom: insets.bottom }}>
-        <Drawer.Item style={styles.item} label='Home' icon='trending-up' onPress={() => navigate('home')} />
+        <Drawer.Item style={styles.item} label='Home' icon='trending-up' onPress={() => navigate('/')} />
 
         <Drawer.Section title='Trending'>
-          <Drawer.Item style={styles.item} label='Google' icon='google' onPress={() => navigate('google')} />
-          <Drawer.Item style={styles.item} label='YouTube' icon='youtube' onPress={() => navigate('youtube')} />
-          <Drawer.Item style={styles.item} label='Twitter' icon='twitter' onPress={() => navigate('twitter')} />
-          <Drawer.Item style={styles.item} label='Reddit' icon='reddit' onPress={() => navigate('reddit')} />
-          <Drawer.Item style={styles.item} label='GitHub' icon='github-circle' onPress={() => navigate('github')} />
-          <Drawer.Item style={styles.item} label='Snapchat' icon='snapchat' onPress={() => navigate('snapchat')} />
+          <Drawer.Item style={styles.item} label='Google' icon='google' onPress={() => navigate('/google')} />
+          <Drawer.Item style={styles.item} label='YouTube' icon='youtube' onPress={() => navigate('/youtube')} />
+          <Drawer.Item style={styles.item} label='Twitter' icon='twitter' onPress={() => navigate('/twitter')} />
+          <Drawer.Item style={styles.item} label='Reddit' icon='reddit' onPress={() => navigate('/reddit')} />
+          <Drawer.Item style={styles.item} label='GitHub' icon='github-circle' onPress={() => navigate('/github')} />
+          <Drawer.Item style={styles.item} label='Snapchat' icon='snapchat' onPress={() => navigate('/snapchat')} />
         </Drawer.Section>
 
         <Drawer.Section title='App'>
-          <Drawer.Item style={styles.item} label='Settings' icon='settings' onPress={() => navigate('settings')} />
+          <Drawer.Item style={styles.item} label='Settings' icon='settings' onPress={() => navigate('/settings')} />
           <Drawer.Item
             style={styles.item}
             label='About'
             icon='cellphone-screenshot'
-            onPress={() => navigate('about')}
+            onPress={() => navigate('/about')}
           />
         </Drawer.Section>
 

@@ -39,44 +39,38 @@ class ColorSettingsScreen extends Component<Props> {
               }}
             />
           </Navbar>
-
           <Button
             style={{ alignSelf: 'flex-end', marginTop: 20, marginRight: 10 }}
             onPress={() => this.setState({ allColors: defaultColors })}>
             Reset all
           </Button>
-
-          <FlatList
-            data={Object.keys(allColors)}
-            keyExtractor={(item) => item}
-            renderItem={({ item }) => (
-              <View key={item} style={{ marginTop: 30, marginHorizontal: 20 }}>
-                <Navbar
-                  barStyle={{ backgroundColor: allColors[item], zIndex: 0 }}
-                  titleStyle={{ textTransform: 'capitalize' }}
-                  title={item}
-                  action={() => null}
-                  dark={true}
-                />
-                <TouchableOpacity
-                  style={{
-                    position: 'absolute',
-                    top: 10,
-                    right: 20,
-                    backgroundColor: allColors[item],
-                    width: 35,
-                    height: 35,
-                    borderRadius: 100,
-                    borderWidth: 2,
-                    borderColor: '#fff',
-                    elevation: 5,
-                  }}
-                  activeOpacity={0.7}
-                  onPress={() => this._selectItem(item)}
-                />
-              </View>
-            )}
-          />
+          {Object.keys(allColors).map((item) => (
+            <View key={item} style={{ marginTop: 30, marginHorizontal: 20 }}>
+              <Navbar
+                barStyle={{ backgroundColor: allColors[item], zIndex: 0 }}
+                titleStyle={{ textTransform: 'capitalize' }}
+                title={item}
+                action={() => null}
+                dark={true}
+              />
+              <TouchableOpacity
+                style={{
+                  position: 'absolute',
+                  top: 10,
+                  right: 20,
+                  backgroundColor: allColors[item],
+                  width: 35,
+                  height: 35,
+                  borderRadius: 100,
+                  borderWidth: 2,
+                  borderColor: '#fff',
+                  elevation: 5,
+                }}
+                activeOpacity={0.7}
+                onPress={() => this._selectItem(item)}
+              />
+            </View>
+          ))}
         </View>
 
         <Portal>

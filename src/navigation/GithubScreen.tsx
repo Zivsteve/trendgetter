@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StatusBar, Dimensions, RefreshControl, ScrollView, FlatList } from 'react-native';
+import { View, StatusBar, Dimensions, ScrollView } from 'react-native';
 import ContentService from '../services/ContentService';
 import GithubRepositoryDetail from '../components/GithubRepositoryDetail';
 import TrendingTitle from '../components/TrendingTitle';
@@ -7,6 +7,7 @@ import Navbar from '../components/Navbar';
 import { Theme, withTheme } from 'react-native-paper';
 import NavigationBar from '../components/NavigationBar';
 import { savedColors } from '../Config';
+import { RefreshControl } from '../components/refresh-control';
 
 const window = Dimensions.get('window');
 
@@ -52,7 +53,7 @@ class GithubScreen extends Component<Props> {
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={() => this._refresh()}
-                colors={['#007afd', 'blue', 'yellow']}
+                colors={[this._themeColor]}
                 tintColor='#007afd'
               />
             }>
@@ -68,11 +69,9 @@ class GithubScreen extends Component<Props> {
               <View style={{ maxWidth: contentWidth }}>
                 <TrendingTitle icon='github-circle' name='GitHub' />
 
-                <FlatList
-                  data={reps}
-                  keyExtractor={(item, index) => `${index}`}
-                  renderItem={({ item }) => <GithubRepositoryDetail options={item} />}
-                />
+                {reps.map((item, index) => (
+                  <GithubRepositoryDetail key={index} options={item} />
+                ))}
               </View>
             </View>
           </ScrollView>

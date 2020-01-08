@@ -1,23 +1,22 @@
-import React, { Component } from 'react';
+import React, { useCallback } from 'react';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
-import { NavigationEvents } from 'react-navigation';
+import { useFocusEffect } from '@react-navigation/native';
 
 interface Props {
   color?: string;
   dark?: boolean;
 }
 
-export default class NavigationBar extends Component<Props> {
-  componentDidUpdate() {
-    this._update();
-  }
+function NavigationBar(props: Props) {
+  useFocusEffect(
+    useCallback(() => {
+      const { color, dark } = props;
+      changeNavigationBarColor(color || '#00000000', !dark, true);
+      return () => {};
+    }, []),
+  );
 
-  private _update() {
-    const { color, dark } = this.props;
-    changeNavigationBarColor(color || '#00000000', !dark, true);
-  }
-
-  render() {
-    return <NavigationEvents onWillFocus={() => this._update()} />;
-  }
+  return null;
 }
+
+export default NavigationBar;

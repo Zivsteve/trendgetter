@@ -12,13 +12,14 @@ interface Props {
 
 class GoogleSearchDetail extends Component<Props> {
   render() {
-    const { options: prop, index } = this.props;
+    const { options: prop, index, theme } = this.props;
+    const { colors } = theme;
 
     return (
       <TouchableRipple
         style={{ paddingHorizontal: 20, paddingVertical: 15, borderRadius: 10 }}
         onPress={() => openURL(prop?.url)}
-        rippleColor='rgba(255, 255, 255, 0.2)'>
+        rippleColor={colors.onSurface}>
         <View style={{ width: '100%', flexDirection: 'row' }}>
           <Text
             style={{

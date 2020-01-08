@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RNBootSplash from 'react-native-bootsplash';
-import { StatusBar, View, RefreshControl, Dimensions, ScrollView, TouchableOpacity, FlatList } from 'react-native';
+import { StatusBar, View, Dimensions, ScrollView, TouchableOpacity, Platform } from 'react-native';
 import { Button, withTheme, Theme } from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
 import ContentService from '../services/ContentService';
@@ -15,6 +15,7 @@ import SnapchatStoryView from '../components/SnapchatStoryView';
 import TwitterTagDetail from '../components/TwitterTagDetail';
 import NavigationBar from '../components/NavigationBar';
 import { MAX_CONTENT_WIDTH, savedHomeLayout, savedColors } from '../Config';
+import { RefreshControl } from '../components/refresh-control';
 
 const windowDims = Dimensions.get('window');
 
@@ -34,7 +35,7 @@ class HomeScreen extends Component<Props> {
 
   componentDidMount() {
     // Fix unloaded content flashing by adding a timeout of 1 ms.
-    setTimeout(() => RNBootSplash.hide({ duration: 200 }), 1);
+    Platform.OS !== 'web' && setTimeout(() => RNBootSplash.hide({ duration: 200 }), 1);
     this._refresh();
   }
 
@@ -85,13 +86,13 @@ class HomeScreen extends Component<Props> {
             <RefreshControl
               refreshing={refreshing}
               onRefresh={() => this._refresh()}
-              colors={['#007afd', 'blue', 'yellow']}
+              colors={[theme.colors.primary]}
               tintColor='#007afd'
             />
           }>
           <Navbar icon='sort-variant' title={date} action={() => toggleDrawer()} underStatusBar dark={theme.dark} />
 
-          <View style={{ width: MAX_CONTENT_WIDTH, marginBottom: 200, alignSelf: 'center' }}>
+          <View style={{ marginBottom: 200, alignSelf: 'center' }}>
             {layout.map((name, index) => (
               <View key={index}>
                 {name === 'youtube' && this._renderYoutube()}
@@ -127,18 +128,18 @@ class HomeScreen extends Component<Props> {
     const { youtubeVideos } = this.state;
 
     return (
-      <View style={{ minHeight: 300, marginTop: 50 }}>
+      <View style={{ height: 400, marginTop: 50 }}>
         <TrendingTitle
           icon='youtube'
           name='YouTube'
           iconColor={savedColors.youtube}
-          onPress={() => navigate('youtube')}
+          onPress={() => navigate('/youtube')}
         />
         <Carousel
-          sliderWidth={MAX_CONTENT_WIDTH}
+          sliderWidth={windowDims.width}
           itemWidth={videoWidth}
           inactiveSlideScale={0.8}
-          inactiveSlideOpacity={1}
+          inactiveSlideOpacity={0.7}
           data={youtubeVideos}
           renderItem={({ item, index }) => (
             <View key={index}>
@@ -154,15 +155,12 @@ class HomeScreen extends Component<Props> {
     const { googleSearches } = this.state;
 
     return (
-      <View style={{ minHeight: 300, marginTop: 50 }}>
-        <TrendingTitle icon='google' name='Google' iconColor={savedColors.google} onPress={() => navigate('google')} />
-        <FlatList
-          scrollEnabled={false}
-          data={googleSearches}
-          keyExtractor={(item, index) => `${index}`}
-          renderItem={({ item, index }) => <GoogleSearchDetail index={index} options={item} />}
-        />
-        <Button style={{ width: 200, alignSelf: 'center' }} onPress={() => navigate('google')}>
+      <View style={{ width: MAX_CONTENT_WIDTH, minHeight: 300, marginHorizontal: 'auto', marginTop: 50 }}>
+        <TrendingTitle icon='google' name='Google' iconColor={savedColors.google} onPress={() => navigate('/google')} />
+        {googleSearches.map((item, index) => (
+          <GoogleSearchDetail key={index} index={index} options={item} />
+        ))}
+        <Button style={{ width: 200, alignSelf: 'center' }} onPress={() => navigate('/google')}>
           More
         </Button>
       </View>
@@ -173,20 +171,17 @@ class HomeScreen extends Component<Props> {
     const { twitterTags } = this.state;
 
     return (
-      <View style={{ minHeight: 300, marginTop: 50 }}>
+      <View style={{ width: MAX_CONTENT_WIDTH, minHeight: 300, marginHorizontal: 'auto', marginTop: 50 }}>
         <TrendingTitle
           icon='twitter'
           name='Twitter'
           iconColor={savedColors.twitter}
-          onPress={() => navigate('twitter')}
+          onPress={() => navigate('/twitter')}
         />
-        <FlatList
-          scrollEnabled={false}
-          data={twitterTags}
-          keyExtractor={(item, index) => `${index}`}
-          renderItem={({ item, index }) => <TwitterTagDetail index={index} options={item} />}
-        />
-        <Button style={{ width: 200, alignSelf: 'center' }} onPress={() => navigate('twitter')}>
+        {twitterTags.map((item, index) => (
+          <TwitterTagDetail key={index} index={index} options={item} />
+        ))}
+        <Button style={{ width: 200, alignSelf: 'center' }} onPress={() => navigate('/twitter')}>
           More
         </Button>
       </View>
@@ -203,17 +198,18 @@ class HomeScreen extends Component<Props> {
           icon='snapchat'
           name='Snapchat'
           iconColor={savedColors.snapchat}
-          onPress={() => navigate('snapchat')}
+          onPress={() => navigate('/snapchat')}
         />
         <Carousel
-          sliderWidth={MAX_CONTENT_WIDTH}
+          sliderWidth={windowDims.width}
           itemWidth={storyWidth}
+          enableMomentum
           data={snapchatStories}
           renderItem={({ item, index }) => (
             <TouchableOpacity
               key={index}
               style={{ width: storyWidth, borderRadius: 20, overflow: 'hidden' }}
-              onPress={() => navigate('story', { options: item })}
+              onPress={() => navigate('/snapchat/story', { options: item })}
               activeOpacity={0.6}>
               <SnapchatStoryView options={item} width={storyWidth} height={storyWidth * 2} />
             </TouchableOpacity>

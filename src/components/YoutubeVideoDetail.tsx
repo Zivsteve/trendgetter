@@ -17,7 +17,7 @@ class YoutubeVideoDetail extends Component<Props> {
 
     return (
       <Card style={{ width: '100%', borderRadius: 10, overflow: 'hidden' }}>
-        <TouchableRipple onPress={() => openURL(`https://youtu.be/${prop.id}`)} rippleColor='rgba(0, 0, 0, 0.3)'>
+        <TouchableRipple onPress={() => openURL(`https://youtu.be/${prop.id}`)} rippleColor={colors.onSurface}>
           <View>
             <View style={{ padding: 5 }}>
               <Title style={{ color: colors.text, fontSize: 14, lineHeight: 15 }} numberOfLines={1}>

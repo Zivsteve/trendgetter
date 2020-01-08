@@ -15,9 +15,7 @@ interface Props {
 }
 
 class AboutScreen extends Component<Props> {
-  static navigationOptions = {
-    gesturesEnabled: true,
-  };
+  static navigationOptions = { gestureEnabled: true };
 
   render() {
     return (
@@ -26,7 +24,7 @@ class AboutScreen extends Component<Props> {
         <NavigationBar dark={true} />
 
         <View style={{ height: '100%', backgroundColor: '#1876d1', overflow: 'hidden' }}>
-          <ScrollView style={{ paddingBottom: 80, height: '100%', maxWidth: 500 }}>
+          <ScrollView style={{ paddingBottom: 80, height: '100%' }}>
             <Navbar barStyle={{ backgroundColor: 'transparent' }} title='About' underStatusBar />
 
             <View style={{ paddingVertical: '10%', alignSelf: 'center', width: '80%' }}>
@@ -93,10 +91,10 @@ class AboutScreen extends Component<Props> {
             style={{
               position: 'absolute',
               bottom: -10,
-              left: 0,
+              right: 0,
             }}
             pointerEvents='none'>
-            <Svg width={window.width} height={100} viewBox='0 0 1440 320'>
+            <Svg width={400} height={100} viewBox='0 0 1440 320'>
               <Path
                 fill='#1e2226'
                 fillOpacity='1'

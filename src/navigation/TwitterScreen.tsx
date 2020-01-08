@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StatusBar, Dimensions, RefreshControl, ScrollView, FlatList } from 'react-native';
+import { View, StatusBar, Dimensions, ScrollView, FlatList } from 'react-native';
 import ContentService from '../services/ContentService';
 import TwitterTagDetail from '../components/TwitterTagDetail';
 import TrendingTitle from '../components/TrendingTitle';
@@ -7,6 +7,7 @@ import Navbar from '../components/Navbar';
 import { Theme, withTheme } from 'react-native-paper';
 import NavigationBar from '../components/NavigationBar';
 import { savedColors, MAX_CONTENT_WIDTH } from '../Config';
+import { RefreshControl } from '../components/refresh-control';
 
 const window = Dimensions.get('window');
 
@@ -51,7 +52,7 @@ class TwitterScreen extends Component<Props> {
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={() => this._refresh()}
-                colors={['#007afd', 'blue', 'yellow']}
+                colors={[this._themeColor]}
                 tintColor='#007afd'
               />
             }>
@@ -68,11 +69,9 @@ class TwitterScreen extends Component<Props> {
                 <TrendingTitle icon='twitter' name='Twitter' />
 
                 <View style={{ width: MAX_CONTENT_WIDTH, marginTop: 20, alignSelf: 'center' }}>
-                  <FlatList
-                    data={tags}
-                    keyExtractor={(item, index) => `${index}`}
-                    renderItem={({ item, index }) => <TwitterTagDetail index={index} options={item} />}
-                  />
+                  {tags.map((item, index) => (
+                    <TwitterTagDetail key={index} index={index} options={item} />
+                  ))}
                 </View>
               </View>
             </View>

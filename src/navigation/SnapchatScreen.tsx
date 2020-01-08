@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StatusBar, Dimensions, RefreshControl, ScrollView, TouchableOpacity, FlatList } from 'react-native';
+import { View, StatusBar, Dimensions, ScrollView, TouchableOpacity, FlatList } from 'react-native';
 import ContentService from '../services/ContentService';
 import { Theme, withTheme } from 'react-native-paper';
 import SnapchatStoryView from '../components/SnapchatStoryView';
@@ -8,6 +8,7 @@ import Navbar from '../components/Navbar';
 import { navigate } from '../services/NavigationService';
 import NavigationBar from '../components/NavigationBar';
 import { savedColors, MAX_CONTENT_WIDTH } from '../Config';
+import { RefreshControl } from '../components/refresh-control';
 
 const window = Dimensions.get('window');
 
@@ -54,7 +55,7 @@ class SnapchatScreen extends Component<Props> {
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={() => this._refresh()}
-                colors={['#007afd', 'blue', 'yellow']}
+                colors={[this._themeColor]}
                 tintColor='#007afd'
               />
             }>
@@ -70,24 +71,24 @@ class SnapchatScreen extends Component<Props> {
               <View>
                 <TrendingTitle icon='snapchat' name='Snapchat' />
 
-                <FlatList
-                  contentContainerStyle={{
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
                     width: MAX_CONTENT_WIDTH,
                     alignSelf: 'center',
                     marginTop: 20,
-                  }}
-                  keyExtractor={(item, index) => `${index}`}
-                  numColumns={2}
-                  data={stories}
-                  renderItem={({ item, index }) => (
+                  }}>
+                  {stories.map((item, index) => (
                     <TouchableOpacity
+                      key={index}
                       style={{ margin: 5, borderRadius: 10, overflow: 'hidden' }}
-                      onPress={() => navigate('story', { options: item })}
+                      onPress={() => navigate('/snapchat/story', { options: item })}
                       activeOpacity={0.6}>
                       <SnapchatStoryView options={item} width={storyWidth} height={storyHeight} />
                     </TouchableOpacity>
-                  )}
-                />
+                  ))}
+                </View>
               </View>
             </View>
           </ScrollView>

@@ -46,7 +46,7 @@ class GithubRepositoryDetail extends Component<Props> {
         }}>
         <TouchableRipple
           onPress={() => openURL(`https://github.com${prop.repo.link}`)}
-          rippleColor='rgba(255, 255, 255, 0.2)'>
+          rippleColor={colors.onSurface}>
           <View style={{ padding: 10, paddingBottom: 4 }}>
             <View style={{ marginBottom: 5, flexDirection: 'row', flexWrap: 'wrap-reverse' }}>
               <Text style={{ color: colors.text, opacity: 0.7, fontSize: 16, fontWeight: 'bold' }}>

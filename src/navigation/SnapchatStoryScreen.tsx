@@ -5,17 +5,16 @@ import Navbar from '../components/Navbar';
 import ContentService from '../services/ContentService';
 import { Appbar, ActivityIndicator } from 'react-native-paper';
 import { timeAgo } from '../utils/NumberUtils';
+import { Route } from '@react-navigation/native';
 
 const window = Dimensions.get('window');
 
 interface Props {
-  navigation: any;
+  route: Route<string>;
 }
 
-export default class SnapchatStoryScreen extends Component<Props> {
-  static navigationOptions = {
-    gesturesEnabled: true,
-  };
+class SnapchatStoryScreen extends Component<Props> {
+  static navigationOptions = { gestureEnabled: true };
   state = {
     title: '',
     snaps: [] as any[],
@@ -30,18 +29,18 @@ export default class SnapchatStoryScreen extends Component<Props> {
   }
 
   async _refresh() {
-    const { navigation } = this.props;
-    const { userName } = navigation.getParam('options', {});
-    const story = await ContentService.getSnapchatStory(userName);
+    const { route } = this.props;
+    const { options } = route.params as any;
+    const story = await ContentService.getSnapchatStory(options.userName);
     this.setState({ title: story.metadata?.title || story.id, snaps: story.snaps });
   }
 
   render() {
     const storyHeight = window.height;
     const storyWidth = window.width;
-    const { navigation } = this.props;
-    const { timestampInSec } = navigation.getParam('options', {});
-    const time = timeAgo(timestampInSec * 1000);
+    const { route } = this.props;
+    const { options } = route.params as any;
+    const time = timeAgo(options.timestampInSec * 1000);
     const { title, snaps, index, loading, paused, muted } = this.state;
     const snap = snaps[index];
 
@@ -147,3 +146,5 @@ export default class SnapchatStoryScreen extends Component<Props> {
     this.setState({ muted: !this.state.muted });
   }
 }
+
+export default SnapchatStoryScreen;

@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { Text, TouchableRipple } from 'react-native-paper';
+import { Text, TouchableRipple, Theme, withTheme } from 'react-native-paper';
 import { formatNumber } from '../utils/NumberUtils';
 import { openURL } from '../services/NavigationService';
 
 interface Props {
   options: any;
   index: number;
+  theme: Theme;
 }
 
-export default class TwitterTagDetail extends Component<Props> {
+class TwitterTagDetail extends Component<Props> {
   render() {
-    const { options: prop, index } = this.props;
+    const { options: prop, index, theme } = this.props;
+    const { colors } = theme;
     return (
       <TouchableRipple
         style={{ paddingHorizontal: 5, paddingVertical: 15, borderRadius: 10 }}
-        rippleColor='rgba(255, 255, 255, 0.2)'
+        rippleColor={colors.onSurface}
         onPress={() => openURL(prop.url)}>
         <View style={{ flexDirection: 'row', paddingHorizontal: 10 }}>
           <Text
@@ -42,3 +44,5 @@ export default class TwitterTagDetail extends Component<Props> {
     );
   }
 }
+
+export default withTheme(TwitterTagDetail);

@@ -1,72 +1,75 @@
-import { NavigationActions, NavigationContainerComponent, NavigationState } from 'react-navigation';
-import { Linking, Platform } from 'react-native';
-import { DrawerActions } from 'react-navigation-drawer';
+import { NavigationContainerRef, NavigationState, Route, CommonActions, PartialState } from '@react-navigation/native';
+import { DrawerActions } from '@react-navigation/routers';
+import { Linking, Platform, BackHandler } from 'react-native';
 
-let _navigator: NavigationContainerComponent;
-let hasLoaded = false;
+let _navigator: NavigationContainerRef;
 let isNavigating = false;
 
 export function getNavigator() {
   return _navigator;
 }
 
-export function setTopLevelNavigator(navigatorRef: NavigationContainerComponent) {
+export function setTopLevelNavigator(navigatorRef: NavigationContainerRef) {
   _navigator = navigatorRef;
   if (Platform.OS === 'web') {
     const onload = () => {
       isNavigating = true;
-      navigate(
-        location.pathname
-          .replace('/', '')
-          .replace('/', '_')
-          .replace(/\//g, '') || undefined,
-      );
+      navigate(location.pathname);
     };
     window.onpopstate = () => onload();
-    if (!hasLoaded) {
-      onload();
-      hasLoaded = true;
-    }
+    window.onload = () => onload();
   }
+  BackHandler.addEventListener('hardwareBackPress', () => {
+    goBack();
+    return true;
+  });
 }
 
-export function onNavigationStateChange(state: NavigationState) {
+export function onNavigationStateChange(state: NavigationState | undefined) {
+  if (!state) {
+    return;
+  }
   if (Platform.OS === 'web' && !isNavigating) {
-    const route: NavigationState = getActiveRouteState(state);
-    const path = route.params?.path || route.key;
-    if (path === 'home') {
-      history.replaceState({}, '', '/');
-      return;
-    }
+    const path = getActiveRouteState(state)?.name || '/';
     console.log(path);
-    history.pushState({}, path, `/${path}`);
+    history.pushState({}, path, path);
   }
   isNavigating = false;
 }
 
 export function toggleDrawer() {
+  if (!_navigator) {
+    return;
+  }
   _navigator.dispatch(DrawerActions.toggleDrawer());
 }
 
-export function navigate(routeName = 'home', params?: any) {
-  _navigator.dispatch(
-    NavigationActions.navigate({
-      routeName,
-      params,
-    }),
-  );
+export function navigate(routeName = '/', params?: any) {
+  if (!_navigator) {
+    return;
+  }
+  const screens = routeName.split('/')[1];
+  if (screens.length > 2) {
+    _navigator.dispatch(CommonActions.navigate({ name: `/${routeName.split('/')[1]}` }));
+  }
+  _navigator.dispatch(CommonActions.navigate({ name: routeName, params: params }));
 }
 
 export function goBack() {
-  _navigator.dispatch(NavigationActions.back());
+  if (!_navigator) {
+    return;
+  }
+  _navigator.dispatch(CommonActions.goBack());
 }
 
-export function getActiveRouteState(route: NavigationState): NavigationState {
-  if (!route.routes || route.routes.length === 0 || route.index >= route.routes.length) {
-    return route;
+export function getActiveRouteState(route: NavigationState) {
+  let rte: any = route.routes[0];
+  while (rte) {
+    if (!rte?.state?.routes?.length) {
+      return rte;
+    }
+    rte = rte.state?.routes[1] || rte.state?.routes[0];
   }
-  const childActiveRoute = route.routes[route.index] as NavigationState;
-  return getActiveRouteState(childActiveRoute);
 }
 
 export function openURL(url: string) {

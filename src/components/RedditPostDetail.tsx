@@ -24,17 +24,19 @@ class RedditPostDetail extends Component<Props> {
     const blur = data?.over_18 || data?.spoiler;
 
     return (
-      <Card style={{ width: imageWidth, marginBottom: 10, borderRadius: 10, overflow: 'hidden' }}>
+      <Card style={{ width: imageWidth, marginBottom: 10, borderRadius: 10, overflow: 'hidden', maxWidth: 500 }}>
         <TouchableRipple
           style={{ borderRadius: 10 }}
           onPress={() => openURL(`https://www.reddit.com${data?.permalink}`)}
           rippleColor='rgba(0, 0, 0, 0.2)'>
           <View>
             <View style={{ flexDirection: 'row', flexWrap: 'nowrap', padding: 5 }}>
-              <Image
-                style={{ width: 30, height: 30, borderRadius: 10, marginTop: 5 }}
-                source={{ uri: data?.sr_detail?.icon_img }}
-              />
+              {isValidImage(data.sr_detail.icon_img) && (
+                <Image
+                  style={{ width: 30, height: 30, borderRadius: 10, marginTop: 5 }}
+                  source={{ uri: data.sr_detail.icon_img }}
+                />
+              )}
               <View style={{ marginLeft: 5 }}>
                 <Text style={{ width: '100%', color: colors.text, opacity: 0.8, textAlign: 'left' }}>
                   r/{data?.subreddit}
@@ -60,12 +62,13 @@ class RedditPostDetail extends Component<Props> {
         </TouchableRipple>
 
         {isVideo && (
-          <Video
-            style={{ width: '100%' }}
-            resizeMode='cover'
-            source={{ uri: data?.secure_media?.reddit_video?.scrubber_media_url }}
-            controls
-          />
+          <View style={{ width: '100%', height: imageHeight }}>
+            <Video
+              style={{ width: '100%', height: '100%' }}
+              resizeMode='cover'
+              source={{ uri: data?.secure_media?.reddit_video?.scrubber_media_url }}
+            />
+          </View>
         )}
 
         <View style={{ width: '100%', flexDirection: 'row', flexWrap: 'wrap-reverse' }}>
@@ -78,6 +81,9 @@ class RedditPostDetail extends Component<Props> {
             ))}
           </ScrollView>
 
+          <IconBadge style={{ marginLeft: 'auto' }} textStyle={{ color: '#bbb' }} icon='comment' iconColor='#bbb'>
+            {formatNumber(data?.num_comments)}
+          </IconBadge>
           <IconBadge
             style={{ marginLeft: 'auto' }}
             textStyle={{ color: '#ff3f18' }}

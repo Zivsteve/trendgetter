@@ -7,16 +7,29 @@ interface Props {
   dark?: boolean;
 }
 
+/**
+ * 
+ * @param props 
+ */
 function NavigationBar(props: Props) {
+  updateBar(props);
   useFocusEffect(
     useCallback(() => {
-      const { color, dark } = props;
-      changeNavigationBarColor(color || '#00000000', !dark, true);
+      updateBar(props);
       return () => {};
     }, []),
   );
 
   return null;
+}
+
+/**
+ * 
+ * @param props 
+ */
+function updateBar(props: Props) {
+  const { color, dark } = props;
+  (changeNavigationBarColor as any)(color || '#00000000', !dark, true);
 }
 
 export default NavigationBar;

@@ -10,6 +10,9 @@ interface Props {
   theme: Theme;
 }
 
+/**
+ * 
+ */
 class YoutubeVideoDetail extends Component<Props> {
   render() {
     const { options: prop, theme } = this.props;

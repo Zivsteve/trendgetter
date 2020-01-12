@@ -12,6 +12,9 @@ interface Props {
   theme: Theme;
 }
 
+/**
+ *
+ */
 class IconBadge extends Component<Props> {
   render() {
     const { icon, iconColor, children, textStyle, style, theme } = this.props;

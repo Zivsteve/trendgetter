@@ -10,7 +10,10 @@ interface Props {
   height: number;
 }
 
-export default class SnapchatStoryView extends Component<Props> {
+/**
+ * 
+ */
+class SnapchatStoryView extends Component<Props> {
   render() {
     const { options: prop, width, height } = this.props;
     const time = timeAgo(prop.timestampInSec * 1000);
@@ -31,3 +34,5 @@ export default class SnapchatStoryView extends Component<Props> {
     );
   }
 }
+
+export default SnapchatStoryView;

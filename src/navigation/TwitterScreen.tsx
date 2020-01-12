@@ -15,6 +15,9 @@ interface Props {
   theme: Theme;
 }
 
+/**
+ *
+ */
 class TwitterScreen extends Component<Props> {
   private _themeColor = savedColors.twitter;
   state = {
@@ -26,6 +29,9 @@ class TwitterScreen extends Component<Props> {
     this._refresh();
   }
 
+  /**
+   *
+   */
   async _refresh() {
     this.setState({ refreshing: true });
     const tags = await ContentService.getTwitterTags();

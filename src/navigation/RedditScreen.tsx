@@ -15,6 +15,9 @@ interface Props {
   theme: Theme;
 }
 
+/**
+ * 
+ */
 class RedditScreen extends Component<Props> {
   private _themeColor = savedColors.reddit;
   state = {
@@ -26,6 +29,9 @@ class RedditScreen extends Component<Props> {
     this._refresh();
   }
 
+  /**
+   * 
+   */
   async _refresh() {
     this.setState({ refreshing: true });
     const posts = await ContentService.getRedditPosts();

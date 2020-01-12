@@ -7,16 +7,19 @@ import ColorSettingsScreen from './ColorSettingsScreen';
 
 const Stack = createStackNavigator();
 
+/**
+ * 
+ */
 function SettingsRoutes() {
   return (
     <Stack.Navigator
       initialRouteName='/settings'
       headerMode='none'
       screenOptions={{ gestureEnabled: false, ...TransitionPresets.RevealFromBottomAndroid }}>
-      <Stack.Screen name='/settings' component={SettingsScreen} />
-      <Stack.Screen name='/settings/home' component={HomeSettingsScreen} />
-      <Stack.Screen name='/settings/theme' component={ThemeSettingsScreen} />
-      <Stack.Screen name='/settings/color' component={ColorSettingsScreen} />
+      <Stack.Screen name='/settings' component={SettingsScreen as any} />
+      <Stack.Screen name='/settings/home' component={HomeSettingsScreen as any} />
+      <Stack.Screen name='/settings/theme' component={ThemeSettingsScreen as any} />
+      <Stack.Screen name='/settings/color' component={ColorSettingsScreen as any} />
     </Stack.Navigator>
   );
 }

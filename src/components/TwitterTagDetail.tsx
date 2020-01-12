@@ -10,6 +10,9 @@ interface Props {
   theme: Theme;
 }
 
+/**
+ * 
+ */
 class TwitterTagDetail extends Component<Props> {
   render() {
     const { options: prop, index, theme } = this.props;

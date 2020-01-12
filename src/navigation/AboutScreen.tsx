@@ -14,6 +14,9 @@ interface Props {
   theme: Theme;
 }
 
+/**
+ * 
+ */
 class AboutScreen extends Component<Props> {
   static navigationOptions = { gestureEnabled: true };
 
@@ -30,7 +33,7 @@ class AboutScreen extends Component<Props> {
             <View style={{ paddingVertical: '10%', alignSelf: 'center', width: '80%' }}>
               <Image
                 style={{ width: 60, height: 60, marginBottom: 10 }}
-                source={require('../assets/logo-light-1024x1024.png')}
+                source={require('../assets/logo-light-108x108.png')}
               />
               <Text style={{ color: '#fff', fontSize: 26, fontWeight: 'bold' }}>Trendgetter</Text>
               <View style={{ width: 100, height: 2, backgroundColor: '#fff', marginVertical: 10 }} />

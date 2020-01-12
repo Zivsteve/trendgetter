@@ -15,7 +15,12 @@ interface Props {
   dark?: boolean;
   children?: JSX.Element[] | JSX.Element;
 }
-export default function Navbar(props: Props) {
+
+/**
+ * 
+ * @param props 
+ */
+function Navbar(props: Props) {
   const insets = useSafeArea();
   const backIcon = Platform.OS === 'ios' ? 'chevron-left' : 'arrow-left';
 
@@ -38,3 +43,5 @@ export default function Navbar(props: Props) {
     </Appbar>
   );
 }
+
+export default Navbar;

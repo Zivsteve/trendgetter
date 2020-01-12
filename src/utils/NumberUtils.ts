@@ -1,7 +1,15 @@
+/**
+ * 
+ * @param num 
+ */
 export function formatNumber(num: number | string) {
   return `${num}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
+/**
+ * 
+ * @param previous 
+ */
 export function timeAgo(previous: number | Date | string) {
   const msPerMinute = 60 * 1000;
   const msPerHour = msPerMinute * 60;
@@ -23,6 +31,9 @@ export function timeAgo(previous: number | Date | string) {
   return `${values[0]} ${values[1]}${values[0] > 1 ? 's' : ''} ago`;
 }
 
+/**
+ * 
+ */
 export function getReadableDate() {
   return new Date().toDateString().replace(' ', ', ');
 }

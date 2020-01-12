@@ -1,0 +1,137 @@
+# https://github.com/h5bp/server-configs-apache/blob/master/dist/.htaccess
+
+# Main options
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    Options -Indexes +FollowSymLinks -MultiViews
+    DirectoryIndex index.html
+
+    RewriteRule ^index\.html$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+    # Cross-origin requests (CORS)
+    Header add Access-Control-Allow-Origin "*"
+    Header add Access-Control-Allow-Methods: "GET,POST"
+    Header add Access-Control-Allow-Headers "content-type,authorization"
+
+    # Strict-Transport-Security (HSTS)
+    Header add Strict-Transport-Security "max-age=31415926;includeSubDomains;"
+
+    # X-Frame-Options
+    Header always append X-Frame-Options "SAMEORIGIN"
+
+    # Reducing MIME type security risks
+    Header set X-Content-Type-Options "nosniff"
+
+    # Reflected Cross-Site Scripting (XSS) attacks
+    Header set X-XSS-Protection "1; mode=block"
+    <FilesMatch "\.(appcache|atom|bbaw|bmp|br|crx|css|cur|eot|f4[abpv]|flv|geojson|gif|gz|htc|ic[os]|jpe?g|m?js|json(ld)?|m4[av]|manifest|map|markdown|md|mp4|oex|og[agv]|opus|otf|pdf|png|rdf|rss|safariextz|svgz?|swf|topojson|tt[cf]|txt|vcard|vcf|vtt|wasm|webapp|web[mp]|webmanifest|woff2?|xloc|xml|xpi)$">
+        Header unset X-XSS-Protection
+    </FilesMatch>
+</IfModule>
+
+# Compression
+<IfModule mod_deflate.c>
+    <IfModule mod_setenvif.c>
+        <IfModule mod_headers.c>
+            SetEnvIfNoCase ^(Accept-EncodXng|X-cept-Encoding|X{15}|~{15}|-{15})$ ^((gzip|deflate)\s*,?\s*)+|[X~-]{4,13}$ HAVE_Accept-Encoding
+            RequestHeader append Accept-Encoding "gzip,deflate" env=HAVE_Accept-Encoding
+        </IfModule>
+    </IfModule>
+    <IfModule mod_filter.c>
+        AddOutputFilterByType DEFLATE "application/atom+xml" \
+                                      "application/javascript" \
+                                      "application/json" \
+                                      "application/ld+json" \
+                                      "application/manifest+json" \
+                                      "application/rdf+xml" \
+                                      "application/rss+xml" \
+                                      "application/schema+json" \
+                                      "application/vnd.geo+json" \
+                                      "application/vnd.ms-fontobject" \
+                                      "application/wasm" \
+                                      "application/x-font-ttf" \
+                                      "application/x-javascript" \
+                                      "application/x-web-app-manifest+json" \
+                                      "application/xhtml+xml" \
+                                      "application/xml" \
+                                      "font/collection" \
+                                      "font/eot" \
+                                      "font/opentype" \
+                                      "font/otf" \
+                                      "font/ttf" \
+                                      "image/bmp" \
+                                      "image/svg+xml" \
+                                      "image/vnd.microsoft.icon" \
+                                      "image/x-icon" \
+                                      "text/cache-manifest" \
+                                      "text/calendar" \
+                                      "text/css" \
+                                      "text/html" \
+                                      "text/javascript" \
+                                      "text/plain" \
+                                      "text/markdown" \
+                                      "text/vcard" \
+                                      "text/vnd.rim.location.xloc" \
+                                      "text/vtt" \
+                                      "text/x-component" \
+                                      "text/x-cross-domain-policy" \
+                                      "text/xml"
+
+    </IfModule>
+    <IfModule mod_mime.c>
+        AddEncoding gzip svgz
+    </IfModule>
+</IfModule>
+
+# Cache expiration
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault                              "access plus 1 hour"
+
+    # Media files
+
+    ExpiresByType image/jpg                     "access plus 1 year"
+    ExpiresByType image/jpeg                    "access plus 1 year"
+    ExpiresByType image/gif                     "access plus 1 year"
+    ExpiresByType image/png                     "access plus 1 year"
+    ExpiresByType video/mp4                     "access plus 1 year"
+
+    ## Web fonts
+
+    # OpenType
+    ExpiresByType font/opentype                 "access plus 1 year"
+    ExpiresByType font/otf                      "access plus 1 year"
+
+    # TrueType
+    ExpiresByType application/x-font-ttf        "access plus 1 year"
+    ExpiresByType font/ttf                      "access plus 1 year"
+
+    # Web Open Font Format (WOFF) 1.0
+    ExpiresByType application/font-woff         "access plus 1 year"
+    ExpiresByType application/x-font-woff       "access plus 1 year"
+    ExpiresByType font/woff                     "access plus 1 year"
+
+    # Web Open Font Format (WOFF) 2.0
+    ExpiresByType application/font-woff2        "access plus 1 year"
+    ExpiresByType font/woff2                    "access plus 1 year"
+
+    ## Main files
+
+    ExpiresByType text/css                      "access plus 1 month"
+    ExpiresByType text/html                     "access plus 1 month"
+    ExpiresByType application/pdf               "access plus 1 month"
+    ExpiresByType application/json              "access plus 1 month"
+    ExpiresByType application/javascript        "access plus 1 month"
+    ExpiresByType text/x-javascript             "access plus 1 month"
+    ExpiresByType image/x-icon                  "access plus 1 month"
+    ExpiresByType text/xml                      "access plus 0 seconds"
+
+    # Manifest file
+    ExpiresByType application/manifest+json     "access plus 1 week"
+</IfModule>

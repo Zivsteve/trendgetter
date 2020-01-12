@@ -23,6 +23,9 @@ interface Props {
   theme: Theme;
 }
 
+/**
+ *
+ */
 class HomeScreen extends Component<Props> {
   state = {
     layout: savedHomeLayout,
@@ -39,21 +42,25 @@ class HomeScreen extends Component<Props> {
     this._refresh();
   }
 
+  /**
+   *
+   */
   async _refresh() {
-    this.setState({ refreshing: true });
-    const videos = await ContentService.getYoutubeVideos();
-    const searches = await ContentService.getGoogleSearches();
-    const tags = await ContentService.getTwitterTags();
-    const stories = await ContentService.getSnapchatStories();
-
-    this.setState({
-      layout: savedHomeLayout,
-      youtubeVideos: videos.slice(0, 5),
-      googleSearches: searches.slice(0, 5),
-      twitterTags: tags.slice(0, 5),
-      snapchatStories: stories.slice(0, 5),
-      refreshing: false,
-    });
+    try {
+      this.setState({ refreshing: true });
+      const videos = await ContentService.getYoutubeVideos();
+      const searches = await ContentService.getGoogleSearches();
+      const tags = await ContentService.getTwitterTags();
+      const stories = await ContentService.getSnapchatStories();
+      this.setState({
+        layout: savedHomeLayout,
+        youtubeVideos: videos.slice(0, 5),
+        googleSearches: searches.slice(0, 5),
+        twitterTags: tags.slice(0, 5),
+        snapchatStories: stories.slice(0, 5),
+        refreshing: false,
+      });
+    } catch (err) {}
   }
 
   render() {
@@ -62,7 +69,6 @@ class HomeScreen extends Component<Props> {
     const { colors } = theme;
     const date = getReadableDate();
     const circleColor = theme.dark ? '#fff' : '#000';
-
     return (
       <View
         style={{
@@ -123,6 +129,9 @@ class HomeScreen extends Component<Props> {
     );
   }
 
+  /**
+   *
+   */
   _renderYoutube() {
     const videoWidth = Math.max(MAX_CONTENT_WIDTH - 100, 300);
     const { youtubeVideos } = this.state;
@@ -151,6 +160,9 @@ class HomeScreen extends Component<Props> {
     );
   }
 
+  /**
+   *
+   */
   _renderGoogle() {
     const { googleSearches } = this.state;
 
@@ -167,6 +179,9 @@ class HomeScreen extends Component<Props> {
     );
   }
 
+  /**
+   *
+   */
   _renderTwitter() {
     const { twitterTags } = this.state;
 
@@ -188,6 +203,9 @@ class HomeScreen extends Component<Props> {
     );
   }
 
+  /**
+   *
+   */
   _renderSnapchat() {
     const storyWidth = MAX_CONTENT_WIDTH / 2;
     const { snapchatStories } = this.state;

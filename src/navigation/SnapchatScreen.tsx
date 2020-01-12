@@ -16,6 +16,9 @@ interface Props {
   theme: Theme;
 }
 
+/**
+ * 
+ */
 class SnapchatScreen extends Component<Props> {
   private _themeColor = savedColors.snapchat;
   state = {
@@ -27,6 +30,9 @@ class SnapchatScreen extends Component<Props> {
     this._refresh();
   }
 
+  /**
+   * 
+   */
   async _refresh() {
     this.setState({ refreshing: true });
     const stories = await ContentService.getSnapchatStories();

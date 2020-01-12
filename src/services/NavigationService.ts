@@ -2,15 +2,22 @@ import { NavigationContainerRef, NavigationState, Route, CommonActions, PartialS
 import { DrawerActions } from '@react-navigation/routers';
 import { Linking, Platform, BackHandler } from 'react-native';
 
-let _navigator: NavigationContainerRef;
+let navigator: NavigationContainerRef;
 let isNavigating = false;
 
+/**
+ *
+ */
 export function getNavigator() {
-  return _navigator;
+  return navigator;
 }
 
+/**
+ *
+ * @param navigatorRef
+ */
 export function setTopLevelNavigator(navigatorRef: NavigationContainerRef) {
-  _navigator = navigatorRef;
+  navigator = navigatorRef;
   if (Platform.OS === 'web') {
     const onload = () => {
       isNavigating = true;
@@ -25,6 +32,10 @@ export function setTopLevelNavigator(navigatorRef: NavigationContainerRef) {
   });
 }
 
+/**
+ *
+ * @param state
+ */
 export function onNavigationStateChange(state: NavigationState | undefined) {
   if (!state) {
     return;
@@ -37,31 +48,46 @@ export function onNavigationStateChange(state: NavigationState | undefined) {
   isNavigating = false;
 }
 
+/**
+ *
+ */
 export function toggleDrawer() {
-  if (!_navigator) {
+  if (!navigator) {
     return;
   }
-  _navigator.dispatch(DrawerActions.toggleDrawer());
+  navigator.dispatch(DrawerActions.toggleDrawer());
 }
 
+/**
+ *
+ * @param routeName
+ * @param params
+ */
 export function navigate(routeName = '/', params?: any) {
-  if (!_navigator) {
+  if (!navigator) {
     return;
   }
   const screens = routeName.split('/')[1];
   if (screens.length > 2) {
-    _navigator.dispatch(CommonActions.navigate({ name: `/${routeName.split('/')[1]}` }));
+    navigator.dispatch(CommonActions.navigate({ name: `/${routeName.split('/')[1]}` }));
   }
-  _navigator.dispatch(CommonActions.navigate({ name: routeName, params: params }));
+  navigator.dispatch(CommonActions.navigate({ name: routeName, params: params }));
 }
 
+/**
+ *
+ */
 export function goBack() {
-  if (!_navigator) {
+  if (!navigator) {
     return;
   }
-  _navigator.dispatch(CommonActions.goBack());
+  navigator.dispatch(CommonActions.goBack());
 }
 
+/**
+ *
+ * @param route
+ */
 export function getActiveRouteState(route: NavigationState) {
   let rte: any = route.routes[0];
   while (rte) {
@@ -72,6 +98,10 @@ export function getActiveRouteState(route: NavigationState) {
   }
 }
 
+/**
+ *
+ * @param url
+ */
 export function openURL(url: string) {
   Linking.openURL(url);
 }

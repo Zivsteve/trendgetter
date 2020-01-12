@@ -13,6 +13,9 @@ interface Props {
   route: Route<string>;
 }
 
+/**
+ *
+ */
 class SnapchatStoryScreen extends Component<Props> {
   static navigationOptions = { gestureEnabled: true };
   state = {
@@ -28,6 +31,9 @@ class SnapchatStoryScreen extends Component<Props> {
     this._refresh();
   }
 
+  /**
+   *
+   */
   async _refresh() {
     const { route } = this.props;
     const { options } = route.params as any;
@@ -125,6 +131,9 @@ class SnapchatStoryScreen extends Component<Props> {
     );
   }
 
+  /**
+   *
+   */
   public next() {
     const { snaps, index } = this.state;
     let newIndex = index + 1;
@@ -134,14 +143,23 @@ class SnapchatStoryScreen extends Component<Props> {
     this.setState({ index: newIndex });
   }
 
+  /**
+   *
+   */
   public prev() {
     this.setState({ index: this.state.index - 1 });
   }
 
+  /**
+   *
+   */
   public togglePaused() {
     this.setState({ paused: !this.state.paused });
   }
 
+  /**
+   *
+   */
   public toggleMuted() {
     this.setState({ muted: !this.state.muted });
   }

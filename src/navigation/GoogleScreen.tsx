@@ -15,6 +15,9 @@ interface Props {
   theme: Theme;
 }
 
+/**
+ * 
+ */
 class GoogleScreen extends Component<Props> {
   private _themeColor = savedColors.google;
   state = {
@@ -26,6 +29,9 @@ class GoogleScreen extends Component<Props> {
     this._refresh();
   }
 
+  /**
+   * 
+   */
   async _refresh() {
     this.setState({ refreshing: true });
     const searches = await ContentService.getGoogleSearches();

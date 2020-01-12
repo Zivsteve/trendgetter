@@ -20,6 +20,9 @@ import SettingsRoutes from './navigation/settings/Routes';
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
+/**
+ * 
+ */
 function Routes() {
   return (
     <NavigationContainer
@@ -30,23 +33,23 @@ function Routes() {
           name='/'
           component={() => (
             <Stack.Navigator
-              initialRouteName='home'
+              initialRouteName='/'
               headerMode='none'
               screenOptions={{ gestureEnabled: false, ...TransitionPresets.SlideFromRightIOS }}>
-              <Stack.Screen name='/' component={HomeScreen} />
-              <Stack.Screen name='/youtube' component={YoutubeScreen} />
-              <Stack.Screen name='/google' component={GoogleScreen} />
-              <Stack.Screen name='/twitter' component={TwitterScreen} />
-              <Stack.Screen name='/reddit' component={RedditScreen} />
-              <Stack.Screen name='/github' component={GithubScreen} />
-              <Stack.Screen name='/snapchat' component={SnapchatScreen} />
+              <Stack.Screen name='/' component={HomeScreen as any} />
+              <Stack.Screen name='/youtube' component={YoutubeScreen as any} />
+              <Stack.Screen name='/google' component={GoogleScreen as any} />
+              <Stack.Screen name='/twitter' component={TwitterScreen as any} />
+              <Stack.Screen name='/reddit' component={RedditScreen as any} />
+              <Stack.Screen name='/github' component={GithubScreen as any} />
+              <Stack.Screen name='/snapchat' component={SnapchatScreen as any} />
               <Stack.Screen
                 name='/snapchat/story'
-                component={SnapchatStoryScreen}
+                component={SnapchatStoryScreen as any}
                 options={SnapchatStoryScreen.navigationOptions}
               />
               <Stack.Screen name='/settings' component={SettingsRoutes} />
-              <Stack.Screen name='/about' component={AboutScreen} options={AboutScreen.navigationOptions} />
+              <Stack.Screen name='/about' component={AboutScreen as any} options={AboutScreen.navigationOptions} />
             </Stack.Navigator>
           )}
         />

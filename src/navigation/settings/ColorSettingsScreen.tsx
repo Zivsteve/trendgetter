@@ -12,6 +12,9 @@ interface Props {
   theme: Theme;
 }
 
+/**
+ *
+ */
 class ColorSettingsScreen extends Component<Props> {
   state = {
     selectedItem: '',
@@ -102,10 +105,18 @@ class ColorSettingsScreen extends Component<Props> {
     );
   }
 
+  /**
+   *
+   * @param item
+   */
   private _selectItem(item: string) {
     this.setState({ selectedItem: item, showColors: true });
   }
 
+  /**
+   *
+   * @param color
+   */
   private _onChange(color: string) {
     const colors = this.state.allColors;
     colors[this.state.selectedItem] = color;

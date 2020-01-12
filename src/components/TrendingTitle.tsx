@@ -12,6 +12,9 @@ interface Props {
   theme: Theme;
 }
 
+/**
+ *
+ */
 class TrendingTitle extends Component<Props> {
   render() {
     const { icon, name, iconColor, onPress, theme } = this.props;

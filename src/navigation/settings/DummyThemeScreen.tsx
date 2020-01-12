@@ -12,7 +12,10 @@ interface Props {
   title: string;
 }
 
-export default class DummyThemeScreen extends Component<Props> {
+/**
+ * 
+ */
+class DummyThemeScreen extends Component<Props> {
   render() {
     const { theme, title } = this.props;
     const { colors } = theme;
@@ -85,3 +88,5 @@ export default class DummyThemeScreen extends Component<Props> {
     );
   }
 }
+
+export default DummyThemeScreen;

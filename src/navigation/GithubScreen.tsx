@@ -15,6 +15,9 @@ interface Props {
   theme: Theme;
 }
 
+/**
+ * 
+ */
 class GithubScreen extends Component<Props> {
   private _themeColor = savedColors.github;
   state = {

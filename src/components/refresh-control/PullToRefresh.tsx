@@ -13,6 +13,9 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface Props extends RefreshControlProps {}
 
+/**
+ *
+ */
 class RefreshControl extends Component<Props> {
   state = {
     progress: 0,
@@ -48,6 +51,9 @@ class RefreshControl extends Component<Props> {
     onPanResponderTerminate: (evt, gestureState) => this._onPanResponderFinish(evt, gestureState),
   });
 
+  /**
+   *
+   */
   private _resetPullVariables() {
     Animated.timing(this._pullDownSwipeMargin, {
       toValue: 0,
@@ -55,6 +61,11 @@ class RefreshControl extends Component<Props> {
     }).start();
   }
 
+  /**
+   *
+   * @param evt
+   * @param gestureState
+   */
   private _onPanResponderFinish(evt: GestureResponderEvent, gestureState: PanResponderGestureState) {
     if (this._pullPosReachedState && this.props.onRefresh) {
       this.props.onRefresh();

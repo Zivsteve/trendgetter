@@ -15,6 +15,9 @@ interface Props {
   theme: Theme;
 }
 
+/**
+ *
+ */
 class YoutubeScreen extends Component<Props> {
   private _themeColor = savedColors.youtube;
   state = {
@@ -26,6 +29,9 @@ class YoutubeScreen extends Component<Props> {
     this._refresh();
   }
 
+  /**
+   *
+   */
   async _refresh() {
     this.setState({ refreshing: true });
     const videos = await ContentService.getYoutubeVideos();

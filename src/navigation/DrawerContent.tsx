@@ -4,29 +4,34 @@ import { useSafeArea } from 'react-native-safe-area-context';
 import { Drawer, Text, Theme, withTheme, TouchableRipple } from 'react-native-paper';
 import { navigate } from '../services/NavigationService';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { setTheme } from '../../App';
+import { AppConsumer } from '../AppContextProvider';
 
 interface Props {
   theme: Theme;
 }
 
+/**
+ * 
+ * @param props 
+ */
 function DrawerHeader(props: any) {
   const insets = useSafeArea();
-
   return (
     <View
       style={{
         paddingTop: insets.top,
         width: '120%',
+        paddingBottom: '5%',
+        marginTop: '-8%',
         marginLeft: '-10%',
-        height: 180,
+        height: 220,
         backgroundColor: '#1876d1',
         alignItems: 'center',
         justifyContent: 'center',
-        borderBottomLeftRadius: 100,
-        borderBottomRightRadius: 100,
+        borderBottomLeftRadius: 200,
+        borderBottomRightRadius: 200,
       }}>
-      <Image style={{ width: 50, height: 50 }} source={require('../assets/logo-light-1024x1024.png')} />
+      <Image style={{ width: 50, height: 50 }} source={require('../assets/logo-light-108x108.png')} />
       <Text style={{ color: '#fff', fontSize: 22, textAlign: 'center', marginTop: 10, fontWeight: 'bold' }}>
         Trendgetter
       </Text>
@@ -35,6 +40,10 @@ function DrawerHeader(props: any) {
   );
 }
 
+/**
+ * 
+ * @param props 
+ */
 function DrawerContent(props: Props) {
   const insets = useSafeArea();
   const { colors } = props.theme;
@@ -65,20 +74,24 @@ function DrawerContent(props: Props) {
           />
         </Drawer.Section>
 
-        <TouchableRipple
-          style={{
-            alignSelf: 'flex-end',
-            width: 40,
-            height: 40,
-            margin: 10,
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 100,
-            overflow: 'hidden',
-          }}
-          onPress={() => setTheme(props.theme.dark ? 'light' : 'dark')}>
-          <Icon name={props.theme.dark ? 'weather-sunny' : 'weather-night'} size={26} color={colors.text} />
-        </TouchableRipple>
+        <AppConsumer>
+          {(consumer) => (
+            <TouchableRipple
+              style={{
+                alignSelf: 'flex-end',
+                width: 40,
+                height: 40,
+                margin: 10,
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 100,
+                overflow: 'hidden',
+              }}
+              onPress={() => consumer.updateTheme(props.theme.dark ? 'light' : 'dark')}>
+              <Icon name={props.theme.dark ? 'weather-sunny' : 'weather-night'} size={26} color={colors.text} />
+            </TouchableRipple>
+          )}
+        </AppConsumer>
       </View>
     </ScrollView>
   );

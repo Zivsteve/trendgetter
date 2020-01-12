@@ -13,6 +13,9 @@ interface Props {
   theme: Theme;
 }
 
+/**
+ * 
+ */
 class GithubRepositoryDetail extends Component<Props> {
   state = {
     unknownLang: false,
@@ -91,6 +94,10 @@ class GithubRepositoryDetail extends Component<Props> {
     );
   }
 
+  /**
+   * 
+   * @param name 
+   */
   private _getIconPath(name: string) {
     const exceptions = [
       { r: '++', v: 'plusplus' },

@@ -5,6 +5,9 @@ type SourceUri = {
   uri?: string | undefined;
 };
 
+/**
+ *
+ */
 class Video extends Component<VideoProperties> {
   private _ref: HTMLVideoElement | null = null;
 
@@ -38,11 +41,17 @@ class Video extends Component<VideoProperties> {
       volume: props.volume,
       controls: props.controls,
       muted: props.muted,
+      loop: props.repeat,
       style: props.style,
     });
   }
 }
 
+/**
+ *
+ * @param func
+ * @param e
+ */
 function call(func?: Function, e?: Event) {
   if (func) {
     func(e);

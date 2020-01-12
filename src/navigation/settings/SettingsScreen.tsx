@@ -10,6 +10,9 @@ interface Props {
   theme: Theme;
 }
 
+/**
+ * 
+ */
 class SettingsScreen extends Component<Props> {
   render() {
     const { theme } = this.props;

@@ -15,6 +15,9 @@ interface Props {
   theme: Theme;
 }
 
+/**
+ * 
+ */
 class HomeSettingsScreen extends Component<Props> {
   data: LayoutDataType = {
     youtube: { icon: 'youtube', name: 'YouTube' },
@@ -26,6 +29,9 @@ class HomeSettingsScreen extends Component<Props> {
     newOrder: savedHomeLayout,
   };
 
+  /**
+   * 
+   */
   _renderRow = ({ data, active }: any) => {
     const { theme } = this.props;
     const { colors } = theme;
@@ -104,6 +110,10 @@ class HomeSettingsScreen extends Component<Props> {
     );
   }
 
+  /**
+   * 
+   * @param order 
+   */
   private _changeOrder(order: string[]) {
     this.setState({ newOrder: order });
   }

@@ -66,7 +66,8 @@ class RedditPostDetail extends Component<Props> {
             <Video
               style={{ width: '100%', height: '100%' }}
               resizeMode='cover'
-              source={{ uri: data?.secure_media?.reddit_video?.scrubber_media_url }}
+              source={{ uri: data?.secure_media?.reddit_video?.hls_url }}
+              repeat
             />
           </View>
         )}

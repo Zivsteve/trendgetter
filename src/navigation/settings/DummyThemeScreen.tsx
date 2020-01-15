@@ -5,8 +5,6 @@ import Navbar from '../../components/Navbar';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getReadableDate } from '../../utils/NumberUtils';
 
-const window = Dimensions.get('window');
-
 interface Props {
   theme: Theme;
   title: string;
@@ -17,6 +15,7 @@ interface Props {
  */
 class DummyThemeScreen extends Component<Props> {
   render() {
+    const window = Dimensions.get('window');
     const { theme, title } = this.props;
     const { colors } = theme;
     const date = getReadableDate();

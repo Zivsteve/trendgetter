@@ -4,6 +4,8 @@ import Themes from './Themes';
 import { AppearanceProvider, Appearance } from 'react-native-appearance';
 import storage from './utils/StorageUtils';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Platform, Dimensions, View } from 'react-native';
+import { DEFAULT_THEME } from './Config';
 
 /**
  *
@@ -28,7 +30,7 @@ export function getTheme() {
  */
 export class AppContextProvider extends Component {
   state: AppConsumerState = {
-    theme: 'light',
+    theme: DEFAULT_THEME,
     updateTheme: (name: string) => {
       this.setState({ theme: name });
       currTheme = name;
@@ -37,6 +39,19 @@ export class AppContextProvider extends Component {
   };
 
   async componentDidMount() {
+    if (Platform.OS === 'web') {
+      let rt: number;
+      window.onresize = () => {
+        clearTimeout(rt);
+        rt = setTimeout(() => {
+          /* Hack: Updating theme causes all components to re-render. */
+          const theme = this.state.theme;
+          this.setState({ theme: 'x' });
+          this.setState({ theme: theme });
+        }, 100);
+      };
+    }
+
     try {
       const theme = await storage.load({ key: 'theme' });
       this.state.updateTheme(theme);

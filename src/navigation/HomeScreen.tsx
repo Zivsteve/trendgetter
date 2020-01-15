@@ -19,8 +19,6 @@ import { RefreshControl } from '../components/refresh-control';
 import DrawerLayout from 'react-native-gesture-handler/DrawerLayout';
 import DrawerContent from './DrawerContent';
 
-const windowDims = Dimensions.get('window');
-
 interface Props {
   theme: Theme;
 }
@@ -66,6 +64,7 @@ class HomeScreen extends Component<Props> {
   }
 
   render() {
+    const windowDims = Dimensions.get('window');
     const { layout, refreshing } = this.state;
     const { theme } = this.props;
     const { colors } = theme;
@@ -137,7 +136,8 @@ class HomeScreen extends Component<Props> {
    *
    */
   _renderYoutube() {
-    const videoWidth = Math.max(MAX_CONTENT_WIDTH - 100, 300);
+    const windowDims = Dimensions.get('window');
+    const videoWidth = Math.max(windowDims.width - 100, 300);
     const { youtubeVideos } = this.state;
 
     return (
@@ -172,7 +172,8 @@ class HomeScreen extends Component<Props> {
     const { googleSearches } = this.state;
 
     return (
-      <View style={{ width: MAX_CONTENT_WIDTH, minHeight: 300, marginHorizontal: 'auto', marginTop: 50 }}>
+      <View
+        style={{ width: '100%', maxWidth: MAX_CONTENT_WIDTH, minHeight: 300, marginHorizontal: 'auto', marginTop: 50 }}>
         <TrendingTitle icon='google' name='Google' iconColor={savedColors.google} onPress={() => navigate('/google')} />
         {googleSearches.map((item, index) => (
           <GoogleSearchDetail key={index} index={index} options={item} />
@@ -191,7 +192,8 @@ class HomeScreen extends Component<Props> {
     const { twitterTags } = this.state;
 
     return (
-      <View style={{ width: MAX_CONTENT_WIDTH, minHeight: 300, marginHorizontal: 'auto', marginTop: 50 }}>
+      <View
+        style={{ width: '100%', maxWidth: MAX_CONTENT_WIDTH, minHeight: 300, marginHorizontal: 'auto', marginTop: 50 }}>
         <TrendingTitle
           icon='twitter'
           name='Twitter'
@@ -212,7 +214,8 @@ class HomeScreen extends Component<Props> {
    *
    */
   _renderSnapchat() {
-    const storyWidth = MAX_CONTENT_WIDTH / 2;
+    const windowDims = Dimensions.get('window');
+    const storyWidth = Math.min(windowDims.width / 2, MAX_CONTENT_WIDTH / 2);
     const { snapchatStories } = this.state;
 
     return (

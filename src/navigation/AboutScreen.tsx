@@ -8,8 +8,6 @@ import { REP_URL } from '../Config';
 import Navbar from '../components/Navbar';
 import NavigationBar from '../components/NavigationBar';
 
-const window = Dimensions.get('window');
-
 interface Props {
   theme: Theme;
 }
@@ -21,6 +19,7 @@ class AboutScreen extends Component<Props> {
   static navigationOptions = { gestureEnabled: true };
 
   render() {
+    const window = Dimensions.get('window');
     return (
       <>
         <StatusBar translucent barStyle='light-content' backgroundColor='transparent' />

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { StatusBar, Dimensions, View, FlatList, TouchableOpacity, ScrollView } from 'react-native';
+import { StatusBar, View, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import { Theme, withTheme, Portal, Dialog, Colors, Title, Appbar, Button } from 'react-native-paper';
 import Navbar from '../../components/Navbar';
 import NavigationBar from '../../components/NavigationBar';
 import { ColorType, defaultColors, saveColors, savedColors } from '../../Config';
 import { goBack } from '../../services/NavigationService';
-
-const window = Dimensions.get('window');
 
 interface Props {
   theme: Theme;
@@ -23,6 +21,7 @@ class ColorSettingsScreen extends Component<Props> {
   };
 
   render() {
+    const window = Dimensions.get('window');
     const { theme } = this.props;
     const { colors, dark } = theme;
     const { allColors } = this.state;

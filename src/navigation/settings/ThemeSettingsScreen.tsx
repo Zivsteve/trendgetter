@@ -9,8 +9,6 @@ import NavigationBar from '../../components/NavigationBar';
 import Animated, { Easing } from 'react-native-reanimated';
 import { AppConsumer, AppConsumerState, getTheme } from '../../AppContextProvider';
 
-const window = Dimensions.get('window');
-
 interface Props {
   theme: Theme;
 }
@@ -24,6 +22,7 @@ class ThemeSettingsScreen extends Component<Props> {
   private _rippleDelay: number | undefined;
 
   render() {
+    const window = Dimensions.get('window');
     const { index, rippleSize, newTheme } = this.state;
     const { theme } = this.props;
     return (

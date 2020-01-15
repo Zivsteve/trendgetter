@@ -9,8 +9,6 @@ import NavigationBar from '../components/NavigationBar';
 import { savedColors } from '../Config';
 import { RefreshControl } from '../components/refresh-control';
 
-const window = Dimensions.get('window');
-
 interface Props {
   theme: Theme;
 }
@@ -39,6 +37,7 @@ class YoutubeScreen extends Component<Props> {
   }
 
   render() {
+    const window = Dimensions.get('window');
     const { videos, refreshing } = this.state;
     const { theme } = this.props;
     const { colors } = theme;

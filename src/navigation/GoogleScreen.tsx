@@ -9,14 +9,12 @@ import NavigationBar from '../components/NavigationBar';
 import { savedColors, MAX_CONTENT_WIDTH } from '../Config';
 import { RefreshControl } from '../components/refresh-control';
 
-const window = Dimensions.get('window');
-
 interface Props {
   theme: Theme;
 }
 
 /**
- * 
+ *
  */
 class GoogleScreen extends Component<Props> {
   private _themeColor = savedColors.google;
@@ -30,7 +28,7 @@ class GoogleScreen extends Component<Props> {
   }
 
   /**
-   * 
+   *
    */
   async _refresh() {
     this.setState({ refreshing: true });
@@ -39,6 +37,7 @@ class GoogleScreen extends Component<Props> {
   }
 
   render() {
+    const window = Dimensions.get('window');
     const { searches, refreshing } = this.state;
     const { theme } = this.props;
     const { colors } = theme;
@@ -74,7 +73,7 @@ class GoogleScreen extends Component<Props> {
               }}>
               <TrendingTitle icon='google' name='Google' />
 
-              <View style={{ marginTop: 20, width: MAX_CONTENT_WIDTH, alignSelf: 'center' }}>
+              <View style={{ marginTop: 20, width: '100%', maxWidth: MAX_CONTENT_WIDTH, alignSelf: 'center' }}>
                 {searches.map((item, index) => (
                   <GoogleSearchDetail key={index} index={index} options={item} />
                 ))}

@@ -9,8 +9,6 @@ import NavigationBar from '../components/NavigationBar';
 import { savedColors } from '../Config';
 import { RefreshControl } from '../components/refresh-control';
 
-const window = Dimensions.get('window');
-
 interface Props {
   theme: Theme;
 }
@@ -36,6 +34,7 @@ class GithubScreen extends Component<Props> {
   }
 
   render() {
+    const window = Dimensions.get('window');
     const { refreshing, reps } = this.state;
     const { theme } = this.props;
     const { colors } = theme;

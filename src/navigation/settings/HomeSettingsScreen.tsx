@@ -8,7 +8,6 @@ import { saveHomeLayout, savedHomeLayout, defaultHomeLayout } from '../../Config
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { goBack } from '../../services/NavigationService';
 
-const window = Dimensions.get('window');
 type LayoutDataType = { [index: string]: { icon: string; name: string } };
 
 interface Props {
@@ -63,6 +62,7 @@ class HomeSettingsScreen extends Component<Props> {
   };
 
   render() {
+    const window = Dimensions.get('window');
     const { colors } = this.props.theme;
 
     return (

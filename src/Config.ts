@@ -6,7 +6,9 @@ export const API_URL = 'http://trendgetter-api.herokuapp.com';
 /** */
 export const REP_URL = 'https://github.com/Zivsteve/trendgetter';
 /** */
-export const MAX_CONTENT_WIDTH = Math.min(Dimensions.get('window').width, 600);
+export const MAX_CONTENT_WIDTH = 600;
+/** */
+export const DEFAULT_THEME = 'light';
 /** */
 export type ColorType = { [name: string]: string };
 /** */

@@ -10,14 +10,12 @@ import NavigationBar from '../components/NavigationBar';
 import { savedColors, MAX_CONTENT_WIDTH } from '../Config';
 import { RefreshControl } from '../components/refresh-control';
 
-const window = Dimensions.get('window');
-
 interface Props {
   theme: Theme;
 }
 
 /**
- * 
+ *
  */
 class SnapchatScreen extends Component<Props> {
   private _themeColor = savedColors.snapchat;
@@ -31,7 +29,7 @@ class SnapchatScreen extends Component<Props> {
   }
 
   /**
-   * 
+   *
    */
   async _refresh() {
     this.setState({ refreshing: true });
@@ -40,7 +38,8 @@ class SnapchatScreen extends Component<Props> {
   }
 
   render() {
-    const storyWidth = MAX_CONTENT_WIDTH / 2 - 10;
+    const window = Dimensions.get('window');
+    const storyWidth = Math.min(window.width / 2 - 10, MAX_CONTENT_WIDTH / 2 - 10);
     const storyHeight = storyWidth * 2;
     const { stories, refreshing } = this.state;
     const { theme } = this.props;

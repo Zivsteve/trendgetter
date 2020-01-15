@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, Dimensions, Image } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { TouchableRipple, Card, Theme, withTheme } from 'react-native-paper';
 import { API_URL } from '../Config';
 import { formatNumber } from '../utils/NumberUtils';
 import IconBadge from './IconBadge';
 import { openURL } from '../services/NavigationService';
-
-const window = Dimensions.get('window');
 
 interface Props {
   options: any;
@@ -14,7 +12,7 @@ interface Props {
 }
 
 /**
- * 
+ *
  */
 class GithubRepositoryDetail extends Component<Props> {
   state = {
@@ -40,16 +38,8 @@ class GithubRepositoryDetail extends Component<Props> {
     }
 
     return (
-      <Card
-        style={{
-          width: window.width - 30,
-          margin: 10,
-          borderRadius: 10,
-          overflow: 'hidden',
-        }}>
-        <TouchableRipple
-          onPress={() => openURL(`https://github.com${prop.repo.link}`)}
-          rippleColor={colors.onSurface}>
+      <Card style={{ margin: 10, borderRadius: 10, overflow: 'hidden' }}>
+        <TouchableRipple onPress={() => openURL(`https://github.com${prop.repo.link}`)} rippleColor={colors.onSurface}>
           <View style={{ padding: 10, paddingBottom: 4 }}>
             <View style={{ marginBottom: 5, flexDirection: 'row', flexWrap: 'wrap-reverse' }}>
               <Text style={{ color: colors.text, opacity: 0.7, fontSize: 16, fontWeight: 'bold' }}>
@@ -95,8 +85,8 @@ class GithubRepositoryDetail extends Component<Props> {
   }
 
   /**
-   * 
-   * @param name 
+   *
+   * @param name
    */
   private _getIconPath(name: string) {
     const exceptions = [

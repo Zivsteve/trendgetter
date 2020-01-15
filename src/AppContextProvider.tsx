@@ -39,8 +39,9 @@ export class AppContextProvider extends Component {
   async componentDidMount() {
     try {
       const theme = await storage.load({ key: 'theme' });
-      this.state.updateTheme(theme || Appearance.getColorScheme());
+      this.state.updateTheme(theme);
     } catch (err) {
+      this.state.updateTheme(Appearance.getColorScheme());
       Appearance.addChangeListener(({ colorScheme }) => this.state.updateTheme(colorScheme));
     }
   }

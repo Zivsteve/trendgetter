@@ -15,7 +15,7 @@ interface Props {
 }
 
 /**
- * 
+ *
  */
 class AboutScreen extends Component<Props> {
   static navigationOptions = { gestureEnabled: true };
@@ -30,7 +30,7 @@ class AboutScreen extends Component<Props> {
           <ScrollView style={{ paddingBottom: 80, height: '100%' }}>
             <Navbar barStyle={{ backgroundColor: 'transparent' }} title='About' underStatusBar />
 
-            <View style={{ paddingVertical: '10%', alignSelf: 'center', width: '80%' }}>
+            <View style={{ paddingVertical: '10%', alignSelf: 'center', width: '80%', maxWidth: 600 }}>
               <Image
                 style={{ width: 60, height: 60, marginBottom: 10 }}
                 source={require('../assets/logo-light-108x108.png')}

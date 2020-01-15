@@ -51,7 +51,7 @@ class ThemeSettingsScreen extends Component<Props> {
                 sliderWidth={window.width}
                 itemWidth={290}
                 layoutCardOffset={0}
-                useScrollView={true}
+                enableMomentum
                 data={Object.keys(Themes)}
                 onSnapToItem={(index) => this._changeTheme(consumer, index)}
                 renderItem={({ item, index }) => (

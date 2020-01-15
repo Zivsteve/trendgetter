@@ -68,6 +68,7 @@ class RedditPostDetail extends Component<Props> {
               resizeMode='cover'
               source={{ uri: data?.secure_media?.reddit_video?.hls_url }}
               repeat
+              muted
             />
           </View>
         )}

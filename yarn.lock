@@ -1498,14 +1498,6 @@
     shortid "^2.2.15"
     use-subscription "^1.3.0"
 
-"@react-navigation/drawer@^5.0.0-alpha.31":
-  version "5.0.0-alpha.31"
-  resolved "https://registry.yarnpkg.com/@react-navigation/drawer/-/drawer-5.0.0-alpha.31.tgz#309cc66cea5b9c88832e7e7a639968a577e69615"
-  integrity sha512-UxryOUlybW7qz63eor/1kWI5P946d4bomQ3VOQF+YtnP4AdHrkojnd18uOYv+AqH9rfqX2/f710wFXtYVCSz2w==
-  dependencies:
-    "@react-navigation/routers" "^5.0.0-alpha.19"
-    color "^3.1.2"
-
 "@react-navigation/native@^5.0.0-alpha.22":
   version "5.0.0-alpha.22"
   resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.0.0-alpha.22.tgz#46c234992007b954ba6694c4258ee94dc1bcaa04"
@@ -1518,14 +1510,6 @@
   resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-5.0.0-alpha.15.tgz#0e6b06dd1c3f65512ced5797e81a19e3a5fd734b"
   integrity sha512-ZIBOxusqIwGxJYdfHyhgueqyWaCbPIEFAJ0AfQchogl43O/+DxgRgtyXLI1iIxN9KTRT3kOcgMdfpYa8Y8OugQ==
   dependencies:
-    shortid "^2.2.15"
-
-"@react-navigation/routers@^5.0.0-alpha.19":
-  version "5.0.0-alpha.19"
-  resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-5.0.0-alpha.19.tgz#2038fd99c0e40e73e528aa54fbc23b1e166e9fbf"
-  integrity sha512-lUaXF97TRS738CssjBthnX95qriFi2zJUldGyZ6WD/isKX55/SKdRotsRH4Q4AIsFTrWrAv3MpU5d+naeLD9KQ==
-  dependencies:
-    "@react-navigation/core" "^5.0.0-alpha.30"
     shortid "^2.2.15"
 
 "@react-navigation/routers@^5.0.0-alpha.22":

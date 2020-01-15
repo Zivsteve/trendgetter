@@ -19,7 +19,7 @@ function SettingsRoutes() {
       <Stack.Screen name='/settings' component={SettingsScreen as any} />
       <Stack.Screen name='/settings/home' component={HomeSettingsScreen as any} />
       <Stack.Screen name='/settings/theme' component={ThemeSettingsScreen as any} />
-      <Stack.Screen name='/settings/color' component={ColorSettingsScreen as any} />
+      <Stack.Screen name='/settings/colors' component={ColorSettingsScreen as any} />
     </Stack.Navigator>
   );
 }

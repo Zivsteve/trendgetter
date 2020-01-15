@@ -20,8 +20,8 @@ class RefreshControl extends Component<Props> {
   state = {
     progress: 0,
     pullPosReachedAnimated: new Animated.Value(0),
+    reset: true,
   };
-  private _reset = true;
   private _pullDownSwipeMargin = new Animated.Value(0);
   private _pullPosReachedState: number = 0;
   private _ref: Component = this;
@@ -59,6 +59,7 @@ class RefreshControl extends Component<Props> {
       toValue: 0,
       duration: 300,
     }).start();
+    this.setState({ reset: false });
   }
 
   /**
@@ -70,7 +71,11 @@ class RefreshControl extends Component<Props> {
     if (this._pullPosReachedState && this.props.onRefresh) {
       this.props.onRefresh();
     }
-    this._resetPullVariables();
+    setTimeout(() => this.setState({ reset: true }), 400);
+  }
+
+  componentDidMount() {
+    setTimeout(() => this.setState({ reset: true }), 100);
   }
 
   render() {
@@ -80,11 +85,10 @@ class RefreshControl extends Component<Props> {
       Animated.timing(this._pullDownSwipeMargin, {
         toValue: 60,
         duration: 350,
-      }).start(() => (this._reset = true));
+      }).start();
     }
-    if (!refreshing && this._reset) {
+    if (!refreshing && this.state.reset) {
       this._resetPullVariables();
-      this._reset = false;
     }
 
     const refreshIndicatorColor = colors && colors.length ? colors[0] : 'blue';

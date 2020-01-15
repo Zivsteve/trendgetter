@@ -31,7 +31,7 @@ class SettingsScreen extends Component<Props> {
             data={[
               { key: 'Home Layout', icon: 'shape', action: () => navigate('/settings/home') },
               { key: 'Theme', icon: 'format-color-fill', action: () => navigate('/settings/theme') },
-              { key: 'Colors', icon: 'brush', action: () => navigate('/settings/color') },
+              { key: 'Colors', icon: 'brush', action: () => navigate('/settings/colors') },
               { key: 'About', icon: 'cellphone-screenshot', action: () => navigate('/about') },
             ]}
             keyExtractor={(item, index) => `${index}`}

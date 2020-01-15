@@ -16,7 +16,7 @@ interface Props {
 }
 
 /**
- * 
+ *
  */
 class HomeSettingsScreen extends Component<Props> {
   data: LayoutDataType = {
@@ -30,7 +30,7 @@ class HomeSettingsScreen extends Component<Props> {
   };
 
   /**
-   * 
+   *
    */
   _renderRow = ({ data, active }: any) => {
     const { theme } = this.props;
@@ -87,7 +87,9 @@ class HomeSettingsScreen extends Component<Props> {
               size={30}
               color='#fff'
             />
-            <Text style={{ alignSelf: 'center', fontSize: 16, opacity: 0.8, fontWeight: 'bold' }}>Drag to reorder</Text>
+            <Text style={{ color: '#fff', alignSelf: 'center', fontSize: 16, opacity: 0.8, fontWeight: 'bold' }}>
+              Drag to reorder
+            </Text>
             <Button style={{ marginLeft: 'auto' }} onPress={() => this.setState({ newOrder: defaultHomeLayout })}>
               Reset all
             </Button>
@@ -111,8 +113,8 @@ class HomeSettingsScreen extends Component<Props> {
   }
 
   /**
-   * 
-   * @param order 
+   *
+   * @param order
    */
   private _changeOrder(order: string[]) {
     this.setState({ newOrder: order });

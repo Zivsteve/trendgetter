@@ -6,8 +6,8 @@ import TrendingTitle from '../components/TrendingTitle';
 import YoutubeVideoDetail from '../components/YoutubeVideoDetail';
 import Navbar from '../components/Navbar';
 import NavigationBar from '../components/NavigationBar';
-import { savedColors } from '../Config';
-import { RefreshControl } from '../components/refresh-control';
+import { savedColors, MAX_CONTENT_WIDTH } from '../Config';
+import { RefreshControl } from '../components/RefreshControl';
 
 interface Props {
   theme: Theme;
@@ -41,7 +41,7 @@ class YoutubeScreen extends Component<Props> {
     const { videos, refreshing } = this.state;
     const { theme } = this.props;
     const { colors } = theme;
-    const videoWidth = Math.min(window.width * 0.8, 600);
+    const videoWidth = Math.min(window.width * 0.98, 400);
 
     return (
       <>

@@ -1,10 +1,16 @@
-import { Dimensions } from 'react-native';
 import storage from './utils/StorageUtils';
+import { displayName, expo, repositoryUrl, apiUrl } from '../app.json';
 
 /** */
-export const API_URL = 'http://trendgetter-api.herokuapp.com';
+export const APP_NAME = displayName;
 /** */
-export const REP_URL = 'https://github.com/Zivsteve/trendgetter';
+export const APP_DESC = expo.description;
+/** */
+export const REP_URL = repositoryUrl;
+/** */
+export const API_URL = apiUrl;
+/** */
+export const PRIMARY_COLOR = expo.primaryColor;
 /** */
 export const MAX_CONTENT_WIDTH = 600;
 /** */
@@ -26,6 +32,7 @@ export const defaultHomeLayout = ['youtube', 'google', 'twitter', 'snapchat'];
 export let savedColors = defaultColors;
 /** */
 export let savedHomeLayout = defaultHomeLayout;
+
 /** */
 export async function updateSavedColors() {
   savedColors = (await storage.load({ key: 'colors' }).catch((err) => null)) || defaultColors;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StatusBar, Dimensions, ScrollView, FlatList } from 'react-native';
+import { View, StatusBar, Dimensions, ScrollView } from 'react-native';
 import ContentService from '../services/ContentService';
 import { Theme, withTheme } from 'react-native-paper';
 import TrendingTitle from '../components/TrendingTitle';
@@ -7,7 +7,7 @@ import GoogleSearchDetail from '../components/GoogleSearchDetail';
 import Navbar from '../components/Navbar';
 import NavigationBar from '../components/NavigationBar';
 import { savedColors, MAX_CONTENT_WIDTH } from '../Config';
-import { RefreshControl } from '../components/refresh-control';
+import { RefreshControl } from '../components/RefreshControl';
 
 interface Props {
   theme: Theme;

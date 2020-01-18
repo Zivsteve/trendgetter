@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { View, StatusBar, Dimensions, ScrollView, FlatList } from 'react-native';
 import ContentService from '../services/ContentService';
-import { Theme, withTheme } from 'react-native-paper';
+import { Theme, withTheme, Button } from 'react-native-paper';
 import RedditPostDetail from '../components/RedditPostDetail';
 import TrendingTitle from '../components/TrendingTitle';
 import Navbar from '../components/Navbar';
 import NavigationBar from '../components/NavigationBar';
-import { savedColors } from '../Config';
-import { RefreshControl } from '../components/refresh-control';
+import { savedColors, MAX_CONTENT_WIDTH } from '../Config';
+import { RefreshControl } from '../components/RefreshControl';
 
 interface Props {
   theme: Theme;
 }
 
 /**
- * 
+ *
  */
 class RedditScreen extends Component<Props> {
   private _themeColor = savedColors.reddit;
@@ -28,7 +28,7 @@ class RedditScreen extends Component<Props> {
   }
 
   /**
-   * 
+   *
    */
   async _refresh() {
     this.setState({ refreshing: true });
@@ -38,6 +38,7 @@ class RedditScreen extends Component<Props> {
 
   render() {
     const window = Dimensions.get('window');
+    const postWidth = Math.min(window.width, MAX_CONTENT_WIDTH);
     const { posts, refreshing } = this.state;
     const { theme } = this.props;
     const { colors } = theme;
@@ -50,8 +51,16 @@ class RedditScreen extends Component<Props> {
         <View style={{ height: '100%', backgroundColor: this._themeColor }}>
           <Navbar barStyle={{ backgroundColor: this._themeColor }} title='Reddit' underStatusBar />
 
-          <ScrollView
-            style={{ backgroundColor: this._themeColor }}
+          <FlatList
+            contentContainerStyle={{
+              alignItems: 'center',
+              width: '100%',
+              borderTopLeftRadius: 20,
+              borderTopRightRadius: 20,
+              backgroundColor: colors.background,
+              minHeight: window.height,
+              paddingBottom: 100,
+            }}
             showsVerticalScrollIndicator={false}
             refreshControl={
               <RefreshControl
@@ -60,27 +69,16 @@ class RedditScreen extends Component<Props> {
                 colors={[this._themeColor]}
                 tintColor='#007afd'
               />
-            }>
-            <View
-              style={{
-                alignItems: 'center',
-                backgroundColor: colors.background,
-                borderTopLeftRadius: 20,
-                borderTopRightRadius: 20,
-                minHeight: window.height,
-                paddingBottom: 100,
-              }}>
-              <View>
-                <TrendingTitle icon='reddit' name='Reddit' />
-
-                <View style={{ marginTop: 20 }}>
-                  {posts.map((item, index) => (
-                    <RedditPostDetail key={index} options={item} width={window.width - 10} />
-                  ))}
-                </View>
+            }
+            data={posts}
+            ListHeaderComponent={() => <TrendingTitle icon='reddit' name='Reddit' />}
+            keyExtractor={(item, index) => `${Math.random()}`}
+            renderItem={({ item, index }) => (
+              <View style={{ marginTop: 20 }}>
+                <RedditPostDetail options={item} width={postWidth - 10} />
               </View>
-            </View>
-          </ScrollView>
+            )}
+          />
         </View>
       </>
     );

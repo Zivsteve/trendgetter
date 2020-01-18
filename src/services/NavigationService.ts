@@ -1,11 +1,11 @@
 import { NavigationContainerRef, NavigationState, CommonActions } from '@react-navigation/native';
 import { Linking, Platform, BackHandler, ToastAndroid } from 'react-native';
-import DrawerLayout from 'react-native-gesture-handler/DrawerLayout';
+import DrawerLayout from '../components/DrawerLayout';
 
 let navigator: NavigationContainerRef;
 let isNavigating = false;
 let backPressed = false;
-let mainDrawer: DrawerLayout | null;
+let mainDrawer: DrawerLayout;
 let mainDrawerOpened = false;
 
 /**
@@ -22,32 +22,35 @@ export function getNavigator() {
 export function setTopLevelNavigator(navigatorRef: NavigationContainerRef) {
   navigator = navigatorRef;
   if (Platform.OS === 'web') {
-    const onload = () => {
+    window.onpopstate = () => {
       isNavigating = true;
       navigate(location.pathname);
     };
-    window.onpopstate = () => onload();
-    window.onload = () => onload();
   }
-  BackHandler.addEventListener('hardwareBackPress', () => {
-    if (!mainDrawerOpened && !navigator?.canGoBack()) {
-      if (backPressed) {
-        return false;
-      }
-      backPressed = true;
-      ToastAndroid.show('Double tap back to exit.', ToastAndroid.SHORT);
-      setTimeout(() => (backPressed = false), 500);
+  BackHandler.addEventListener('hardwareBackPress', () => handleBackPress());
+}
+
+/**
+ *
+ */
+function handleBackPress() {
+  if (!mainDrawerOpened && !navigator?.canGoBack()) {
+    if (backPressed) {
+      return false;
     }
-    goBack();
-    return true;
-  });
+    backPressed = true;
+    ToastAndroid.show('Double tap back to exit.', ToastAndroid.SHORT);
+    setTimeout(() => (backPressed = false), 500);
+  }
+  goBack();
+  return true;
 }
 
 /**
  *
  * @param drawer
  */
-export function setMainDrawer(drawer: DrawerLayout | null) {
+export function setMainDrawer(drawer: DrawerLayout) {
   mainDrawer = drawer;
 }
 
@@ -106,10 +109,6 @@ export function navigate(routeName = '/', params?: any) {
     return;
   }
   mainDrawer?.closeDrawer();
-  const screens = routeName.split('/')[1];
-  if (screens.length > 2) {
-    navigator.dispatch(CommonActions.navigate({ name: `/${routeName.split('/')[1]}` }));
-  }
   navigator.dispatch(CommonActions.navigate({ name: routeName, params: params }));
 }
 
@@ -117,8 +116,12 @@ export function navigate(routeName = '/', params?: any) {
  *
  */
 export function goBack() {
-  if (mainDrawerOpened || !navigator?.canGoBack()) {
-    mainDrawer?.closeDrawer();
+  if (!navigator?.canGoBack()) {
+    if (mainDrawerOpened) {
+      mainDrawer?.closeDrawer();
+      return;
+    }
+    navigate('/');
     return;
   }
   navigator.goBack();
@@ -129,13 +132,7 @@ export function goBack() {
  * @param route
  */
 export function getActiveRouteState(route: NavigationState) {
-  let rte: any = route.routes.slice(-1)[0];
-  while (rte) {
-    if (!rte?.state?.routes?.length) {
-      return rte;
-    }
-    rte = rte.state?.routes[1] || rte.state?.routes[0];
-  }
+  return route.routes.slice(-1)[0];
 }
 
 /**

@@ -5,14 +5,15 @@ import { Drawer, Text, Theme, withTheme, TouchableRipple } from 'react-native-pa
 import { navigate } from '../services/NavigationService';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { AppConsumer } from '../AppContextProvider';
+import { APP_NAME } from '../Config';
 
 interface Props {
   theme: Theme;
 }
 
 /**
- * 
- * @param props 
+ *
+ * @param props
  */
 function DrawerHeader(props: any) {
   const insets = useSafeArea();
@@ -33,16 +34,15 @@ function DrawerHeader(props: any) {
       }}>
       <Image style={{ width: 50, height: 50 }} source={require('../assets/logo-light-108x108.png')} />
       <Text style={{ color: '#fff', fontSize: 22, textAlign: 'center', marginTop: 10, fontWeight: 'bold' }}>
-        Trendgetter
+        {APP_NAME}
       </Text>
-      <View style={{ backgroundColor: '#fff', width: 100, height: 2, marginVertical: 10 }} />
     </View>
   );
 }
 
 /**
- * 
- * @param props 
+ *
+ * @param props
  */
 function DrawerContent(props: Props) {
   const insets = useSafeArea();
@@ -53,25 +53,22 @@ function DrawerContent(props: Props) {
       <DrawerHeader />
 
       <View style={{ paddingBottom: insets.bottom }}>
-        <Drawer.Item style={styles.item} label='Home' icon='trending-up' onPress={() => navigate('/')} />
+        <Drawer.Section>
+          <Drawer.Item label='Home' icon='trending-up' onPress={() => navigate('/')} />
+        </Drawer.Section>
 
         <Drawer.Section title='Trending'>
-          <Drawer.Item style={styles.item} label='Google' icon='google' onPress={() => navigate('/google')} />
-          <Drawer.Item style={styles.item} label='YouTube' icon='youtube' onPress={() => navigate('/youtube')} />
-          <Drawer.Item style={styles.item} label='Twitter' icon='twitter' onPress={() => navigate('/twitter')} />
-          <Drawer.Item style={styles.item} label='Reddit' icon='reddit' onPress={() => navigate('/reddit')} />
-          <Drawer.Item style={styles.item} label='GitHub' icon='github-circle' onPress={() => navigate('/github')} />
-          <Drawer.Item style={styles.item} label='Snapchat' icon='snapchat' onPress={() => navigate('/snapchat')} />
+          <Drawer.Item label='Google' icon='google' onPress={() => navigate('/google')} />
+          <Drawer.Item label='YouTube' icon='youtube' onPress={() => navigate('/youtube')} />
+          <Drawer.Item label='Twitter' icon='twitter' onPress={() => navigate('/twitter')} />
+          <Drawer.Item label='Reddit' icon='reddit' onPress={() => navigate('/reddit')} />
+          <Drawer.Item label='GitHub' icon='github-circle' onPress={() => navigate('/github')} />
+          <Drawer.Item label='Snapchat' icon='snapchat' onPress={() => navigate('/snapchat')} />
         </Drawer.Section>
 
         <Drawer.Section title='App'>
-          <Drawer.Item style={styles.item} label='Settings' icon='settings' onPress={() => navigate('/settings')} />
-          <Drawer.Item
-            style={styles.item}
-            label='About'
-            icon='cellphone-screenshot'
-            onPress={() => navigate('/about')}
-          />
+          <Drawer.Item label='Settings' icon='settings' onPress={() => navigate('/settings')} />
+          <Drawer.Item label='About' icon='cellphone-screenshot' onPress={() => navigate('/about')} />
         </Drawer.Section>
 
         <AppConsumer>
@@ -96,9 +93,5 @@ function DrawerContent(props: Props) {
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  item: {},
-});
 
 export default withTheme(DrawerContent);

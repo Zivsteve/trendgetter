@@ -78,9 +78,8 @@ class RefreshControl extends Component<Props> {
     setTimeout(() => this.setState({ reset: true }), 100);
   }
 
-  render() {
-    const { colors, refreshing, style, children } = this.props;
-
+  componentDidUpdate() {
+    const { refreshing } = this.props;
     if (refreshing) {
       Animated.timing(this._pullDownSwipeMargin, {
         toValue: 60,
@@ -90,7 +89,10 @@ class RefreshControl extends Component<Props> {
     if (!refreshing && this.state.reset) {
       this._resetPullVariables();
     }
+  }
 
+  render() {
+    const { colors, refreshing, style, children } = this.props;
     const refreshIndicatorColor = colors && colors.length ? colors[0] : 'blue';
     const indicatorTransformStyle = {
       marginTop: -45,

@@ -67,7 +67,7 @@ class HomeSettingsScreen extends Component<Props> {
 
     return (
       <>
-        <StatusBar translucent barStyle='light-content' backgroundColor='rgba(0, 0, 0, 0.1)' />
+        <StatusBar translucent barStyle='light-content' backgroundColor='rgba(0, 0, 0, 0.05)' />
 
         <View style={{ backgroundColor: '#1e2226' }}>
           <Navbar barStyle={{ backgroundColor: '#1e2226' }} title='Home Layout' underStatusBar>

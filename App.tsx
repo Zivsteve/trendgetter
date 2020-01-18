@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import Routes from './src/Routes';
 import { Platform } from 'react-native';
 import { AppContextProvider } from './src/AppContextProvider';
@@ -12,17 +12,15 @@ class App extends Component<Props> {
   render() {
     return (
       <AppContextProvider>
-        <Fragment>
-          {Platform.OS === 'web' && (
-            <style>{`
+        {Platform.OS === 'web' && (
+          <style>{`
               @font-face {
                 font-family: 'MaterialCommunityIcons';
                 src: url(${require('./src/assets/fonts/MaterialCommunityIcons.ttf')}) format('truetype');
               }
             `}</style>
-          )}
-          <Routes />
-        </Fragment>
+        )}
+        <Routes />
       </AppContextProvider>
     );
   }

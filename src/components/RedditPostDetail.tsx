@@ -74,8 +74,8 @@ class RedditPostDetail extends Component<Props> {
         )}
 
         <View style={{ width: '100%', flexDirection: 'row', flexWrap: 'wrap-reverse' }}>
-          <ScrollView horizontal style={{ maxWidth: 250 }}>
-            {data?.all_awardings.map((item: any, key: number) => (
+          <ScrollView horizontal style={{ maxWidth: 200 }}>
+            {data?.all_awardings.splice(0, 10).map((item: any, key: number) => (
               <View key={key} style={{ flexDirection: 'row', flexWrap: 'nowrap', marginLeft: 5, alignItems: 'center' }}>
                 <Image style={{ width: 15, height: 15 }} source={{ uri: item?.icon_url }} />
                 <Text style={{ fontSize: 12, color: colors.text, opacity: 0.8, marginLeft: 2 }}>{item?.count}</Text>

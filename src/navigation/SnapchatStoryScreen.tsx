@@ -17,7 +17,6 @@ interface Props {
  *
  */
 class SnapchatStoryScreen extends Component<Props> {
-  static navigationOptions = { gestureEnabled: true };
   state = {
     title: '',
     snaps: [] as any[],
@@ -52,7 +51,7 @@ class SnapchatStoryScreen extends Component<Props> {
 
     return (
       <View style={{ height: '100%', backgroundColor: '#000' }}>
-        <StatusBar translucent barStyle='light-content' backgroundColor='rgba(0, 0, 0, 0.2)' />
+        <StatusBar translucent barStyle='light-content' backgroundColor='rgba(0, 0, 0, 0.05)' />
 
         <ScrollView style={{ height: window.height }} showsVerticalScrollIndicator={false}>
           <Navbar

@@ -16,7 +16,7 @@ interface Props {
 class ColorSettingsScreen extends Component<Props> {
   state = {
     selectedItem: '',
-    allColors: savedColors as ColorType,
+    allColors: Object.assign({}, savedColors as ColorType),
     showColors: false,
   };
 
@@ -31,8 +31,8 @@ class ColorSettingsScreen extends Component<Props> {
         <StatusBar translucent barStyle={dark ? 'light-content' : 'dark-content'} backgroundColor='rgba(0,0,0,0.05)' />
         <NavigationBar dark={dark} />
 
-        <View style={{ height: '100%', backgroundColor: colors.background }}>
-          <Navbar barStyle={{ backgroundColor: 'rgba(0,0,0,0.05)' }} title='Colors' underStatusBar dark={theme.dark}>
+        <ScrollView style={{ height: '100%', backgroundColor: colors.background }}>
+          <Navbar title='Colors' underStatusBar dark={theme.dark}>
             <Appbar.Action
               icon='check'
               onPress={() => {
@@ -43,37 +43,40 @@ class ColorSettingsScreen extends Component<Props> {
           </Navbar>
           <Button
             style={{ alignSelf: 'flex-end', marginTop: 20, marginRight: 10 }}
-            onPress={() => this.setState({ allColors: defaultColors })}>
+            onPress={() => this._setColors(defaultColors)}>
             Reset all
           </Button>
-          {Object.keys(allColors).map((item) => (
-            <View key={item} style={{ marginTop: 30, marginHorizontal: 20 }}>
-              <Navbar
-                barStyle={{ backgroundColor: allColors[item], zIndex: 0 }}
-                titleStyle={{ textTransform: 'capitalize' }}
-                title={item}
-                action={() => null}
-                dark={true}
-              />
-              <TouchableOpacity
-                style={{
-                  position: 'absolute',
-                  top: 10,
-                  right: 20,
-                  backgroundColor: allColors[item],
-                  width: 35,
-                  height: 35,
-                  borderRadius: 100,
-                  borderWidth: 2,
-                  borderColor: '#fff',
-                  elevation: 5,
-                }}
-                activeOpacity={0.7}
-                onPress={() => this._selectItem(item)}
-              />
-            </View>
-          ))}
-        </View>
+
+          <View style={{ marginBottom: 80 }}>
+            {Object.keys(allColors).map((item) => (
+              <View key={item} style={{ marginTop: 30, marginHorizontal: 20 }}>
+                <Navbar
+                  barStyle={{ backgroundColor: allColors[item], zIndex: 0 }}
+                  titleStyle={{ textTransform: 'capitalize' }}
+                  title={item}
+                  action={() => null}
+                  dark={true}
+                />
+                <TouchableOpacity
+                  style={{
+                    position: 'absolute',
+                    top: 10,
+                    right: 20,
+                    backgroundColor: allColors[item],
+                    width: 35,
+                    height: 35,
+                    borderRadius: 100,
+                    borderWidth: 2,
+                    borderColor: '#fff',
+                    elevation: 5,
+                  }}
+                  activeOpacity={0.7}
+                  onPress={() => this._selectItem(item)}
+                />
+              </View>
+            ))}
+          </View>
+        </ScrollView>
 
         <Portal>
           <Dialog visible={this.state.showColors} onDismiss={() => this.setState({ showColors: false })}>
@@ -102,6 +105,14 @@ class ColorSettingsScreen extends Component<Props> {
         </Portal>
       </>
     );
+  }
+
+  /**
+   *
+   * @param colors
+   */
+  private _setColors(colors: ColorType) {
+    this.setState({ allColors: Object.assign({}, colors) });
   }
 
   /**

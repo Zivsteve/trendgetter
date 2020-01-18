@@ -1,16 +1,23 @@
 {
   "name": "Trendgetter",
   "displayName": "Trendgetter",
+  "repositoryUrl": "https://github.com/Zivsteve/trendgetter",
+  "apiUrl": "http://trendgetter-api.herokuapp.com",
   "expo": {
     "name": "Trendgetter",
     "slug": "trendgetter",
-    "description": "Description",
+    "description": "Trendgetter is an app made for displaying trending content from various social medias. If you are interested, the code is open-sourced on GitHub, including the API itself.",
     "privacy": "unlisted",
     "sdkVersion": "36.0.0",
     "version": "1.0.0",
     "entryPoint": "node_modules/expo/AppEntry.js",
     "platforms": ["ios", "android", "web"],
-    "icon": "src/assets/logo-full-1024x1024.png",
-    "primaryColor": "#4285f4"
+    "icon": "src/assets/maskable-icon.png",
+    "primaryColor": "#4285f4",
+    "splash": {
+      "backgroundColor": "#4285f4",
+      "resizeMode": "contain",
+      "image": "src/assets/splash-icon.png"
+    }
   }
 }

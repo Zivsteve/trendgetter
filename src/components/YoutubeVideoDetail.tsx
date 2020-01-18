@@ -11,7 +11,7 @@ interface Props {
 }
 
 /**
- * 
+ *
  */
 class YoutubeVideoDetail extends Component<Props> {
   render() {
@@ -19,7 +19,7 @@ class YoutubeVideoDetail extends Component<Props> {
     const { colors } = theme;
 
     return (
-      <Card style={{ width: '100%', borderRadius: 10, overflow: 'hidden' }}>
+      <Card style={{ width: '100%', borderRadius: 0 }}>
         <TouchableRipple onPress={() => openURL(`https://youtu.be/${prop.id}`)} rippleColor={colors.onSurface}>
           <View>
             <View style={{ padding: 5 }}>

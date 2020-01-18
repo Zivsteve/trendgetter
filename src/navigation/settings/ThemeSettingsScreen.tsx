@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { StatusBar, Dimensions, View } from 'react-native';
-import { Theme, withTheme } from 'react-native-paper';
+import { StatusBar, Dimensions, View, TouchableWithoutFeedback, ScrollView } from 'react-native';
+import { Theme, withTheme, Text } from 'react-native-paper';
 import DummyThemeScreen from './DummyThemeScreen';
 import Themes from '../../Themes';
-import Carousel from 'react-native-snap-carousel';
 import Navbar from '../../components/Navbar';
 import NavigationBar from '../../components/NavigationBar';
 import Animated, { Easing } from 'react-native-reanimated';
 import { AppConsumer, AppConsumerState, getTheme } from '../../AppContextProvider';
+import Carousel from '../../components/Carousel';
 
 interface Props {
   theme: Theme;
@@ -36,30 +36,26 @@ class ThemeSettingsScreen extends Component<Props> {
             />
             <NavigationBar dark={newTheme.dark} />
 
-            <View style={{ height: '100%' }}>
-              <Navbar
-                barStyle={{ backgroundColor: 'rgba(0,0,0,0.05)' }}
-                title='Theme'
-                underStatusBar
-                dark={newTheme.dark}
-              />
+            <ScrollView style={{ height: '100%' }}>
+              <Navbar title='Theme' subtitle='Tap to select' underStatusBar dark={newTheme.dark} />
 
               <Carousel
-                containerCustomStyle={{ marginTop: -100 }}
+                containerCustomStyle={{ marginTop: -50 }}
                 firstItem={index}
                 sliderWidth={window.width}
-                itemWidth={290}
+                itemWidth={300}
                 layoutCardOffset={0}
                 enableMomentum
                 data={Object.keys(Themes)}
-                onSnapToItem={(index) => this._changeTheme(consumer, index)}
                 renderItem={({ item, index }) => (
-                  <View style={{ alignItems: 'center' }}>
+                  <TouchableWithoutFeedback onPress={() => this._changeTheme(consumer, index)}>
                     <View
                       key={index}
                       style={{
+                        alignSelf: 'center',
                         transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }],
                         width: window.width,
+                        maxWidth: 400,
                         borderRadius: 20,
                         overflow: 'hidden',
                         borderColor: newTheme.dark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)',
@@ -67,7 +63,7 @@ class ThemeSettingsScreen extends Component<Props> {
                       }}>
                       <DummyThemeScreen theme={Themes[item]} title={`${item} theme`} />
                     </View>
-                  </View>
+                  </TouchableWithoutFeedback>
                 )}
               />
 
@@ -96,7 +92,7 @@ class ThemeSettingsScreen extends Component<Props> {
                 }}
                 pointerEvents='none'
               />
-            </View>
+            </ScrollView>
           </>
         )}
       </AppConsumer>

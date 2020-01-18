@@ -7,7 +7,7 @@ import Navbar from '../components/Navbar';
 import { Theme, withTheme } from 'react-native-paper';
 import NavigationBar from '../components/NavigationBar';
 import { savedColors, MAX_CONTENT_WIDTH } from '../Config';
-import { RefreshControl } from '../components/refresh-control';
+import { RefreshControl } from '../components/RefreshControl';
 
 interface Props {
   theme: Theme;
@@ -73,7 +73,7 @@ class TwitterScreen extends Component<Props> {
               <View style={{ width: '100%' }}>
                 <TrendingTitle icon='twitter' name='Twitter' />
 
-                <View style={{ width: MAX_CONTENT_WIDTH, marginTop: 20, alignSelf: 'center' }}>
+                <View style={{ marginTop: 20, width: '100%', maxWidth: MAX_CONTENT_WIDTH, alignSelf: 'center' }}>
                   {tags.map((item, index) => (
                     <TwitterTagDetail key={index} index={index} options={item} />
                   ))}

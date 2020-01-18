@@ -1,7 +1,8 @@
 import { DefaultTheme, DarkTheme, Theme } from 'react-native-paper';
+import { PRIMARY_COLOR } from './Config';
 
 /**
- * 
+ *
  */
 const Themes: { [key: string]: Theme } = {
   light: {
@@ -9,8 +10,8 @@ const Themes: { [key: string]: Theme } = {
     roundness: 5,
     colors: {
       ...DefaultTheme.colors,
-      primary: '#4285f4',
-      accent: '#4285f4',
+      primary: PRIMARY_COLOR,
+      accent: PRIMARY_COLOR,
       background: '#f5f5f5',
       text: '#374851',
       onSurface: 'rgba(0, 0, 0, 0.2)',
@@ -22,8 +23,8 @@ const Themes: { [key: string]: Theme } = {
     roundness: 5,
     colors: {
       ...DarkTheme.colors,
-      primary: '#4285f4',
-      accent: '#4285f4',
+      primary: PRIMARY_COLOR,
+      accent: PRIMARY_COLOR,
       background: '#263238',
       text: '#fff',
       surface: '#1e2226',
@@ -36,8 +37,8 @@ const Themes: { [key: string]: Theme } = {
     roundness: 5,
     colors: {
       ...DarkTheme.colors,
-      primary: '#4285f4',
-      accent: '#4285f4',
+      primary: PRIMARY_COLOR,
+      accent: PRIMARY_COLOR,
       background: '#203754',
       text: '#fff',
       surface: '#2e4f77',
@@ -50,8 +51,8 @@ const Themes: { [key: string]: Theme } = {
     roundness: 5,
     colors: {
       ...DarkTheme.colors,
-      primary: '#4285f4',
-      accent: '#4285f4',
+      primary: PRIMARY_COLOR,
+      accent: PRIMARY_COLOR,
       background: '#000',
       text: '#eee',
       surface: '#1e2226',
@@ -64,8 +65,8 @@ const Themes: { [key: string]: Theme } = {
     roundness: 5,
     colors: {
       ...DarkTheme.colors,
-      primary: '#4285f4',
-      accent: '#4285f4',
+      primary: PRIMARY_COLOR,
+      accent: PRIMARY_COLOR,
       background: '#343134',
       text: '#eee',
       surface: '#242024',
@@ -78,8 +79,8 @@ const Themes: { [key: string]: Theme } = {
     roundness: 5,
     colors: {
       ...DarkTheme.colors,
-      primary: '#4285f4',
-      accent: '#4285f4',
+      primary: PRIMARY_COLOR,
+      accent: PRIMARY_COLOR,
       background: '#011627',
       text: '#43e000',
       surface: '#00111e',

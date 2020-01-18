@@ -8,7 +8,7 @@ import Navbar from '../components/Navbar';
 import { navigate } from '../services/NavigationService';
 import NavigationBar from '../components/NavigationBar';
 import { savedColors, MAX_CONTENT_WIDTH } from '../Config';
-import { RefreshControl } from '../components/refresh-control';
+import { RefreshControl } from '../components/RefreshControl';
 
 interface Props {
   theme: Theme;
@@ -50,7 +50,7 @@ class SnapchatScreen extends Component<Props> {
         <StatusBar translucent barStyle='light-content' backgroundColor='rgba(0, 0, 0, 0.04)' />
         <NavigationBar dark={theme.dark} />
 
-        <View style={{ height: '100%', backgroundColor: this._themeColor }}>
+        <View style={{ width: '100%', height: '100%', backgroundColor: this._themeColor }}>
           <Navbar barStyle={{ backgroundColor: this._themeColor }} title='Snapchat' underStatusBar />
 
           <ScrollView
@@ -80,7 +80,7 @@ class SnapchatScreen extends Component<Props> {
                   style={{
                     flexDirection: 'row',
                     flexWrap: 'wrap',
-                    width: MAX_CONTENT_WIDTH,
+                    width: '100%',
                     alignSelf: 'center',
                     marginTop: 20,
                   }}>

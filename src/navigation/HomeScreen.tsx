@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import RNBootSplash from 'react-native-bootsplash';
 import { StatusBar, View, Dimensions, ScrollView, TouchableOpacity, Platform } from 'react-native';
 import { Button, withTheme, Theme } from 'react-native-paper';
-import Carousel from 'react-native-snap-carousel';
+import Carousel from '../components/Carousel';
 import ContentService from '../services/ContentService';
 import YoutubeVideoDetail from '../components/YoutubeVideoDetail';
 import GoogleSearchDetail from '../components/GoogleSearchDetail';
@@ -15,9 +15,10 @@ import SnapchatStoryView from '../components/SnapchatStoryView';
 import TwitterTagDetail from '../components/TwitterTagDetail';
 import NavigationBar from '../components/NavigationBar';
 import { MAX_CONTENT_WIDTH, savedHomeLayout, savedColors } from '../Config';
-import { RefreshControl } from '../components/refresh-control';
-import DrawerLayout from 'react-native-gesture-handler/DrawerLayout';
+import { RefreshControl } from '../components/RefreshControl';
 import DrawerContent from './DrawerContent';
+import DrawerLayout from '../components/DrawerLayout';
+import { setThemeColor } from '../utils/WebUtils';
 
 interface Props {
   theme: Theme;
@@ -38,7 +39,10 @@ class HomeScreen extends Component<Props> {
 
   componentDidMount() {
     // Fix unloaded content flashing by adding a timeout of 1 ms.
-    Platform.OS !== 'web' && setTimeout(() => RNBootSplash.hide({ duration: 200 }), 1);
+    setTimeout(() => {
+      Platform.OS !== 'web' && RNBootSplash.hide({ duration: 200 });
+      setTimeout(() => setThemeColor(), 300); // [web] Update theme-color meta.
+    }, 1);
     this._refresh();
   }
 
@@ -80,15 +84,14 @@ class HomeScreen extends Component<Props> {
         <NavigationBar dark={theme.dark} />
 
         <DrawerLayout
-          ref={(drawer) => setMainDrawer(drawer)}
+          ref={(drawer) => setMainDrawer(drawer as DrawerLayout)}
           drawerWidth={280}
-          drawerType='front'
           drawerBackgroundColor='#fff'
           onDrawerOpen={() => setMainDrawerState(true)}
           onDrawerClose={() => setMainDrawerState(false)}
           renderNavigationView={() => <DrawerContent />}>
           <ScrollView
-            style={{ width: '100%', backgroundColor: colors.background }}
+            style={{ backgroundColor: colors.background }}
             showsVerticalScrollIndicator={false}
             refreshControl={
               <RefreshControl
@@ -100,7 +103,7 @@ class HomeScreen extends Component<Props> {
             }>
             <Navbar icon='sort-variant' title={date} action={() => openMainDrawer()} underStatusBar dark={theme.dark} />
 
-            <View style={{ marginBottom: 200, alignSelf: 'center' }}>
+            <View style={{ width: '100%', marginBottom: 200, alignSelf: 'center' }}>
               {layout.map((name, index) => (
                 <View key={index}>
                   {name === 'youtube' && this._renderYoutube()}
@@ -137,7 +140,7 @@ class HomeScreen extends Component<Props> {
    */
   _renderYoutube() {
     const windowDims = Dimensions.get('window');
-    const videoWidth = Math.max(windowDims.width - 100, 300);
+    const videoWidth = Math.min(windowDims.width * 0.8, 400);
     const { youtubeVideos } = this.state;
 
     return (
@@ -151,15 +154,10 @@ class HomeScreen extends Component<Props> {
         <Carousel
           sliderWidth={windowDims.width}
           itemWidth={videoWidth}
-          enableMomentum
           inactiveSlideScale={0.8}
           inactiveSlideOpacity={0.7}
           data={youtubeVideos}
-          renderItem={({ item, index }) => (
-            <View key={index}>
-              <YoutubeVideoDetail options={item} />
-            </View>
-          )}
+          renderItem={({ item, index }) => <YoutubeVideoDetail key={index} options={item} />}
         />
       </View>
     );
@@ -173,7 +171,14 @@ class HomeScreen extends Component<Props> {
 
     return (
       <View
-        style={{ width: '100%', maxWidth: MAX_CONTENT_WIDTH, minHeight: 300, marginHorizontal: 'auto', marginTop: 50 }}>
+        style={{
+          alignSelf: 'center',
+          width: '100%',
+          maxWidth: MAX_CONTENT_WIDTH,
+          minHeight: 300,
+          marginHorizontal: 'auto',
+          marginTop: 50,
+        }}>
         <TrendingTitle icon='google' name='Google' iconColor={savedColors.google} onPress={() => navigate('/google')} />
         {googleSearches.map((item, index) => (
           <GoogleSearchDetail key={index} index={index} options={item} />
@@ -193,7 +198,14 @@ class HomeScreen extends Component<Props> {
 
     return (
       <View
-        style={{ width: '100%', maxWidth: MAX_CONTENT_WIDTH, minHeight: 300, marginHorizontal: 'auto', marginTop: 50 }}>
+        style={{
+          alignSelf: 'center',
+          width: '100%',
+          maxWidth: MAX_CONTENT_WIDTH,
+          minHeight: 300,
+          marginHorizontal: 'auto',
+          marginTop: 50,
+        }}>
         <TrendingTitle
           icon='twitter'
           name='Twitter'
@@ -229,7 +241,6 @@ class HomeScreen extends Component<Props> {
         <Carousel
           sliderWidth={windowDims.width}
           itemWidth={storyWidth}
-          enableMomentum
           data={snapchatStories}
           renderItem={({ item, index }) => (
             <TouchableOpacity

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>%WEB_TITLE%</title>
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="shortcut icon" href="/favicon.ico?" />
 
     <style>
       * {
@@ -25,23 +25,21 @@
         flex-grow: 1;
         display: flex;
         flex: 1;
-
-        /* iOS safe-area fix. */
-        padding-top: 0;
-        padding-top: constant(safe-area-inset-top, 0);
-        padding-top: env(safe-area-inset-top, 0);
-        padding-bottom: 0;
-        padding-bottom: constant(safe-area-inset-bottom, 0);
-        padding-bottom: env(safe-area-inset-bottom, 0);
       }
-
+      #root:first-child {
+        /* iOS safe-area fix. */
+        margin-top: 0;
+        margin-top: constant(safe-area-inset-top, 0);
+        margin-top: env(safe-area-inset-top, 0);
+      }
       html {
         scroll-behavior: smooth;
         -webkit-text-size-adjust: 100%;
         height: 100%;
       }
-
       body {
+        position: fixed;
+        overflow: hidden;
         display: flex;
         overflow-y: auto;
         overscroll-behavior-y: none;
@@ -53,7 +51,7 @@
 
       @media screen and (min-width: 996px) {
         ::-webkit-scrollbar {
-          width: 3px;
+          width: 5px;
         }
         ::-webkit-scrollbar-track {
           background-color: transparent;

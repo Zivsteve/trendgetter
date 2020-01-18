@@ -7,14 +7,14 @@ import Navbar from '../components/Navbar';
 import { Theme, withTheme } from 'react-native-paper';
 import NavigationBar from '../components/NavigationBar';
 import { savedColors } from '../Config';
-import { RefreshControl } from '../components/refresh-control';
+import { RefreshControl } from '../components/RefreshControl';
 
 interface Props {
   theme: Theme;
 }
 
 /**
- * 
+ *
  */
 class GithubScreen extends Component<Props> {
   private _themeColor = savedColors.github;
@@ -68,7 +68,7 @@ class GithubScreen extends Component<Props> {
                 minHeight: window.height,
                 paddingBottom: 100,
               }}>
-              <View style={{ maxWidth: contentWidth }}>
+              <View style={{ width: '100%', maxWidth: contentWidth }}>
                 <TrendingTitle icon='github-circle' name='GitHub' />
 
                 {reps.map((item, index) => (

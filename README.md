@@ -21,6 +21,10 @@
 
 ---
 
+**Check it out the API!**
+
+> [Trendgetter API](https://github.com/Zivsteve/trendgetter-api) 
+
 ## Features
 
 - Design

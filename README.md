@@ -2,6 +2,9 @@
 
 # Trendgetter
 
+![GitHub package.json version](https://img.shields.io/github/package-json/v/Zivsteve/trendgetter?style=flat-square)
+![GitHub](https://img.shields.io/github/license/Zivsteve/trendgetter?style=flat-square)
+
 ### Available on iOS, Android and Web!
 
 <a href="https://tgetter.com/ios" target="_blank">
@@ -23,7 +26,7 @@
 
 **Check out the API!**
 
-> [Trendgetter API](https://github.com/Zivsteve/trendgetter-api) 
+> [Trendgetter API](https://github.com/Zivsteve/trendgetter-api)
 
 ## Features
 

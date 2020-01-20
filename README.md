@@ -21,7 +21,7 @@
 
 ---
 
-**Check it out the API!**
+**Check out the API!**
 
 > [Trendgetter API](https://github.com/Zivsteve/trendgetter-api) 
 

@@ -111,6 +111,7 @@ class RefreshControl extends Component<Props> {
               width: 40,
               height: 40,
               borderRadius: 100,
+              backgroundColor: '#fff',
               elevation: 3,
             }}>
             {refreshing ? (

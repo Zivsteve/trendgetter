@@ -55,7 +55,7 @@ class GithubScreen extends Component<Props> {
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={() => this._refresh()}
-                colors={[this._themeColor]}
+                colors={[theme.dark ? '#fff' : this._themeColor]}
                 tintColor='#007afd'
               />
             }>

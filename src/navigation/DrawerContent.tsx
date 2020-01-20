@@ -49,7 +49,7 @@ function DrawerContent(props: Props) {
   const { colors } = props.theme;
 
   return (
-    <ScrollView style={{ backgroundColor: colors.background }}>
+    <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: colors.background }}>
       <DrawerHeader />
 
       <View style={{ paddingBottom: insets.bottom }}>

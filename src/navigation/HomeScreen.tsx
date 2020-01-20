@@ -39,10 +39,7 @@ class HomeScreen extends Component<Props> {
 
   componentDidMount() {
     // Fix unloaded content flashing by adding a timeout of 1 ms.
-    setTimeout(() => {
-      Platform.OS !== 'web' && RNBootSplash.hide({ duration: 200 });
-      setTimeout(() => setThemeColor(), 300); // [web] Update theme-color meta.
-    }, 1);
+    Platform.OS !== 'web' && setTimeout(() => RNBootSplash.hide({ duration: 200 }), 1);
     this._refresh();
   }
 
@@ -51,16 +48,15 @@ class HomeScreen extends Component<Props> {
    */
   async _refresh() {
     try {
-      this.setState({ refreshing: true });
+      this.setState({ layout: savedHomeLayout, refreshing: true });
       const videos = await ContentService.getYoutubeVideos();
+      this.setState({ youtubeVideos: videos.slice(0, 5) });
       const searches = await ContentService.getGoogleSearches();
+      this.setState({ googleSearches: searches.slice(0, 5) });
       const tags = await ContentService.getTwitterTags();
+      this.setState({ twitterTags: tags.slice(0, 5) });
       const stories = await ContentService.getSnapchatStories();
       this.setState({
-        layout: savedHomeLayout,
-        youtubeVideos: videos.slice(0, 5),
-        googleSearches: searches.slice(0, 5),
-        twitterTags: tags.slice(0, 5),
         snapchatStories: stories.slice(0, 5),
         refreshing: false,
       });

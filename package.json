@@ -68,7 +68,7 @@
     "babel-plugin-module-resolver": "^3.2.0",
     "jetifier": "^1.6.4",
     "metro-react-native-babel-preset": "^0.56.0",
-    "replace": "^1.1.5",
+    "replace-in-file": "^5.0.2",
     "typescript": "^3.7.3"
   }
 }

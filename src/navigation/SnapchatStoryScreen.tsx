@@ -22,7 +22,7 @@ class SnapchatStoryScreen extends Component<Props> {
     snaps: [] as any[],
     index: 0,
     loading: true,
-    paused: false,
+    paused: true,
     muted: true,
   };
 
@@ -37,7 +37,7 @@ class SnapchatStoryScreen extends Component<Props> {
     const { route } = this.props;
     const { options } = route.params as any;
     const story = await ContentService.getSnapchatStory(options.userName);
-    this.setState({ title: story.metadata?.title || story.id, snaps: story.snaps });
+    this.setState({ title: story.metadata?.title || story.id, snaps: story.snaps, paused: false });
   }
 
   render() {

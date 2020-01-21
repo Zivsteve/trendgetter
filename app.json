@@ -2,7 +2,7 @@
   "name": "Trendgetter",
   "displayName": "Trendgetter",
   "repositoryUrl": "https://github.com/Zivsteve/trendgetter",
-  "apiUrl": "https://trendgetter.appspot.com",
+  "apiUrl": "https://api.tgetter.com",
   "expo": {
     "name": "Trendgetter",
     "slug": "trendgetter",

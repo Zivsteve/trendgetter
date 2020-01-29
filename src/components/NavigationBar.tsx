@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
-import changeNavigationBarColor from 'react-native-navigation-bar-color';
+import { NativeModules, Platform } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+
+const { NavigationBarColor } = NativeModules;
 
 interface Props {
   color?: string;
@@ -8,8 +10,8 @@ interface Props {
 }
 
 /**
- * 
- * @param props 
+ *
+ * @param props
  */
 function NavigationBar(props: Props) {
   updateBar(props);
@@ -24,12 +26,31 @@ function NavigationBar(props: Props) {
 }
 
 /**
- * 
- * @param props 
+ *
+ * @param props
  */
 function updateBar(props: Props) {
   const { color, dark } = props;
-  (changeNavigationBarColor as any)(color || '#00000000', !dark, true);
+  changeNavigationBarColor(color || '#00000000', !dark, false);
+}
+
+function changeNavigationBarColor(color: string, light = false, animated = true) {
+  if (Platform.OS === 'android') {
+    NavigationBarColor.changeNavigationBarColor(color, light, animated);
+  }
+}
+
+function hideNavigationBar() {
+  if (Platform.OS === 'android') {
+    return NavigationBarColor.HideNavigationBar();
+  }
+}
+
+function showNavigationBar() {
+  if (Platform.OS === 'android') {
+    NavigationBarColor.ShowNavigationBar();
+  }
 }
 
 export default NavigationBar;
+export { changeNavigationBarColor, hideNavigationBar, showNavigationBar };

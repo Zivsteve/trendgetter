@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RNBootSplash from 'react-native-bootsplash';
-import { StatusBar, View, Dimensions, ScrollView, TouchableOpacity, Platform } from 'react-native';
+import { StatusBar, View, Dimensions, ScrollView, Platform } from 'react-native';
 import { Button, withTheme, Theme } from 'react-native-paper';
 import Carousel from '../components/Carousel';
 import ContentService from '../services/ContentService';
@@ -14,11 +14,10 @@ import Navbar from '../components/Navbar';
 import SnapchatStoryView from '../components/SnapchatStoryView';
 import TwitterTagDetail from '../components/TwitterTagDetail';
 import NavigationBar from '../components/NavigationBar';
-import { MAX_CONTENT_WIDTH, savedHomeLayout, savedColors } from '../Config';
+import { MAX_CONTENT_WIDTH, savedHomeLayout, savedColors, updateSavedHomeLayout, updateSavedColors } from '../Config';
 import { RefreshControl } from '../components/RefreshControl';
 import DrawerContent from './DrawerContent';
 import DrawerLayout from '../components/DrawerLayout';
-import { setThemeColor } from '../utils/WebUtils';
 
 interface Props {
   theme: Theme;
@@ -47,19 +46,26 @@ class HomeScreen extends Component<Props> {
    *
    */
   async _refresh() {
+    await updateSavedColors();
+    await updateSavedHomeLayout();
     try {
       this.setState({ layout: savedHomeLayout, refreshing: true });
-      const videos = await ContentService.getYoutubeVideos();
-      this.setState({ youtubeVideos: videos.slice(0, 5) });
-      const searches = await ContentService.getGoogleSearches();
-      this.setState({ googleSearches: searches.slice(0, 5) });
-      const tags = await ContentService.getTwitterTags();
-      this.setState({ twitterTags: tags.slice(0, 5) });
-      const stories = await ContentService.getSnapchatStories();
-      this.setState({
-        snapchatStories: stories.slice(0, 5),
-        refreshing: false,
-      });
+      for (let item of savedHomeLayout) {
+        if (item === 'youtube') {
+          const videos = await ContentService.getYoutubeVideos();
+          this.setState({ youtubeVideos: videos.slice(0, 5) });
+        } else if (item === 'google') {
+          const searches = await ContentService.getGoogleSearches();
+          this.setState({ googleSearches: searches.slice(0, 5) });
+        } else if (item === 'twitter') {
+          const tags = await ContentService.getTwitterTags();
+          this.setState({ twitterTags: tags.slice(0, 5) });
+        } else if (item === 'snapchat') {
+          const stories = await ContentService.getSnapchatStories();
+          this.setState({ snapchatStories: stories.slice(0, 5) });
+        }
+      }
+      this.setState({ refreshing: false });
     } catch (err) {}
   }
 
@@ -82,6 +88,7 @@ class HomeScreen extends Component<Props> {
         <DrawerLayout
           ref={(drawer) => setMainDrawer(drawer as DrawerLayout)}
           drawerWidth={280}
+          drawerPosition='left'
           drawerBackgroundColor='#fff'
           onDrawerOpen={() => setMainDrawerState(true)}
           onDrawerClose={() => setMainDrawerState(false)}
@@ -153,6 +160,9 @@ class HomeScreen extends Component<Props> {
           inactiveSlideScale={0.8}
           inactiveSlideOpacity={0.7}
           data={youtubeVideos}
+          useScrollView={false}
+          snapToAlignment='center'
+          enableSnap
           renderItem={({ item, index }) => <YoutubeVideoDetail key={index} options={item} />}
         />
       </View>
@@ -171,7 +181,7 @@ class HomeScreen extends Component<Props> {
           alignSelf: 'center',
           width: '100%',
           maxWidth: MAX_CONTENT_WIDTH,
-          minHeight: 300,
+          minHeight: 530,
           marginHorizontal: 'auto',
           marginTop: 50,
         }}>
@@ -198,7 +208,7 @@ class HomeScreen extends Component<Props> {
           alignSelf: 'center',
           width: '100%',
           maxWidth: MAX_CONTENT_WIDTH,
-          minHeight: 300,
+          minHeight: 530,
           marginHorizontal: 'auto',
           marginTop: 50,
         }}>
@@ -227,7 +237,7 @@ class HomeScreen extends Component<Props> {
     const { snapchatStories } = this.state;
 
     return (
-      <View style={{ minHeight: 300, marginTop: 50 }}>
+      <View style={{ minHeight: 550, marginTop: 50 }}>
         <TrendingTitle
           icon='snapchat'
           name='Snapchat'
@@ -239,13 +249,7 @@ class HomeScreen extends Component<Props> {
           itemWidth={storyWidth}
           data={snapchatStories}
           renderItem={({ item, index }) => (
-            <TouchableOpacity
-              key={index}
-              style={{ width: storyWidth, borderRadius: 20, overflow: 'hidden' }}
-              onPress={() => navigate('/snapchat/story', { options: item })}
-              activeOpacity={0.6}>
-              <SnapchatStoryView options={item} width={storyWidth} height={storyWidth * 2} />
-            </TouchableOpacity>
+            <SnapchatStoryView key={index} options={item} width={storyWidth} height={storyWidth * 2} />
           )}
         />
       </View>

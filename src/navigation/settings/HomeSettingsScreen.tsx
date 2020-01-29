@@ -4,7 +4,7 @@ import { Button, Appbar, Text, Theme, withTheme } from 'react-native-paper';
 import SortableList from 'react-native-sortable-list';
 import TrendingTitle from '../../components/TrendingTitle';
 import Navbar from '../../components/Navbar';
-import { saveHomeLayout, savedHomeLayout, defaultHomeLayout } from '../../Config';
+import { saveHomeLayout, savedHomeLayout, defaultHomeLayout, MAX_CONTENT_WIDTH } from '../../Config';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { goBack } from '../../services/NavigationService';
 
@@ -38,13 +38,15 @@ class HomeSettingsScreen extends Component<Props> {
     return (
       <View
         style={{
-          width: 300,
+          width: '100%',
+          maxWidth: MAX_CONTENT_WIDTH,
+          height: 100,
           flexDirection: 'row',
           alignSelf: 'center',
           alignItems: 'center',
           backgroundColor: theme.dark ? 'rgba(255, 255, 255, 0.02)' : 'rgba(0, 0, 0, 0.02)',
           marginBottom: 5,
-          paddingLeft: 20,
+          paddingLeft: '5%',
           borderRadius: 10,
         }}
         pointerEvents='none'>
@@ -52,7 +54,7 @@ class HomeSettingsScreen extends Component<Props> {
           <TrendingTitle icon={data.icon} name={data.name} />
         </View>
         <Icon
-          style={{ marginLeft: 'auto', backgroundColor: 'transparent' }}
+          style={{ marginLeft: 'auto', marginRight: '5%', backgroundColor: 'transparent', opacity: 0.8 }}
           size={32}
           color={colors.text}
           name='equal'
@@ -80,7 +82,7 @@ class HomeSettingsScreen extends Component<Props> {
             />
           </Navbar>
 
-          <View style={{ flexDirection: 'row', paddingVertical: 20, paddingHorizontal: 15 }}>
+          <View style={{ flexDirection: 'row', paddingVertical: 5, paddingHorizontal: 15 }}>
             <Icon
               style={{ opacity: 0.8, marginRight: 5, alignSelf: 'center' }}
               name='cursor-pointer'

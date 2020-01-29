@@ -42,7 +42,10 @@ class Video extends Component<VideoProperties> {
       controls: props.controls,
       muted: props.muted,
       loop: props.repeat,
+      playsInline: true,
       style: props.style,
+      autoPlay: true,
+      allowFullScreen: false,
     });
   }
 }

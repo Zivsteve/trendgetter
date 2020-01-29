@@ -37,7 +37,6 @@ export let savedHomeLayout = defaultHomeLayout;
 export async function updateSavedColors() {
   savedColors = (await storage.load({ key: 'colors' }).catch((err) => null)) || defaultColors;
 }
-updateSavedColors();
 
 /** */
 export async function saveColors(colors: ColorType) {
@@ -49,7 +48,6 @@ export async function saveColors(colors: ColorType) {
 export async function updateSavedHomeLayout() {
   savedHomeLayout = (await storage.load({ key: 'homelayout' }).catch((err) => null)) || defaultHomeLayout;
 }
-updateSavedHomeLayout();
 
 /** */
 export async function saveHomeLayout(layout: string[]) {

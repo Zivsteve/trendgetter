@@ -32,7 +32,7 @@ function Routes() {
       ref={(navigatorRef: NavigationContainerRef) => setTopLevelNavigator(navigatorRef)}
       onStateChange={(p) => onNavigationStateChange(p)}>
       <Stack.Navigator
-        initialRouteName={Platform.OS === 'web' ? location.pathname : '/'}
+        initialRouteName={getInitalRoute()}
         headerMode='none'
         screenOptions={{ gestureEnabled: false, ...TransitionPresets.SlideFromRightIOS }}>
         <Stack.Screen name='/' component={HomeScreen as Screen} />
@@ -55,6 +55,14 @@ function Routes() {
       </Stack.Navigator>
     </NavigationContainer>
   );
+}
+
+function getInitalRoute() {
+  if (Platform.OS === 'web') {
+    const path = location.pathname === '/snapchat/story' ? '/snapchat' : location.pathname;
+    return path;
+  }
+  return '/';
 }
 
 export default Routes;

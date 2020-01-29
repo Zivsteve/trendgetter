@@ -1,3 +1,3 @@
-import DrawerLayout from 'react-native-gesture-handler/DrawerLayout';
+import DrawerLayout from 'react-native-drawer-layout';
 
 export default DrawerLayout;

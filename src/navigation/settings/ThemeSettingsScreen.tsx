@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { StatusBar, Dimensions, View, TouchableWithoutFeedback, ScrollView } from 'react-native';
-import { Theme, withTheme, Text } from 'react-native-paper';
+import { StatusBar, Dimensions, View, TouchableWithoutFeedback, ScrollView, Animated, Easing } from 'react-native';
+import { Theme, withTheme } from 'react-native-paper';
 import DummyThemeScreen from './DummyThemeScreen';
 import Themes from '../../Themes';
 import Navbar from '../../components/Navbar';
 import NavigationBar from '../../components/NavigationBar';
-import Animated, { Easing } from 'react-native-reanimated';
 import { AppConsumer, AppConsumerState, getTheme } from '../../AppContextProvider';
 import Carousel from '../../components/Carousel';
 
@@ -24,6 +23,7 @@ class ThemeSettingsScreen extends Component<Props> {
   render() {
     const window = Dimensions.get('window');
     const { index, rippleSize, newTheme } = this.state;
+    const minRippleSize = Math.max(window.width, window.height) * 3;
     const { theme } = this.props;
     return (
       <AppConsumer>
@@ -45,7 +45,6 @@ class ThemeSettingsScreen extends Component<Props> {
                 sliderWidth={window.width}
                 itemWidth={300}
                 layoutCardOffset={0}
-                enableMomentum
                 data={Object.keys(Themes)}
                 renderItem={({ item, index }) => (
                   <TouchableWithoutFeedback onPress={() => this._changeTheme(consumer, index)}>
@@ -71,8 +70,8 @@ class ThemeSettingsScreen extends Component<Props> {
                 style={{
                   position: 'absolute',
                   top: 0,
-                  width: '100%',
-                  height: '100%',
+                  width: window.width,
+                  height: window.height + 100,
                   backgroundColor: theme.colors.background,
                   zIndex: -2,
                 }}
@@ -81,13 +80,12 @@ class ThemeSettingsScreen extends Component<Props> {
                 style={{
                   position: 'absolute',
                   top: -100,
-                  left: -window.width,
+                  alignSelf: 'center',
                   backgroundColor: newTheme.colors.background,
-                  borderRadius: window.height * 1.5,
-                  width: window.height * 1.5,
-                  height: window.height * 1.5,
-                  scaleX: rippleSize,
-                  scaleY: rippleSize,
+                  borderRadius: minRippleSize,
+                  width: minRippleSize,
+                  height: minRippleSize,
+                  transform: [{ scale: rippleSize }],
                   zIndex: -1,
                 }}
                 pointerEvents='none'
@@ -110,7 +108,7 @@ class ThemeSettingsScreen extends Component<Props> {
     this._rippleDelay = setTimeout(() => {
       const name = Object.keys(Themes)[index];
       Animated.timing(this.state.rippleSize, {
-        duration: 500,
+        duration: 1000,
         toValue: 1,
         easing: Easing.inOut(Easing.ease),
       }).start(() => consumer.updateTheme(name));

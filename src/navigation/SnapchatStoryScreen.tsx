@@ -7,8 +7,6 @@ import { Appbar, ActivityIndicator } from 'react-native-paper';
 import { timeAgo } from '../utils/NumberUtils';
 import { Route } from '@react-navigation/native';
 
-const window = Dimensions.get('window');
-
 interface Props {
   route: Route<string>;
 }
@@ -41,6 +39,7 @@ class SnapchatStoryScreen extends Component<Props> {
   }
 
   render() {
+    const window = Dimensions.get('window');
     const storyHeight = window.height;
     const storyWidth = window.width;
     const { route } = this.props;

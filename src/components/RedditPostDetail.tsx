@@ -5,7 +5,8 @@ import { isValidImage } from '../utils/ImageUtils';
 import { formatNumber, timeAgo } from '../utils/NumberUtils';
 import IconBadge from './IconBadge';
 import { openURL } from '../services/NavigationService';
-import Video from '../components/Video';
+import Video from './Video';
+import { MAX_CONTENT_WIDTH } from '../Config';
 
 interface Props {
   options: any;
@@ -18,13 +19,21 @@ class RedditPostDetail extends Component<Props> {
     const { options: prop, width: imageWidth, theme } = this.props;
     const { colors } = theme;
     const data = prop?.data;
+    const imageUrl = prop.data.url.replace('.gifv', '.mp4');
     const imageScale = data?.thumbnail_height / data?.thumbnail_width || 0;
     const imageHeight = imageWidth * imageScale;
-    const isVideo = data?.is_video;
+    const isVideo = data?.is_video || imageUrl.endsWith('.mp4');
     const blur = data?.over_18 || data?.spoiler;
 
     return (
-      <Card style={{ width: imageWidth, marginBottom: 10, borderRadius: 10, overflow: 'hidden', maxWidth: 500 }}>
+      <Card
+        style={{
+          width: imageWidth,
+          marginBottom: 10,
+          borderRadius: 10,
+          overflow: 'hidden',
+          maxWidth: MAX_CONTENT_WIDTH,
+        }}>
         <TouchableRipple
           style={{ borderRadius: 10 }}
           onPress={() => openURL(`https://www.reddit.com${data?.permalink}`)}
@@ -50,11 +59,11 @@ class RedditPostDetail extends Component<Props> {
             <Text style={{ width: '100%', color: colors.text, opacity: 0.8, padding: 10, textAlign: 'left' }}>
               {data?.title}
             </Text>
-            {isValidImage(prop.data.url) && (
+            {isValidImage(imageUrl) && (
               <Image
                 resizeMode='contain'
                 style={{ width: imageWidth, height: imageHeight, borderRadius: 10 }}
-                source={{ uri: prop.data.url }}
+                source={{ uri: imageUrl }}
                 blurRadius={blur ? 20 : 0}
               />
             )}
@@ -66,15 +75,15 @@ class RedditPostDetail extends Component<Props> {
             <Video
               style={{ width: '100%', height: '100%' }}
               resizeMode='cover'
-              source={{ uri: data?.secure_media?.reddit_video?.hls_url }}
+              source={{ uri: data?.media?.reddit_video?.fallback_url || imageUrl }}
               repeat
               muted
             />
           </View>
         )}
 
-        <View style={{ width: '100%', flexDirection: 'row', flexWrap: 'wrap-reverse' }}>
-          <ScrollView horizontal style={{ maxWidth: 200 }}>
+        <View style={{ width: '100%', flexDirection: 'row' }}>
+          <ScrollView horizontal>
             {data?.all_awardings.splice(0, 10).map((item: any, key: number) => (
               <View key={key} style={{ flexDirection: 'row', flexWrap: 'nowrap', marginLeft: 5, alignItems: 'center' }}>
                 <Image style={{ width: 15, height: 15 }} source={{ uri: item?.icon_url }} />
@@ -83,16 +92,14 @@ class RedditPostDetail extends Component<Props> {
             ))}
           </ScrollView>
 
-          <IconBadge style={{ marginLeft: 'auto' }} textStyle={{ color: '#bbb' }} icon='comment' iconColor='#bbb'>
-            {formatNumber(data?.num_comments)}
-          </IconBadge>
-          <IconBadge
-            style={{ marginLeft: 'auto' }}
-            textStyle={{ color: '#ff3f18' }}
-            icon='arrow-up-bold'
-            iconColor='#ff3f18'>
-            {formatNumber(data?.ups)}
-          </IconBadge>
+          <View style={{ marginLeft: 'auto', flexDirection: 'row' }}>
+            <IconBadge textStyle={{ color: '#bbb' }} icon='comment' iconColor='#bbb'>
+              {formatNumber(data?.num_comments)}
+            </IconBadge>
+            <IconBadge textStyle={{ color: '#ff3f18' }} icon='arrow-up-bold' iconColor='#ff3f18'>
+              {formatNumber(data?.ups)}
+            </IconBadge>
+          </View>
         </View>
       </Card>
     );

@@ -9,7 +9,7 @@
     "description": "Trendgetter is an app made for displaying trending content from various social medias. If you are interested, the code is open-sourced on GitHub, including the API itself.",
     "privacy": "unlisted",
     "sdkVersion": "36.0.0",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "entryPoint": "node_modules/expo/AppEntry.js",
     "platforms": ["ios", "android", "web"],
     "icon": "src/assets/maskable-icon.png",

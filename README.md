@@ -82,6 +82,7 @@
 <img src=".github/images/screenshot3.png" alt="Screenshot" width="250">
 <img src=".github/images/screenshot4.png" alt="Screenshot" width="250">
 <img src=".github/images/screenshot5.png" alt="Screenshot" width="250">
+<img src=".github/images/screenshot6.png" alt="Screenshot" width="250">
 
 ---
 

@@ -61,9 +61,10 @@ function DrawerContent(props: Props) {
           <Drawer.Item label='Google' icon='google' onPress={() => navigate('/google')} />
           <Drawer.Item label='YouTube' icon='youtube' onPress={() => navigate('/youtube')} />
           <Drawer.Item label='Twitter' icon='twitter' onPress={() => navigate('/twitter')} />
+          <Drawer.Item label='Snapchat' icon='snapchat' onPress={() => navigate('/snapchat')} />
+          <Drawer.Item label='TikTok' icon='music-note' onPress={() => navigate('/tiktok')} />
           <Drawer.Item label='Reddit' icon='reddit' onPress={() => navigate('/reddit')} />
           <Drawer.Item label='GitHub' icon='github-circle' onPress={() => navigate('/github')} />
-          <Drawer.Item label='Snapchat' icon='snapchat' onPress={() => navigate('/snapchat')} />
         </Drawer.Section>
 
         <Drawer.Section title='App'>

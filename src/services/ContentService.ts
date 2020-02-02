@@ -13,10 +13,12 @@ const getGithubRepositories = async () => get('github');
 /** */
 const getSnapchatStories = async () => get('snapchat');
 /**
- * 
- * @param username 
+ *
+ * @param id
  */
-const getSnapchatStory = async (username: string) => get(`snapchat/${username}`);
+const getSnapchatPlaylist = async (id: string) => get(`snapchat/${id}`);
+/** */
+const getTiktokTags = async () => get('tiktok');
 
 /**
  *
@@ -44,5 +46,6 @@ export default {
   getRedditPosts,
   getGithubRepositories,
   getSnapchatStories,
-  getSnapchatStory,
+  getSnapchatPlaylist,
+  getTiktokTags,
 };

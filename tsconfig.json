@@ -8,6 +8,7 @@
     "noEmit": true,
     "incremental": true,
     "isolatedModules": true,
+    "sourceMap": false,
     "strict": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,

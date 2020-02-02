@@ -1,14 +1,33 @@
 /**
- * 
- * @param num 
+ *
+ * @param num
  */
 export function formatNumber(num: number | string) {
   return `${num}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
+export function formatNumberShort(num: number | string, digits: number) {
+  num = +num;
+  var si = [
+    { value: 1, symbol: '' },
+    { value: 1e3, symbol: 'K' },
+    { value: 1e6, symbol: 'M' },
+    { value: 1e9, symbol: 'B' },
+    { value: 1e12, symbol: 'T' },
+  ];
+  var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+  var i;
+  for (i = si.length - 1; i > 0; i--) {
+    if (num >= si[i].value) {
+      break;
+    }
+  }
+  return (num / si[i].value).toFixed(digits).replace(rx, '$1') + si[i].symbol;
+}
+
 /**
- * 
- * @param previous 
+ *
+ * @param previous
  */
 export function timeAgo(previous: number | Date | string) {
   const msPerMinute = 60 * 1000;
@@ -32,7 +51,7 @@ export function timeAgo(previous: number | Date | string) {
 }
 
 /**
- * 
+ *
  */
 export function getReadableDate() {
   return new Date().toDateString().replace(' ', ', ');

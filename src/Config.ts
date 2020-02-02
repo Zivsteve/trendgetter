@@ -25,6 +25,7 @@ export const defaultColors: ColorType = {
   reddit: '#ff3f18',
   github: '#24292e',
   snapchat: '#fdd835',
+  tiktok: '#f73057',
 };
 /** */
 export const defaultHomeLayout = ['youtube', 'google', 'twitter', 'snapchat'];

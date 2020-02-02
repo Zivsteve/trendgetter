@@ -34,8 +34,8 @@ class SnapchatStoryScreen extends Component<Props> {
   async _refresh() {
     const { route } = this.props;
     const { options } = route.params as any;
-    const story = await ContentService.getSnapchatStory(options.userName);
-    this.setState({ title: story.metadata?.title || story.id, snaps: story.snaps, paused: false });
+    const playlist = await ContentService.getSnapchatPlaylist(options.id);
+    this.setState({ title: playlist.title || playlist.id, snaps: playlist.elements, paused: false });
   }
 
   render() {
@@ -44,9 +44,12 @@ class SnapchatStoryScreen extends Component<Props> {
     const storyWidth = window.width;
     const { route } = this.props;
     const { options } = route.params as any;
-    const time = timeAgo(options.timestampInSec * 1000);
+    const time = timeAgo(options.timestamp);
     const { title, snaps, index, loading, paused, muted } = this.state;
     const snap = snaps[index];
+    const file = snap?.snapInfo.streamingMediaInfo.mediaWithOverlayUrl || snap?.snapInfo.streamingMediaInfo.mediaUrl;
+    const filePrefix = snap?.snapInfo.streamingMediaInfo.prefixUrl;
+    const snapUrl = `${filePrefix}${file}`;
 
     return (
       <View style={{ height: '100%', backgroundColor: '#000' }}>
@@ -80,7 +83,7 @@ class SnapchatStoryScreen extends Component<Props> {
             />
           )}
 
-          {snaps.length > 0 && snap?.media?.mediaUrl && (
+          {snaps.length > 0 && snapUrl && (
             <TouchableHighlight
               style={{ width: storyWidth, height: storyHeight, alignItems: 'center' }}
               onPress={() => this.next()}>
@@ -88,14 +91,13 @@ class SnapchatStoryScreen extends Component<Props> {
                 <Video
                   style={{ width: storyWidth, height: storyHeight }}
                   resizeMode='cover'
-                  source={{ uri: snap?.media?.mediaUrl }}
+                  source={{ uri: snapUrl }}
                   onEnd={() => this.next()}
                   onLoadStart={() => this.setState({ loading: true })}
                   onLoad={() => this.setState({ loading: false })}
                   paused={paused}
                   muted={muted}
                 />
-                <Image source={{ uri: snap?.overlayImage?.mediaUrl }} />
               </View>
             </TouchableHighlight>
           )}

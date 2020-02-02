@@ -1,6 +1,14 @@
 const replace = require('replace-in-file');
+const fs = require('fs');
 
-const manifestPath = 'web-build/manifest.json';
+const webPath = 'web-build';
+const manifestPath = webPath + '/manifest.json';
+
+/* Remove sourcemaps. */
+
+fs.readdirSync(webPath)
+  .filter((f) => /[.]map$/.test(f))
+  .map((f) => fs.unlinkSync(webPath + '/' + f));
 
 /* Modify Expo's manifest.json. */
 
@@ -8,7 +16,7 @@ const manifestPath = 'web-build/manifest.json';
 replace({
   from: new RegExp('"type": "image/png"', 'g'),
   to: `"type": "image/png",
-      "purpose": "any maskable"`,
+      "purpose": "maskable"`,
   files: manifestPath,
 }).then(() => {
   // Link related_applications.

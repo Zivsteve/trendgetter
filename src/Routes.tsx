@@ -1,4 +1,5 @@
 import React, { ComponentType } from 'react';
+import { Platform } from 'react-native';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import { NavigationContainerRef, NavigationContainer } from '@react-navigation/native';
 import { setTopLevelNavigator, onNavigationStateChange } from './services/NavigationService';
@@ -16,7 +17,7 @@ import SettingsScreen from './navigation/settings/SettingsScreen';
 import HomeSettingsScreen from './navigation/settings/HomeSettingsScreen';
 import ThemeSettingsScreen from './navigation/settings/ThemeSettingsScreen';
 import ColorSettingsScreen from './navigation/settings/ColorSettingsScreen';
-import { Platform } from 'react-native';
+import TiktokScreen from './navigation/TiktokScreen';
 
 /** */
 export type Screen = ComponentType<any>;
@@ -42,6 +43,7 @@ function Routes() {
         <Stack.Screen name='/reddit' component={RedditScreen as Screen} />
         <Stack.Screen name='/github' component={GithubScreen as Screen} />
         <Stack.Screen name='/snapchat' component={SnapchatScreen as Screen} />
+        <Stack.Screen name='/tiktok' component={TiktokScreen as Screen} />
         <Stack.Screen
           name='/snapchat/story'
           component={SnapchatStoryScreen as Screen}

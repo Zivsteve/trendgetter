@@ -32,7 +32,7 @@
     "react": "^16.12.0",
     "react-art": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-native": "^0.61.4",
+    "react-native": "^0.62.3",
     "react-native-appearance": "^0.3.2",
     "react-native-bootsplash": "^1.2.1",
     "react-native-drawer-layout": "^2.0.0",

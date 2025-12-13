@@ -12,9 +12,7 @@ const config = {
 // Initialize a single browser instance.
 // This browser instance will be shared across requests to avoid the overhead of launching a new browser each time.
 export let browser: playwright.Browser;
-(async () => {
-  browser = await playwright.webkit.launch({ headless: true });
-})();
+browser = await playwright.webkit.launch({ headless: true });
 
 const fastify = Fastify({ logger: true });
 fastify.register(fastifyCors);

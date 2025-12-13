@@ -1,17 +1,29 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "ESNext",
+    "lib": ["ESNext"],
+    "allowJs": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "target": "esnext",
+    "skipLibCheck": true,
+    "target": "ESNext",
     "noImplicitAny": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "sourceMap": false,
+    "outDir": "dist",
     "baseUrl": ".",
-    "outDir": "public",
     "paths": {
-      "*": ["node_modules/*", "src/types/*"]
-    }
+      "~/*": ["./src/*"]
+    },
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/@types",
+      "./packages/*/@types"
+    ]
   },
-  "include": ["src/**/*"]
+  "include": ["./src", "./package.json"],
+  "exclude": ["./node_modules", "./dist"]
 }

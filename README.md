@@ -1,11 +1,11 @@
-# 🌎 Trendgetter API
+# 🌎 Trendgetter
 
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/Zivsteve/trendgetter-api?style=flat-square)
 ![GitHub](https://img.shields.io/github/license/Zivsteve/trendgetter-api?style=flat-square)
 
 ---
 
-Trendgetter API is a free and open-source API that provides trending data from various platforms such as Google, YouTube, X, Reddit, GitHub, and TikTok.
+Trendgetter is a free and open-source API that provides trending data from various platforms such as Google, YouTube, X, Reddit, GitHub, and TikTok.
 
 You can clone this repository and run your own instance of the API.
 
@@ -20,7 +20,7 @@ The Trendgetter API has been completely rewritten from scratch to provide a more
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/Zivsteve/trendgetter-api.git
+   git clone https://github.com/Zivsteve/trendgetter.git
    cd trendgetter-api
    yarn
    yarn dev

@@ -53,7 +53,7 @@ The Trendgetter API has been completely rewritten from scratch to provide a more
 | `cat`     | string | `0`     | Category code for trends                          |
 
 > Google provides an official RSS feed for trending search terms:
-> https://trends.google.com/trends/trendingsearches/daily/rss
+> https://trends.google.com/trending/rss
 
 </details>
 

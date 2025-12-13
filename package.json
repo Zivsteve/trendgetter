@@ -1,9 +1,10 @@
 {
-  "name": "trendgetter-api",
+  "name": "trendgetter",
   "version": "2.0.0",
-  "description": "The official Trendgetter API source-code",
+  "description": "A free and open-source API that provides trending data from various platforms such as Google, YouTube, X, Reddit, GitHub, and TikTok.",
+  "repository": "https://github.com/Zivsteve/trendgetter",
   "license": "MIT",
-  "main": "server.js",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "start": "node dist/index.js",

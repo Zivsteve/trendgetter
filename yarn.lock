@@ -1956,9 +1956,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"trendgetter-api@workspace:.":
+"trendgetter@workspace:.":
   version: 0.0.0-use.local
-  resolution: "trendgetter-api@workspace:."
+  resolution: "trendgetter@workspace:."
   dependencies:
     "@fastify/cors": "npm:^11.2.0"
     "@types/jsdom": "npm:^27.0.0"

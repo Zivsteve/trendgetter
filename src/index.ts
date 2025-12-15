@@ -12,7 +12,9 @@ const config = {
 // Initialize a single browser instance.
 // This browser instance will be shared across requests to avoid the overhead of launching a new browser each time.
 export let browser: playwright.Browser;
-browser = await playwright.webkit.launch({ headless: true });
+(async () => {
+  browser = await playwright.webkit.launch({ headless: true });
+})();
 
 const fastify = Fastify({ logger: true });
 fastify.register(fastifyCors);
@@ -26,7 +28,7 @@ for (const endpoint in ENDPOINTS) {
   fastify.get(
     `/api/${endpoint}`,
     async (request: FastifyRequest<{ Querystring: Record<string, string | number> }>, reply) => {
-      const handlerModule = await ENDPOINTS[endpoint as keyof typeof ENDPOINTS];
+      const handlerModule = ENDPOINTS[endpoint as keyof typeof ENDPOINTS];
       const handler = handlerModule.default;
       const data = await handler(request.query);
 

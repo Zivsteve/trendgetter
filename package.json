@@ -4,12 +4,11 @@
   "description": "A free and open-source API that provides trending data from various platforms such as Google, YouTube, X, Reddit, GitHub, and TikTok.",
   "repository": "https://github.com/Zivsteve/trendgetter",
   "license": "MIT",
-  "main": "dist/index.js",
-  "type": "module",
+  "main": "dist/src/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "start": "node dist/index.js",
-    "build": "tsc -p ."
+    "start": "node dist/src/index.js",
+    "build": "tsc -p . && tsc-alias"
   },
   "dependencies": {
     "@fastify/cors": "^11.2.0",
@@ -24,6 +23,7 @@
     "@types/node": "^25.0.1",
     "prettier": "^3.7.4",
     "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.16",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },

@@ -14,15 +14,7 @@
     "moduleResolution": "Node",
     "sourceMap": false,
     "outDir": "dist",
-    "baseUrl": ".",
-    "paths": {
-      "~/*": ["./src/*"]
-    },
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/@types",
-      "./packages/*/@types"
-    ]
+    "baseUrl": "."
   },
   "include": ["./src", "./package.json"],
   "exclude": ["./node_modules", "./dist"]

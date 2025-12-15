@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { JSDOM } from 'jsdom';
-import { browser } from '~/utils.js';
+import { browser } from '../utils.js';
 
 /**
  * Fetches trending videos from TikTok Creative Center.

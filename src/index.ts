@@ -9,15 +9,15 @@ const config = {
   port: Number(process.env.PORT) || 8000,
 };
 
-// Initialize a single browser instance.
-// This browser instance will be shared across requests to avoid the overhead of launching a new browser each time.
-await initBrowser();
-
 const fastify = Fastify({ logger: true });
 fastify.register(fastifyCors);
 
 fastify.get('/', async (request, reply) => {
-  return { message: 'API is running!' };
+  return {
+    message: 'API is running!',
+    method: request.method,
+    ip: request.ip,
+  };
 });
 
 // Dynamically create routes.
@@ -37,14 +37,9 @@ for (const endpoint in ENDPOINTS) {
   );
 }
 
+// Initialize a single browser instance.
+// This browser instance will be shared across requests to avoid the overhead of launching a new browser each time.
+initBrowser();
+
 // Start the server.
-const start = async () => {
-  try {
-    await fastify.listen(config);
-    console.info(`Server listening on ${config.host}:${config.port}`);
-  } catch (err) {
-    fastify.log.error(err);
-    process.exit(1);
-  }
-};
-start();
+fastify.listen(config);

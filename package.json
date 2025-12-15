@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "start": "node dist/src/index.js",
-    "build": "tsc -p . && tsc-alias"
+    "build": "tsc -p ."
   },
   "dependencies": {
     "@fastify/cors": "^11.2.0",
@@ -24,7 +24,6 @@
     "@types/node": "^25.0.1",
     "prettier": "^3.7.4",
     "ts-node": "^10.9.2",
-    "tsc-alias": "^1.8.16",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },

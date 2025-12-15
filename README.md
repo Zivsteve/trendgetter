@@ -44,7 +44,9 @@ The Trendgetter API has been completely rewritten from scratch to provide a more
   Google
   </summary>
 
-`/api/google/topics` - Get trending search topics from Google Trends.
+GET `/api/google/topics`
+
+> Get trending search topics from Google Trends.
 
 | Parameter | Type   | Default | Description                                       |
 | --------- | ------ | ------- | ------------------------------------------------- |
@@ -52,8 +54,10 @@ The Trendgetter API has been completely rewritten from scratch to provide a more
 | `geo`     | string | `US`    | Geographic location code (e.g., `US`, `GB`, `IN`) |
 | `cat`     | string | `0`     | Category code for trends                          |
 
-> Google provides an official RSS feed for trending search terms:
-> https://trends.google.com/trending/rss
+**Google Trends RSS Feed**
+
+Google provides an official RSS feed for trending search terms:
+https://trends.google.com/trending/rss
 
 </details>
 
@@ -62,7 +66,9 @@ The Trendgetter API has been completely rewritten from scratch to provide a more
 <details>
   <summary>YouTube</summary>
 
-`/api/youtube/videos` - Get trending videos from YouTube.
+GET `/api/youtube/videos`
+
+> Get trending videos from YouTube.
 
 | Parameter     | Type   | Default | Description                                                                    |
 | ------------- | ------ | ------- | ------------------------------------------------------------------------------ |
@@ -71,10 +77,10 @@ The Trendgetter API has been completely rewritten from scratch to provide a more
 
 **YouTube Data API v3**
 
-> Unfortunately, YouTube removed their official trending page in 2025.
+Unfortunately, YouTube removed their official trending page in 2025.
 
-> However, you can still retrieve trending videos using the YouTube Data API v3:
-> https://developers.google.com/youtube/v3/docs/videos/list
+However, you can still retrieve trending videos using the YouTube Data API v3:
+https://developers.google.com/youtube/v3/docs/videos/list
 
 </details>
 
@@ -83,7 +89,9 @@ The Trendgetter API has been completely rewritten from scratch to provide a more
 <details>
   <summary>X</summary>
 
-`/api/x/tags` - Get trending hashtags from X (formerly Twitter).
+GET `/api/x/tags`
+
+> Get trending hashtags from X (formerly Twitter).
 
 | Parameter  | Type   | Default | Description                                                                                         |
 | ---------- | ------ | ------- | --------------------------------------------------------------------------------------------------- |
@@ -91,12 +99,12 @@ The Trendgetter API has been completely rewritten from scratch to provide a more
 
 **Workaround for X's limited API**
 
-> Unfortunately, X made their official API really expensive and limited access.
+Unfortunately, X made their official API really expensive and limited access.
 
-> The platform also requires authentication for accessing trending topics.
+The platform also requires authentication for accessing trending topics.
 
-> A workaround is to scrape this third-party site that displays X's trending topics:
-> https://trends24.in/
+A workaround is to scrape this third-party site that displays X's trending topics:
+https://trends24.in/
 
 </details>
 
@@ -105,7 +113,9 @@ The Trendgetter API has been completely rewritten from scratch to provide a more
 <details>
   <summary>Reddit</summary>
 
-`/api/reddit/posts` - Get trending posts from Reddit.
+GET `/api/reddit/posts`
+
+> Get trending posts from Reddit.
 
 | Parameter   | Type   | Default   | Description                                                                                 |
 | ----------- | ------ | --------- | ------------------------------------------------------------------------------------------- |
@@ -114,10 +124,10 @@ The Trendgetter API has been completely rewritten from scratch to provide a more
 
 **Reddit API**
 
-> Reddit has an amazing API. You can add .json to almost any page to get it's posts.
+Reddit has an amazing API. You can add .json to almost any page to get it's posts.
 
-> For example, the top posts of r/popular:
-> https://www.reddit.com/r/popular/top.json
+For example, the top posts of r/popular:
+https://www.reddit.com/r/popular/top.json
 
 </details>
 
@@ -126,7 +136,9 @@ The Trendgetter API has been completely rewritten from scratch to provide a more
 <details>
   <summary>GitHub</summary>
 
-`/api/github/repos` - Get trending repositories from GitHub.
+GET `/api/github/repos`
+
+> Get trending repositories from GitHub.
 
 | Parameter              | Type   | Default | Description                                                                       |
 | ---------------------- | ------ | ------- | --------------------------------------------------------------------------------- |
@@ -136,11 +148,11 @@ The Trendgetter API has been completely rewritten from scratch to provide a more
 
 **GitHub Trending Page**
 
-> GitHub doesn't have an official API, but it has a trending page which we can parse:
-> https://github.com/trending
+GitHub doesn't have an official API, but it has a trending page which we can parse:
+https://github.com/trending
 
-> We can also get trending developers:
-> https://github.com/trending/developers
+We can also get trending developers:
+https://github.com/trending/developers
 
 </details>
 
@@ -149,7 +161,9 @@ The Trendgetter API has been completely rewritten from scratch to provide a more
 <details>
   <summary>TikTok</summary>
 
-`/api/tiktok/videos` - Get trending videos from TikTok.
+GET `/api/tiktok/videos`
+
+> Get trending videos from TikTok.
 
 | Parameter      | Type   | Default | Description                                                                     |
 | -------------- | ------ | ------- | ------------------------------------------------------------------------------- |
@@ -160,11 +174,11 @@ The Trendgetter API has been completely rewritten from scratch to provide a more
 
 **TikTok's Unofficial API**
 
-> TikTok does not provide an official API for trending videos.
+TikTok does not provide an official API for trending videos.
 
-> However, we can use TikTok's internal API endpoints from their Creative Center to fetch trending videos by mimicking the requests made by the TikTok web application.
+However, we can use TikTok's internal API endpoints from their Creative Center to fetch trending videos by mimicking the requests made by the TikTok web application.
 
-> https://ads.tiktok.com/business/creativecenter/inspiration/popular/pc/en
+https://ads.tiktok.com/business/creativecenter/inspiration/popular/pc/en
 
 </details>
 

@@ -61,3 +61,5 @@ node_modules/
 !.yarn/versions/
 !.yarn/sdks/
 !.yarn/patches/
+.vercel
+.env*.local

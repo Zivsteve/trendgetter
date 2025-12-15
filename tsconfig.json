@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "ESNext",
     "lib": ["ESNext"],
     "allowJs": true,
     "experimentalDecorators": true,

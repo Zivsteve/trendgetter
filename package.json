@@ -5,6 +5,7 @@
   "repository": "https://github.com/Zivsteve/trendgetter",
   "license": "MIT",
   "main": "dist/src/index.js",
+  "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "start": "node dist/src/index.js",

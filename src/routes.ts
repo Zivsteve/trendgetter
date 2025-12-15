@@ -1,8 +1,8 @@
 export const ENDPOINTS = {
-  'github/repos': require('./platforms/github'),
-  'google/topics': import('./platforms/google'),
-  'tiktok/videos': import('./platforms/tiktok'),
-  'youtube/videos': import('./platforms/youtube'),
-  'x/tags': import('./platforms/x'),
-  'reddit/posts': import('./platforms/reddit'),
+  'github/repos': import('./platforms/github.js'),
+  'google/topics': import('./platforms/google.js'),
+  'tiktok/videos': import('./platforms/tiktok.js'),
+  'youtube/videos': import('./platforms/youtube.js'),
+  'x/tags': import('./platforms/x.js'),
+  'reddit/posts': import('./platforms/reddit.js'),
 };

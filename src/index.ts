@@ -2,7 +2,7 @@ import 'dotenv/config';
 import Fastify, { FastifyRequest } from 'fastify';
 import fastifyCors from '@fastify/cors';
 import playwright from 'playwright';
-import { ENDPOINTS } from './routes';
+import { ENDPOINTS } from '~/routes.js';
 
 const config = {
   host: process.env.HOST || '0.0.0.0',
@@ -12,9 +12,7 @@ const config = {
 // Initialize a single browser instance.
 // This browser instance will be shared across requests to avoid the overhead of launching a new browser each time.
 export let browser: playwright.Browser;
-(async () => {
-  browser = await playwright.webkit.launch({ headless: true });
-})();
+browser = await playwright.webkit.launch({ headless: true });
 
 const fastify = Fastify({ logger: true });
 fastify.register(fastifyCors);

@@ -1,8 +1,8 @@
 import 'dotenv/config';
 import Fastify, { FastifyRequest } from 'fastify';
 import fastifyCors from '@fastify/cors';
-import playwright from 'playwright';
-import { ENDPOINTS } from '~/routes.js';
+import { ENDPOINTS } from './routes.js';
+import { initBrowser } from './utils.js';
 
 const config = {
   host: process.env.HOST || '0.0.0.0',
@@ -11,8 +11,7 @@ const config = {
 
 // Initialize a single browser instance.
 // This browser instance will be shared across requests to avoid the overhead of launching a new browser each time.
-export let browser: playwright.Browser;
-browser = await playwright.webkit.launch({ headless: true });
+await initBrowser();
 
 const fastify = Fastify({ logger: true });
 fastify.register(fastifyCors);
@@ -23,8 +22,11 @@ fastify.get('/', async (request, reply) => {
 
 // Dynamically create routes.
 for (const endpoint in ENDPOINTS) {
+  const endpointPath = `/api/${endpoint}`;
+
+  console.info('[+]', endpointPath);
   fastify.get(
-    `/api/${endpoint}`,
+    endpointPath,
     async (request: FastifyRequest<{ Querystring: Record<string, string | number> }>, reply) => {
       const handlerModule = await ENDPOINTS[endpoint as keyof typeof ENDPOINTS];
       const handler = handlerModule.default;

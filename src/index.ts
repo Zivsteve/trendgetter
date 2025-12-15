@@ -28,7 +28,7 @@ for (const endpoint in ENDPOINTS) {
   fastify.get(
     `/api/${endpoint}`,
     async (request: FastifyRequest<{ Querystring: Record<string, string | number> }>, reply) => {
-      const handlerModule = ENDPOINTS[endpoint as keyof typeof ENDPOINTS];
+      const handlerModule = await ENDPOINTS[endpoint as keyof typeof ENDPOINTS];
       const handler = handlerModule.default;
       const data = await handler(request.query);
 

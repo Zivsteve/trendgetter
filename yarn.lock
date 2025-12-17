@@ -383,7 +383,6 @@ __metadata:
     "@types/jsdom": "npm:^27.0.0"
     "@types/node": "npm:^25.0.2"
     axios: "npm:^1.13.2"
-    dotenv: "npm:^17.2.3"
     jsdom: "npm:^26.1.0"
     playwright: "npm:^1.57.0"
     typescript: "npm:^5.9.3"

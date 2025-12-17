@@ -47,6 +47,18 @@ trendgetter.x.tags();
 trendgetter.youtube.videos();
 ```
 
+---
+
+#### Note: Some platforms may require API keys:
+
+```typescript
+trendgetter.youtube.apiKey = 'YOUTUBE_API_KEY';
+```
+
+If you are using environment variables, they will be picked up automatically.
+
+---
+
 ## Using Parameters
 
 Each platform's methods accept an optional `params` object to customize the request:

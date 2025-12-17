@@ -15,7 +15,7 @@ export async function getYoutubeTrendingVideos(params?: Record<string, string | 
       chart: 'mostPopular',
       regionCode: params?.region_code || 'US',
       maxResults: params?.limit || 10,
-      key: process.env.YOUTUBE_API_KEY,
+      key: youtube.apiKey,
     },
   });
 
@@ -37,4 +37,5 @@ export async function getYoutubeTrendingVideos(params?: Record<string, string | 
 
 export const youtube = {
   videos: getYoutubeTrendingVideos,
+  apiKey: process?.env?.YOUTUBE_API_KEY || '',
 };

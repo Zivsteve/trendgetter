@@ -1,7 +1,7 @@
 {
   "name": "@trendgetter/core",
   "displayName": "Trendgetter",
-  "version": "2.0.2",
+  "version": "2.0.2-beta.1",
   "description": "A free and open-source API that provides trending data from various platforms such as Google, YouTube, X, Reddit, GitHub, and TikTok.",
   "keywords": [
     "trending",

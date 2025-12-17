@@ -1,5 +1,5 @@
 {
-  "name": "trendgetter-api",
+  "name": "@trendgetter/api",
   "displayName": "Trendgetter API",
   "version": "2.0.0",
   "description": "Trendgetter API Server",

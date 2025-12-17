@@ -363,6 +363,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@trendgetter/api@workspace:packages/server":
+  version: 0.0.0-use.local
+  resolution: "@trendgetter/api@workspace:packages/server"
+  dependencies:
+    "@fastify/cors": "npm:^11.2.0"
+    "@types/node": "npm:^25.0.2"
+    dotenv: "npm:^17.2.3"
+    fastify: "npm:^5.6.2"
+    tsx: "npm:^4.21.0"
+    typescript: "npm:^5.9.3"
+  languageName: unknown
+  linkType: soft
+
+"@trendgetter/core@workspace:packages/core":
+  version: 0.0.0-use.local
+  resolution: "@trendgetter/core@workspace:packages/core"
+  dependencies:
+    "@types/jsdom": "npm:^27.0.0"
+    "@types/node": "npm:^25.0.2"
+    axios: "npm:^1.13.2"
+    dotenv: "npm:^17.2.3"
+    jsdom: "npm:^26.1.0"
+    playwright: "npm:^1.57.0"
+    typescript: "npm:^5.9.3"
+  languageName: unknown
+  linkType: soft
+
 "@types/jsdom@npm:^27.0.0":
   version: 27.0.0
   resolution: "@types/jsdom@npm:27.0.0"
@@ -1791,36 +1818,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"trendgetter-api@workspace:packages/server":
+"trendgetter@workspace:.":
   version: 0.0.0-use.local
-  resolution: "trendgetter-api@workspace:packages/server"
-  dependencies:
-    "@fastify/cors": "npm:^11.2.0"
-    "@types/node": "npm:^25.0.2"
-    dotenv: "npm:^17.2.3"
-    fastify: "npm:^5.6.2"
-    tsx: "npm:^4.21.0"
-    typescript: "npm:^5.9.3"
-  languageName: unknown
-  linkType: soft
-
-"trendgetter-monorepo@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "trendgetter-monorepo@workspace:."
-  languageName: unknown
-  linkType: soft
-
-"trendgetter@workspace:packages/core":
-  version: 0.0.0-use.local
-  resolution: "trendgetter@workspace:packages/core"
-  dependencies:
-    "@types/jsdom": "npm:^27.0.0"
-    "@types/node": "npm:^25.0.2"
-    axios: "npm:^1.13.2"
-    dotenv: "npm:^17.2.3"
-    jsdom: "npm:^26.1.0"
-    playwright: "npm:^1.57.0"
-    typescript: "npm:^5.9.3"
+  resolution: "trendgetter@workspace:."
   languageName: unknown
   linkType: soft
 

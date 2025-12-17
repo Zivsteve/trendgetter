@@ -1,7 +1,7 @@
 # 🌎 Trendgetter
 
-![GitHub package.json version](https://img.shields.io/github/package-json/v/Zivsteve/trendgetter-api?style=flat-square)
-![GitHub](https://img.shields.io/github/license/Zivsteve/trendgetter-api?style=flat-square)
+![GitHub package.json version](https://img.shields.io/npm/v/@trendgetter/core.svg)
+![GitHub](https://img.shields.io/github/license/Zivsteve/trendgetter?style=flat-square)
 
 ---
 

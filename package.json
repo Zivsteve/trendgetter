@@ -1,5 +1,5 @@
 {
-  "name": "trendgetter-monorepo",
+  "name": "trendgetter",
   "displayName": "Trendgetter",
   "description": "A free and open-source API that provides trending data from various platforms such as Google, YouTube, X, Reddit, GitHub, and TikTok.",
   "repository": "https://github.com/Zivsteve/trendgetter",
@@ -11,10 +11,11 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "yarn workspace trendgetter-api dev",
-    "start": "yarn workspace trendgetter-api start",
-    "build:server": "yarn workspace trendgetter-api build",
-    "build": "yarn workspace trendgetter build"
+    "dev": "yarn workspace @trendgetter/api dev",
+    "start": "yarn workspace @trendgetter/api start",
+    "build:server": "yarn workspace @trendgetter/api build",
+    "build": "yarn workspace @trendgetter/core build",
+    "publish": "yarn workspace @trendgetter/core publish"
   },
   "engines": {
     "node": "24"

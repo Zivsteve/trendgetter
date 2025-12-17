@@ -1,6 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist"
-  }
+    "outDir": "dist",
+    "declaration": true
+  },
+  "include": ["package.json", "index.ts", "platforms/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

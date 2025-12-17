@@ -1,4 +1,4 @@
-import * as trendgetter from 'trendgetter';
+import * as trendgetter from '@trendgetter/core';
 
 export const ENDPOINTS = {
   'github/repos': trendgetter.github.repos,

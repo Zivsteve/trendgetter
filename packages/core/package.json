@@ -1,14 +1,26 @@
 {
-  "name": "trendgetter",
+  "name": "@trendgetter/core",
   "displayName": "Trendgetter",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A free and open-source API that provides trending data from various platforms such as Google, YouTube, X, Reddit, GitHub, and TikTok.",
+  "keywords": [
+    "trending",
+    "trends",
+    "api",
+    "google trends",
+    "youtube trends",
+    "x trends",
+    "reddit trends",
+    "github trends",
+    "tiktok trends"
+  ],
   "repository": "https://github.com/Zivsteve/trendgetter",
   "license": "MIT",
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "publish": "npm publish --access public"
   },
   "dependencies": {
     "axios": "^1.13.2",

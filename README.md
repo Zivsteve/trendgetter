@@ -13,6 +13,9 @@ You can clone this repository and run your own instance of the API.
 
 The Trendgetter API has been completely rewritten from scratch to provide a more robust and scalable solution for fetching trending data from multiple platforms. The new version includes improved error handling, better performance, and support for additional platforms.
 
+Try it out now!
+https://trendgetter.vercel.app/
+
 ---
 
 ### How to Use
@@ -44,7 +47,7 @@ The Trendgetter API has been completely rewritten from scratch to provide a more
   Google
   </summary>
 
-GET `/api/google/topics`
+GET [`/api/google/topics`](https://trendgetter.vercel.app/api/google/topics)
 
 > Get trending search topics from Google Trends.
 
@@ -66,7 +69,7 @@ https://trends.google.com/trending/rss
 <details>
   <summary>YouTube</summary>
 
-GET `/api/youtube/videos`
+GET [`/api/youtube/videos`](https://trendgetter.vercel.app/api/youtube/videos)
 
 > Get trending videos from YouTube.
 
@@ -89,7 +92,7 @@ https://developers.google.com/youtube/v3/docs/videos/list
 <details>
   <summary>X</summary>
 
-GET `/api/x/tags`
+GET [`/api/x/tags`](https://trendgetter.vercel.app/api/x/tags)
 
 > Get trending hashtags from X (formerly Twitter).
 
@@ -113,7 +116,7 @@ https://trends24.in/
 <details>
   <summary>Reddit</summary>
 
-GET `/api/reddit/posts`
+GET [`/api/reddit/posts`](https://trendgetter.vercel.app/api/reddit/posts)
 
 > Get trending posts from Reddit.
 
@@ -136,7 +139,7 @@ https://www.reddit.com/r/popular/top.json
 <details>
   <summary>GitHub</summary>
 
-GET `/api/github/repos`
+GET [`/api/github/repos`](https://trendgetter.vercel.app/api/github/repos)
 
 > Get trending repositories from GitHub.
 
@@ -161,7 +164,7 @@ https://github.com/trending/developers
 <details>
   <summary>TikTok</summary>
 
-GET `/api/tiktok/videos`
+GET [`/api/tiktok/videos`](https://trendgetter.vercel.app/api/tiktok/videos)
 
 > Get trending videos from TikTok.
 

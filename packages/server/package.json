@@ -1,0 +1,29 @@
+{
+  "name": "trendgetter-api",
+  "displayName": "Trendgetter API",
+  "version": "2.0.0",
+  "description": "Trendgetter API Server",
+  "repository": "https://github.com/Zivsteve/trendgetter",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch index.ts",
+    "start": "node dist/index.js",
+    "build": "tsc -p ."
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.2.0",
+    "dotenv": "^17.2.3",
+    "fastify": "^5.6.2"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": "24"
+  }
+}

@@ -6,7 +6,7 @@ import axios from 'axios';
  * @param region_code - The region code to fetch trending videos for (default is 'US').
  * @param limit - The number of trending videos to fetch (default is 10).
  */
-export default async function getYoutubeTrendingVideos(params?: Record<string, string | number>) {
+export async function getYoutubeTrendingVideos(params?: Record<string, string | number>) {
   // YouTube has unfortunately removed their trending page.
   // However, we can use the YouTube Data API to fetch trending videos.
   const res = await axios.get('https://youtube.googleapis.com/youtube/v3/videos', {
@@ -34,3 +34,7 @@ export default async function getYoutubeTrendingVideos(params?: Record<string, s
     }))
     ?.sort((a: any, b: any) => +b.statistics.view_count - +a.statistics.view_count);
 }
+
+export const youtube = {
+  videos: getYoutubeTrendingVideos,
+};

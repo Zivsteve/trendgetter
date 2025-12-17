@@ -6,7 +6,7 @@ import { JSDOM } from 'jsdom';
  *
  * @param location - The location to fetch trending tags for (default is 'worldwide').
  */
-export default async function getXTrendingTags(params?: Record<string, string | number>) {
+export async function getXTrendingTags(params?: Record<string, string | number>) {
   const location = `${params?.location || ''}`.replace(/\s+/g, '-').toLowerCase();
 
   // X has unfortunately made their API very expensive.
@@ -25,7 +25,7 @@ export default async function getXTrendingTags(params?: Record<string, string | 
       name: name,
       url: url,
       count: tagElement.querySelector('[data-count]')
-        ? +tagElement.querySelector('[data-count]')!.getAttribute('data-count')
+        ? +tagElement.querySelector('[data-count]')!.getAttribute('data-count')!
         : null,
       length: statCardLink ? statCardLink.nextSibling?.textContent?.trim() : null,
     };
@@ -48,3 +48,7 @@ export default async function getXTrendingTags(params?: Record<string, string | 
 
   return uniqueTags;
 }
+
+export const x = {
+  tags: getXTrendingTags,
+};

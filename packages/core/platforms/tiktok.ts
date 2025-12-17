@@ -1,6 +1,6 @@
 import axios from 'axios';
+import playwright from 'playwright';
 import { JSDOM } from 'jsdom';
-import { browser } from '../utils.js';
 
 /**
  * Fetches trending videos from TikTok Creative Center.
@@ -10,10 +10,13 @@ import { browser } from '../utils.js';
  * @param limit - The number of videos to fetch per page (default is 10).
  * @param country_code - The country code to filter videos by (default is 'US').
  */
-export default async function getTikTokTrendingVideos(params?: Record<string, string | number>) {
+export async function getTikTokTrendingVideos(params?: Record<string, string | number>) {
   // TikTok's API requires authentication headers that are generated dynamically.
   // A simple way to obtain these headers is to use a headless browser to visit the TikTok Creative Center page
   // and intercept the necessary headers from the network requests.
+  const browser = await playwright.webkit.launch({
+    headless: true,
+  });
   const context = await browser.newContext();
   const page = await context.newPage();
 
@@ -98,3 +101,7 @@ export default async function getTikTokTrendingVideos(params?: Record<string, st
 
   return data;
 }
+
+export const tiktok = {
+  videos: getTikTokTrendingVideos,
+};

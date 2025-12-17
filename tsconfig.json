@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
-    "lib": ["ESNext"],
+    "module": "nodenext",
     "allowJs": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -9,13 +8,16 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
-    "target": "ESNext",
+    "target": "es2020",
     "noImplicitAny": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "nodenext",
     "sourceMap": false,
     "outDir": "dist",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "trendgetter": ["packages/core"]
+    }
   },
-  "include": ["./src", "./package.json"],
-  "exclude": ["./node_modules", "./dist"]
+  "include": ["package.json"],
+  "exclude": ["node_modules", "dist"]
 }

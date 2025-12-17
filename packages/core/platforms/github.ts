@@ -8,7 +8,7 @@ import { JSDOM } from 'jsdom';
  * @param language - The programming language to filter repositories by.
  * @param spoken_language_code - The spoken language to filter repositories by. (e.g., 'en' for English)
  */
-export default async function getGithubTrendingRepos(params?: Record<string, string | number>) {
+export async function getGithubTrendingRepos(params?: Record<string, string | number>) {
   // GitHub has a public trending page that can be scraped for trending repositories and does not require authentication.
   const res = await axios.get(`https://github.com/trending/${params?.language || ''}`, { params });
 
@@ -37,3 +37,7 @@ export default async function getGithubTrendingRepos(params?: Record<string, str
 
   return repos;
 }
+
+export const github = {
+  repos: getGithubTrendingRepos,
+};

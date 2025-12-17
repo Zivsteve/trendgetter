@@ -30,7 +30,7 @@ import { JSDOM } from 'jsdom';
  *    18. Travel and Transportation
  *    19. Climate
  */
-export default async function getGoogleTrendingTopics(params?: Record<string, string | number>) {
+export async function getGoogleTrendingTopics(params?: Record<string, string | number>) {
   // Google Trends provides a public RSS feed for trending topics.
   const res = await axios.get('https://trends.google.com/trending/rss', { params });
 
@@ -60,3 +60,7 @@ export default async function getGoogleTrendingTopics(params?: Record<string, st
 
   return topics;
 }
+
+export const google = {
+  topics: getGoogleTrendingTopics,
+};

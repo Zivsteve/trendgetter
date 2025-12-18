@@ -56,7 +56,9 @@ GET [`/api/google/topics`](https://trendgetter.vercel.app/api/google/topics)
 | --------- | ------ | ------- | ------------------------------------------------- |
 | `hl`      | string | `en`    | Language code (e.g., `en`, `es`, `fr`)            |
 | `geo`     | string | `US`    | Geographic location code (e.g., `US`, `GB`, `IN`) |
-| `cat`     | string | `0`     | Category code for trends                          |
+| `cat`     | string | `ALL`   | Category code for trends                          |
+
+_Check the `GoogleCategory` enum for available categories._
 
 **Google Trends RSS Feed**
 

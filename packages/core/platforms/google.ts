@@ -1,6 +1,48 @@
 import axios from 'axios';
 import { JSDOM } from 'jsdom';
 
+/** Enum for Google topic categories. */
+export enum GoogleCategory {
+  ALL = undefined,
+  AUTOS_AND_VEHICLES = 1,
+  BEAUTY_AND_FASHION = 2,
+  BUSINESS_AND_FINANCE = 3,
+  ENTERTAINMENT = 4,
+  FOOD_AND_DRINK = 5,
+  GAMES = 6,
+  HEALTH = 7,
+  HOBBIES_AND_LEISURE = 8,
+  JOBS_AND_EDUCATION = 9,
+  LAW_AND_GOVERNMENT = 10,
+  OTHER = 11,
+  PETS_AND_ANIMALS = 12,
+  POLITICS = 13,
+  SCIENCE = 14,
+  SHOPPING = 15,
+  SPORTS = 16,
+  TECHNOLOGY = 17,
+  TRAVEL_AND_TRANSPORTATION = 18,
+  CLIMATE = 19,
+}
+
+export interface GoogleParams {
+  geo?: string;
+  hl?: string;
+  hours?: number;
+  status?: string;
+  sort?: string;
+  category?: GoogleCategory;
+}
+
+const DEFAULT_PARAMS: GoogleParams = {
+  geo: 'US',
+  hl: 'en-US',
+  hours: 24,
+  status: 'active',
+  sort: 'relevance',
+  category: GoogleCategory.ALL,
+};
+
 /**
  * Fetches trending topics from Google Trends RSS feed.
  *
@@ -9,30 +51,32 @@ import { JSDOM } from 'jsdom';
  * @param hours - The time range for trending topics in hours (e.g., 1, 4, 24).
  * @param status - Whether to include only active trends ('active').
  * @param sort - The sorting method for trends ('title', 'sort-volume', 'recency', 'relevance (default)').
- * @param category - The category index to filter trends by:
- *    1. Autos and Vehicles
- *    2. Beauty and Fashion
- *    3. Business and Finance
- *    4. Entertainment
- *    5. Food and Drink
- *    6. Games
- *    7. Health
- *    8. Hobbies and Leisure
- *    9. Jobs and Education
- *    10. Law and Government
- *    11. Other
- *    12. Pets and Animals
- *    13. Politics
- *    14. Science
- *    15. Shopping
- *    16. Sports
- *    17. Technology
- *    18. Travel and Transportation
- *    19. Climate
+ * @param category  - The category to filter trending topics by (default is GoogleCategory.ALL).
+ *
+ * {@link GoogleCategory} - Enum for Google topic categories. Example: GoogleCategory.SPORTS
+ *
+ * @example
+ * ```typescript
+ * await google.topics({
+ *   geo: 'US',
+ *   hl: 'en-US',
+ *   hours: 24,
+ *   category: GoogleCategory.SPORTS,
+ * })
+ * ```
  */
-export async function getGoogleTrendingTopics(params?: Record<string, string | number>) {
+export async function getGoogleTrendingTopics(params?: GoogleParams) {
   // Google Trends provides a public RSS feed for trending topics.
-  const res = await axios.get('https://trends.google.com/trending/rss', { params });
+  const res = await axios.get('https://trends.google.com/trending/rss', {
+    params: {
+      geo: params?.geo || DEFAULT_PARAMS.geo,
+      hl: params?.hl || DEFAULT_PARAMS.hl,
+      hours: params?.hours || DEFAULT_PARAMS.hours,
+      status: params?.status || DEFAULT_PARAMS.status,
+      sort: params?.sort || DEFAULT_PARAMS.sort,
+      cat: params?.category || DEFAULT_PARAMS.category,
+    },
+  });
 
   const dom = new JSDOM(res.data, { contentType: 'text/xml' });
   const document = dom.window.document;

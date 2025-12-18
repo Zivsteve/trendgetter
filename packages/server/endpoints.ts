@@ -3,6 +3,7 @@ import * as trendgetter from '@trendgetter/core';
 export const ENDPOINTS = {
   'github/repos': trendgetter.github.repos,
   'google/topics': trendgetter.google.topics,
+  'hackernews/posts': trendgetter.hackernews.posts,
   'reddit/posts': trendgetter.reddit.posts,
   'tiktok/videos': trendgetter.tiktok.videos,
   'youtube/videos': trendgetter.youtube.videos,

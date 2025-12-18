@@ -41,6 +41,7 @@ console.log(results);
 ```typescript
 trendgetter.github.repos();
 trendgetter.google.topics();
+trendgetter.hackernews.posts();
 trendgetter.reddit.posts();
 trendgetter.tiktok.videos();
 trendgetter.x.tags();

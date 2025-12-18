@@ -91,7 +91,7 @@ https://developers.google.com/youtube/v3/docs/videos/list
 ---
 
 <details>
-  <summary>X</summary>
+  <summary>X (formerly Twitter)</summary>
 
 GET [`/api/x/tags`](https://trendgetter.vercel.app/api/x/tags)
 
@@ -132,6 +132,27 @@ Reddit has an amazing API. You can add .json to almost any page to get it's post
 
 For example, the top posts of r/popular:
 https://www.reddit.com/r/popular/top.json
+
+</details>
+
+---
+
+<details>
+  <summary>Hacker News / Y Combinator</summary>
+
+GET [`/api/hackernews/posts`](https://trendgetter.vercel.app/api/hackernews/posts)
+
+> Get trending posts from Hacker News.
+
+| Parameter | Type   | Default | Description                                                          |
+| --------- | ------ | ------- | -------------------------------------------------------------------- |
+| `type`    | string | `top`   | The type of trending posts to fetch. Can be 'top', 'new', or 'best'. |
+| `limit`   | number | `20`    | The maximum number of trending posts to retrieve.                    |
+
+**Hacker News API**
+
+Hacker News provides a public API to fetch top, new, and best posts:
+https://github.com/HackerNews/API
 
 </details>
 

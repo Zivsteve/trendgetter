@@ -159,6 +159,31 @@ https://github.com/HackerNews/API
 ---
 
 <details>
+  <summary>Pinterest</summary>
+
+GET [`/api/pinterest/pins`](https://trendgetter.vercel.app/api/pinterest/pins)
+
+> Get trending pins from Pinterest.
+
+| Parameter     | Type   | Default | Description                                                                           |
+| ------------- | ------ | ------- | ------------------------------------------------------------------------------------- |
+| `countryCode` | string | `US`    | The country code to fetch trending pins for (e.g., `US`, `GB`, `IN`)                  |
+| `category`    | string | `ALL`   | The category to filter trending pins by. Multiple values can be provided as an array. |
+
+_Check the `PinsCategory` enum for available categories._
+
+**Pinterest's Unofficial API**
+
+Pinterest does provide an official API, but we can use their private API to fetch trending pins.
+
+This is done by mimicking the requests made by the Pinterest web application:
+https://trends.pinterest.com
+
+</details>
+
+---
+
+<details>
   <summary>GitHub</summary>
 
 GET [`/api/github/repos`](https://trendgetter.vercel.app/api/github/repos)

@@ -1,6 +1,7 @@
 export * from './platforms/github.js';
 export * from './platforms/google.js';
 export * from './platforms/hackernews.js';
+export * from './platforms/pinterest.js';
 export * from './platforms/reddit.js';
 export * from './platforms/tiktok.js';
 export * from './platforms/youtube.js';

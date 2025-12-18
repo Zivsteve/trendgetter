@@ -42,6 +42,7 @@ console.log(results);
 trendgetter.github.repos();
 trendgetter.google.topics();
 trendgetter.hackernews.posts();
+trendgetter.pinterest.pins();
 trendgetter.reddit.posts();
 trendgetter.tiktok.videos();
 trendgetter.x.tags();

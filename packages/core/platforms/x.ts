@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { JSDOM } from 'jsdom';
 
+const axiosX = axios.create({
+  baseURL: 'https://trends24.in',
+});
+
 /**
  * Fetches trending tags from X (formerly Twitter) Trends page.
  *
@@ -11,7 +15,7 @@ export async function getXTrendingTags(params?: Record<string, string | number>)
 
   // X has unfortunately made their API very expensive.
   // As a workaround, we will scrape the trends from the public trends page.
-  const res = await axios.get(`https://trends24.in/${location}`);
+  const res = await axiosX.get(`/${location}`);
 
   const dom = new JSDOM(res.data);
   const document = dom.window.document;

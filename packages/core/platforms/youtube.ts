@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+const axiosYT = axios.create({
+  baseURL: 'https://youtube.googleapis.com/youtube/v3',
+});
+
 /**
  * Fetches trending videos from YouTube using the YouTube Data API.
  *
@@ -9,7 +13,7 @@ import axios from 'axios';
 export async function getYoutubeTrendingVideos(params?: Record<string, string | number>) {
   // YouTube has unfortunately removed their trending page.
   // However, we can use the YouTube Data API to fetch trending videos.
-  const res = await axios.get('https://youtube.googleapis.com/youtube/v3/videos', {
+  const res = await axiosYT.get('/videos', {
     params: {
       part: 'snippet,contentDetails,statistics',
       chart: 'mostPopular',

@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { JSDOM } from 'jsdom';
 
+const axiosGH = axios.create({
+  baseURL: 'https://github.com',
+});
+
 /**
  * Fetches trending repositories from GitHub Trending page.
  *
@@ -10,7 +14,7 @@ import { JSDOM } from 'jsdom';
  */
 export async function getGithubTrendingRepos(params?: Record<string, string | number>) {
   // GitHub has a public trending page that can be scraped for trending repositories and does not require authentication.
-  const res = await axios.get(`https://github.com/trending/${params?.language || ''}`, { params });
+  const res = await axiosGH.get(`/trending/${params?.language || ''}`, { params });
 
   const dom = new JSDOM(res.data);
   const document = dom.window.document;
@@ -26,7 +30,7 @@ export async function getGithubTrendingRepos(params?: Record<string, string | nu
 
     return {
       name: titleElement ? titleElement.textContent.trim().replace(/\s+/g, '') : null,
-      url: titleElement ? `https://github.com${titleElement.getAttribute('href')}` : null,
+      url: titleElement ? `${axiosGH.defaults.baseURL}${titleElement.getAttribute('href')}` : null,
       description: descriptionElement ? descriptionElement.textContent.trim() : null,
       language: languageElement ? languageElement.textContent.trim() : null,
       stars: starsElement ? +starsElement.textContent.trim().replace(',', '') : null,

@@ -2,6 +2,10 @@ import axios from 'axios';
 import playwright from 'playwright';
 import { JSDOM } from 'jsdom';
 
+const axiosTT = axios.create({
+  baseURL: 'https://ads.tiktok.com',
+});
+
 /**
  * Fetches trending videos from TikTok Creative Center.
  *
@@ -44,7 +48,7 @@ export async function getTikTokTrendingVideos(params?: Record<string, string | n
 
   // Navigate to the TikTok Creative Center to trigger the request interception.
   try {
-    const url = 'https://ads.tiktok.com/business/creativecenter/inspiration/popular/pc/en';
+    const url = `${axiosTT.defaults.baseURL}/business/creativecenter/inspiration/popular/pc/en`;
     await page.goto(url);
     await page.waitForEvent('close');
   } catch (err) {}
@@ -54,7 +58,7 @@ export async function getTikTokTrendingVideos(params?: Record<string, string | n
   }
 
   // Fetch trending videos using the captured headers.
-  const res = await axios.get('https://ads.tiktok.com/creative_radar_api/v1/popular_trend/list', {
+  const res = await axiosTT.get('/creative_radar_api/v1/popular_trend/list', {
     params: {
       period: params?.period || 7,
       page: params?.page || 1,

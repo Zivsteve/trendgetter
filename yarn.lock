@@ -1820,6 +1820,9 @@ __metadata:
 "trendgetter@workspace:.":
   version: 0.0.0-use.local
   resolution: "trendgetter@workspace:."
+  dependencies:
+    fastify: "npm:^5.6.2"
+    typescript: "npm:^5.9.3"
   languageName: unknown
   linkType: soft
 

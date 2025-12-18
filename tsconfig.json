@@ -18,6 +18,6 @@
       "trendgetter": ["packages/core"]
     }
   },
-  "include": ["package.json"],
+  "include": ["package.json", "server.ts"],
   "exclude": ["node_modules", "dist"]
 }

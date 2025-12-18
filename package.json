@@ -13,9 +13,16 @@
   "scripts": {
     "dev": "yarn workspace @trendgetter/api dev",
     "start": "yarn workspace @trendgetter/api start",
+    "build:root": "tsc -p tsconfig.json",
     "build:server": "yarn workspace @trendgetter/api build",
     "build": "yarn workspace @trendgetter/core build",
     "publish": "yarn workspace @trendgetter/core publish"
+  },
+  "dependencies": {
+    "fastify": "^5.6.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
   },
   "engines": {
     "node": "24"

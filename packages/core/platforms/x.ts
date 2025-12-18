@@ -5,12 +5,16 @@ const axiosX = axios.create({
   baseURL: 'https://trends24.in',
 });
 
+export interface XParams {
+  location?: string;
+}
+
 /**
  * Fetches trending tags from X (formerly Twitter) Trends page.
  *
  * @param location - The location to fetch trending tags for (default is 'worldwide').
  */
-export async function getXTrendingTags(params?: Record<string, string | number>) {
+export async function getXTrendingTags(params?: XParams) {
   const location = `${params?.location || ''}`.replace(/\s+/g, '-').toLowerCase();
 
   // X has unfortunately made their API very expensive.

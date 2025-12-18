@@ -4,12 +4,17 @@ const axiosHN = axios.create({
   baseURL: 'https://hacker-news.firebaseio.com/v0',
 });
 
+export interface HackerNewsParams {
+  type?: 'top' | 'new' | 'best';
+  limit?: number;
+}
+
 /**
  * Fetches trending posts from Hacker News.
  *
  * @param type - The type of trending posts to fetch. Can be 'top', 'new', or 'best'.
  */
-export async function getHackerNewsTrendingPosts(params?: Record<string, string | number>) {
+export async function getHackerNewsTrendingPosts(params?: HackerNewsParams) {
   // Hacker News provides a public API to fetch top, new, and best stories.
   const TYPES = {
     top: 'topstories',
@@ -23,7 +28,7 @@ export async function getHackerNewsTrendingPosts(params?: Record<string, string 
 
   const res = await axiosHN.get(`/${typeKey}.json`);
   // The API returns an array of post IDs.
-  const postIds: number[] = res.data.slice(0, params?.limit ? Number(params.limit) : 20);
+  const postIds: number[] = res.data.slice(0, params?.limit ? +params.limit : 20);
 
   // Fetch details for each post by its ID.
   const postPromises = postIds.map(async (id) => {

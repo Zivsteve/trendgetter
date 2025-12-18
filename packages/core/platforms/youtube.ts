@@ -4,21 +4,31 @@ const axiosYT = axios.create({
   baseURL: 'https://youtube.googleapis.com/youtube/v3',
 });
 
+export interface YoutubeParams {
+  country_code?: string;
+  limit?: number;
+}
+
+const DEFAULT_PARAMS: YoutubeParams = {
+  country_code: 'US',
+  limit: 10,
+};
+
 /**
  * Fetches trending videos from YouTube using the YouTube Data API.
  *
- * @param region_code - The region code to fetch trending videos for (default is 'US').
+ * @param country_code - The region code to fetch trending videos for (default is 'US').
  * @param limit - The number of trending videos to fetch (default is 10).
  */
-export async function getYoutubeTrendingVideos(params?: Record<string, string | number>) {
+export async function getYoutubeTrendingVideos(params?: YoutubeParams) {
   // YouTube has unfortunately removed their trending page.
   // However, we can use the YouTube Data API to fetch trending videos.
   const res = await axiosYT.get('/videos', {
     params: {
       part: 'snippet,contentDetails,statistics',
       chart: 'mostPopular',
-      regionCode: params?.region_code || 'US',
-      maxResults: params?.limit || 10,
+      regionCode: params?.country_code || DEFAULT_PARAMS.country_code,
+      maxResults: params?.limit || DEFAULT_PARAMS.limit,
       key: youtube.apiKey,
     },
   });

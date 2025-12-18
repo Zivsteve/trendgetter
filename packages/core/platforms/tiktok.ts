@@ -6,6 +6,20 @@ const axiosTT = axios.create({
   baseURL: 'https://ads.tiktok.com',
 });
 
+export interface TikTokParams {
+  period?: number;
+  page?: number;
+  limit?: number;
+  country_code?: string;
+}
+
+const DEFAULT_PARAMS: TikTokParams = {
+  period: 7,
+  page: 1,
+  limit: 10,
+  country_code: 'US',
+};
+
 /**
  * Fetches trending videos from TikTok Creative Center.
  *
@@ -14,7 +28,7 @@ const axiosTT = axios.create({
  * @param limit - The number of videos to fetch per page (default is 10).
  * @param country_code - The country code to filter videos by (default is 'US').
  */
-export async function getTikTokTrendingVideos(params?: Record<string, string | number>) {
+export async function getTikTokTrendingVideos(params?: TikTokParams) {
   // TikTok's API requires authentication headers that are generated dynamically.
   // A simple way to obtain these headers is to use a headless browser to visit the TikTok Creative Center page
   // and intercept the necessary headers from the network requests.
@@ -60,11 +74,10 @@ export async function getTikTokTrendingVideos(params?: Record<string, string | n
   // Fetch trending videos using the captured headers.
   const res = await axiosTT.get('/creative_radar_api/v1/popular_trend/list', {
     params: {
-      period: params?.period || 7,
-      page: params?.page || 1,
-      limit: params?.limit || 10,
-      order_by: 'like',
-      country_code: params?.country_code || 'US',
+      period: params?.period || DEFAULT_PARAMS.period,
+      page: params?.page || DEFAULT_PARAMS.page,
+      limit: params?.limit || DEFAULT_PARAMS.limit,
+      country_code: params?.country_code || DEFAULT_PARAMS.country_code,
     },
     headers: {
       Timestamp: timestamp,

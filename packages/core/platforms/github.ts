@@ -5,6 +5,12 @@ const axiosGH = axios.create({
   baseURL: 'https://github.com',
 });
 
+export interface GithubParams {
+  since?: 'daily' | 'weekly' | 'monthly';
+  language?: string;
+  spoken_language_code?: string;
+}
+
 /**
  * Fetches trending repositories from GitHub Trending page.
  *
@@ -12,7 +18,7 @@ const axiosGH = axios.create({
  * @param language - The programming language to filter repositories by.
  * @param spoken_language_code - The spoken language to filter repositories by. (e.g., 'en' for English)
  */
-export async function getGithubTrendingRepos(params?: Record<string, string | number>) {
+export async function getGithubTrendingRepos(params?: GithubParams) {
   // GitHub has a public trending page that can be scraped for trending repositories and does not require authentication.
   const res = await axiosGH.get(`/trending/${params?.language || ''}`, { params });
 

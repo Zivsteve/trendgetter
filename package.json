@@ -2,7 +2,7 @@
   "name": "trendgetter",
   "displayName": "Trendgetter",
   "description": "A free and open-source API that provides trending data from various platforms such as Google, YouTube, X, Reddit, GitHub, and TikTok.",
-  "repository": "https://github.com/Zivsteve/trendgetter",
+  "repository": "github:zivsteve/trendgetter",
   "license": "MIT",
   "main": "dist/src/index.js",
   "type": "module",

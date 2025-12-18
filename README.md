@@ -1,7 +1,7 @@
 # 🌎 Trendgetter
 
 ![GitHub package.json version](https://img.shields.io/npm/v/@trendgetter/core.svg)
-![GitHub](https://img.shields.io/github/license/Zivsteve/trendgetter?style=flat-square)
+![GitHub](https://img.shields.io/github/license/zivsteve/trendgetter?style=flat-square)
 
 ---
 
@@ -23,13 +23,14 @@ https://trendgetter.vercel.app/
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/Zivsteve/trendgetter.git
+   git clone https://github.com/zivsteve/trendgetter.git
    cd trendgetter-api
    yarn
    yarn dev
    ```
 
 2. **Set up environment variables:**
+
    - Copy the `.env.example` file to `.env` and fill in any required API keys.
 
 3. **Access the API endpoints:**
@@ -201,7 +202,7 @@ Help me improve this project! Any amount is much appreciated :)
 
 > Copyright (C) 2020-present Zivsteve.  
 > Licensed under the [MIT](https://opensource.org/licenses/MIT) license.  
-> (See the [LICENSE](https://github.com/Zivsteve/trendgetter-api/blob/master/LICENSE) file for the whole license text.)
+> (See the [LICENSE](https://github.com/zivsteve/trendgetter-api/blob/master/LICENSE) file for the whole license text.)
 
 # Contributing
 

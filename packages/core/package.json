@@ -14,7 +14,7 @@
     "github trends",
     "tiktok trends"
   ],
-  "repository": "https://github.com/Zivsteve/trendgetter",
+  "repository": "github:zivsteve/trendgetter",
   "license": "MIT",
   "main": "dist/index.js",
   "type": "module",

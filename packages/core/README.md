@@ -1,7 +1,7 @@
 # 🌎 Trendgetter
 
 ![GitHub package.json version](https://img.shields.io/npm/v/@trendgetter/core.svg)
-![GitHub](https://img.shields.io/github/license/Zivsteve/trendgetter?style=flat-square)
+![GitHub](https://img.shields.io/github/license/zivsteve/trendgetter?style=flat-square)
 
 ---
 
@@ -68,7 +68,7 @@ const results = await trendgetter.youtube.videos({ regionCode: 'GB', maxResults:
 console.log(results);
 ```
 
-> See the [API Documentation](https://github.com/Zivsteve/trendgetter)
+> See the [API Documentation](https://github.com/zivsteve/trendgetter)
 > for detailed information on available parameters for each platform.
 
 ---
